@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/HappyTouch.iml" filepath="$PROJECT_DIR$/HappyTouch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reveallayout/reveallayout.iml" filepath="$PROJECT_DIR$/reveallayout/reveallayout.iml" />
+    </modules>
+  </component>
+</project>
+

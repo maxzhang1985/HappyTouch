@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+
+             android:id="@+id/container"
+ >
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="fill_parent" android:layout_height="fill_parent"
+        android:layout_weight="1">
+        <TextView android:id="@+id/eating"
+            android:text="快乐点" android:textSize="69dp"
+            android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#969900"
+            android:gravity="center"
+             />
+        <TextView android:id="@+id/shopping"
+            android:text="购快乐" android:textSize="69dp"
+            android:layout_width="fill_parent" android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#669900"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+</FrameLayout>
