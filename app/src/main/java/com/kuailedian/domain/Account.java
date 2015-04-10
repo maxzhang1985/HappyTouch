@@ -1,5 +1,6 @@
 package com.kuailedian.domain;
 
+
 /**
  * Created by maxzhang on 4/9/2015.
  */

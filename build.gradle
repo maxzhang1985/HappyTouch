@@ -14,6 +14,13 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {  // For Android-ViewPagerIndicator
+            url "http://dl.bintray.com/populov/maven"
+        }
         jcenter()
+        mavenCentral()
+        maven {
+            url "http://JRAF.org/static/maven/2"
+        }
     }
 }
