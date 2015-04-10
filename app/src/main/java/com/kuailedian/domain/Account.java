@@ -1,5 +1,6 @@
 package com.kuailedian.domain;
 
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by maxzhang on 4/9/2015.

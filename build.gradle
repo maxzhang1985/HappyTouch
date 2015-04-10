@@ -3,6 +3,7 @@
 buildscript {
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.0'
@@ -14,13 +15,8 @@ buildscript {
 
 allprojects {
     repositories {
-        maven {  // For Android-ViewPagerIndicator
-            url "http://dl.bintray.com/populov/maven"
-        }
+        maven { url 'http://maven.oschina.net/content/groups/public/' }
         jcenter()
         mavenCentral()
-        maven {
-            url "http://JRAF.org/static/maven/2"
-        }
     }
 }
