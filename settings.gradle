@@ -1,1 +1,4 @@
 include ':app', ':reveallayout'
+include ':app', ':PullToRefresh'
+project(':reveallayout').projectDir = new File('Librarys/reveallayout')
+project(':PullToRefresh').projectDir = new File('Librarys/PullToRefresh')
