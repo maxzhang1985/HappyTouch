@@ -1,8 +1,7 @@
 package com.kuailedian.domain;
 
 import de.greenrobot.event.EventBus;
-import com.loopj.android.*;
-import com.loopj.android.http.AsyncHttpClient;
+
 
 import java.util.Date;
 
