@@ -1,8 +1,5 @@
 package com.kuailedian.happytouch;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -10,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,84 +14,43 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.kuailedian.domain.INavigationService;
+import com.kuailedian.domain.MenuProvider;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
-import com.yalantis.contextmenu.lib.MenuObject;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
 
-import java.util.ArrayList;
-import java.util.List;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClickListener,
-        OnMenuItemLongClickListener{
+        OnMenuItemLongClickListener , INavigationService{
 
     private FragmentManager fragmentManager;
     private DialogFragment mMenuDialogFragment;
+
+    @InjectView(R.id.toolbar)
+     Toolbar mToolbar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_base);
+
+        ButterKnife.inject(this);
+        initView() ;
+
+        getHtAppliction().SetSystemDomain(INavigationService.class, this);
+        this.Navigate(FragmentSampleActivity.SimpleFragment.newInstance(0));
+    }
+
+
+
+    private void initView() {
+        //Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         fragmentManager = getSupportFragmentManager();
-        initToolbar();
-        mMenuDialogFragment = ContextMenuDialogFragment.newInstance((int) getResources().getDimension(R.dimen.tool_bar_height), getMenuObjects());
-
-        Log.v("mydemo","run");
-        addFragment(new MyBaseFragment(), true, R.id.container);
-        Log.v("mydemo","complete");
-    }
-
-    private List<MenuObject> getMenuObjects() {
-        // You can use any [resource, bitmap, drawable, color] as image:
-        // item.setResource(...)
-        // item.setBitmap(...)
-        // item.setDrawable(...)
-        // item.setColor(...)
-        // You can set image ScaleType:
-        // item.setScaleType(ScaleType.FIT_XY)
-        // You can use any [resource, drawable, color] as background:
-        // item.setBgResource(...)
-        // item.setBgDrawable(...)
-        // item.setBgColor(...)
-        // You can use any [color] as text color:
-        // item.setTextColor(...)
-        // You can set any [color] as divider color:
-        // item.setDividerColor(...)
-
-        List<MenuObject> menuObjects = new ArrayList<>();
-
-        MenuObject close = new MenuObject();
-        close.setResource(R.mipmap.icn_close);
-
-        MenuObject send = new MenuObject("Send message");
-        send.setResource(R.mipmap.icn_1);
-
-        MenuObject like = new MenuObject("Like profile");
-        Bitmap b = BitmapFactory.decodeResource(getResources(), R.mipmap.icn_2);
-        like.setBitmap(b);
-
-        MenuObject addFr = new MenuObject("Add to friends");
-        BitmapDrawable bd = new BitmapDrawable(getResources(),
-                BitmapFactory.decodeResource(getResources(), R.mipmap.icn_3));
-        addFr.setDrawable(bd);
-
-        MenuObject addFav = new MenuObject("Add to favorites");
-        addFav.setResource(R.mipmap.icn_4);
-
-        MenuObject block = new MenuObject("Block user");
-        block.setResource(R.mipmap.icn_5);
-
-        menuObjects.add(close);
-        menuObjects.add(send);
-        menuObjects.add(like);
-        menuObjects.add(addFr);
-        menuObjects.add(addFav);
-        menuObjects.add(block);
-        return menuObjects;
-    }
-
-    private void initToolbar() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mToolBarTextView = (TextView) findViewById(R.id.text_view_toolbar_title);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -108,7 +63,18 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
                 onBackPressed();
             }
         });
-        mToolBarTextView.setText("Samantha");
+        mToolBarTextView.setText(R.string.app_name);
+
+
+
+        mMenuDialogFragment = ContextMenuDialogFragment.newInstance((int) getResources().getDimension(R.dimen.tool_bar_height), MenuProvider.getMenuObjects(this));
+
+    }
+
+    protected HTApplication getHtAppliction()
+    {
+        HTApplication application = (HTApplication)getApplication();
+        return application;
     }
 
     protected void addFragment(Fragment fragment, boolean addToBackStack, int containerId) {
@@ -129,6 +95,7 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
     public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_my_base, menu);
+
         return true;
     }
 
@@ -155,11 +122,16 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
 
     @Override
     public void onMenuItemClick(View clickedView, int position) {
-        Toast.makeText(this, "Clicked on position: " + position, Toast.LENGTH_SHORT).show();
+        Navigate(FragmentSampleActivity.SimpleFragment.newInstance(position));
     }
 
     @Override
     public void onMenuItemLongClick(View clickedView, int position) {
         Toast.makeText(this, "Long clicked on position: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void Navigate(android.support.v4.app.Fragment fragment) {
+        addFragment(fragment, true, R.id.container);
     }
 }
