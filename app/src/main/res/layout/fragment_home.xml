@@ -1,24 +1,15 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
-             android:orientation="vertical"
              android:layout_width="match_parent"
-             android:layout_height="match_parent"
+             android:layout_height="wrap_content"
              tools:context="com.kuailedian.happytouch.HomeFragment">
 
-
-      <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|center"
-        android:adjustViewBounds="true"
-        android:scaleType="centerInside"
-        >
 
         <ViewSwitcher
 
             android:id="@+id/kenBurnsViewSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
             android:inAnimation="@android:anim/fade_in"
             android:outAnimation="@android:anim/fade_out">
@@ -34,21 +25,40 @@
                 android:src="@mipmap/test_back1"/>
         </ViewSwitcher>
 
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="150dp"
+    android:layout_alignParentBottom="true"
+    >
+   <LinearLayout
+       android:layout_gravity="center"
+       android:layout_centerInParent="true"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:padding="50dp"
+       >
+       <Button
+           android:background="#88000000"
+           android:layout_width="120dp"
+           android:layout_height="50dp" android:text="点餐"
+           android:layout_marginRight="12dp"
+           />
+
+       <Button
+           android:background="#88000000"
+           android:layout_width="120dp"
+           android:layout_height="50dp" android:text="购物"
+           android:layout_marginLeft="12dp"
+           />
 
        </LinearLayout>
 
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="300px"
-            android:layout_gravity="bottom|center"
-
-
-
-            >
-        </LinearLayout>
+    </RelativeLayout>
 
 
 
 
-</FrameLayout>
+
+
+</RelativeLayout>
