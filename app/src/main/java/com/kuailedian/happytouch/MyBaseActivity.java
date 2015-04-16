@@ -14,8 +14,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.kuailedian.domain.INavigationService;
-import com.kuailedian.domain.MenuProvider;
+import com.kuailedian.applictionservice.INavigationService;
+import com.kuailedian.applictionservice.MenuProvider;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;

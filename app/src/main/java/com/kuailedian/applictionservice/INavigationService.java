@@ -1,4 +1,4 @@
-package com.kuailedian.domain;
+package com.kuailedian.applictionservice;
 
 import android.support.v4.app.Fragment;
 

@@ -1,4 +1,4 @@
-package com.kuailedian.domain;
+package com.kuailedian.applictionservice;
 
 import android.content.Context;
 import android.graphics.Bitmap;
