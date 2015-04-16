@@ -20,6 +20,10 @@ public class HomeFragment extends Fragment {
 
     @InjectView(R.id.kenBurnsImageView)
     KenBurnsView kenBurnsView;
+
+    @InjectView(R.id.kenBurnsImageView1)
+    KenBurnsView kenBurnsView1;
+
     @InjectView(R.id.kenBurnsViewSwitch)
     ViewSwitcher viewSwitcher;
 
@@ -38,23 +42,48 @@ public class HomeFragment extends Fragment {
     }
 
 
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         kenBurnsView.resume();
+        kenBurnsView1.resume();
 
-        kenBurnsView.setTransitionListener(new KenBurnsView.TransitionListener() {
-            @Override
-            public void onTransitionStart(Transition transition) {
-
-            }
-            @Override
-            public void onTransitionEnd(Transition transition) {
-                viewSwitcher.showNext();
-            }
-        });
+        kenBurnsView1.setTransitionListener(listener);
+        kenBurnsView.setTransitionListener(listener);
     }
 
+
+    KenBurnsView.TransitionListener listener = new KenBurnsView.TransitionListener() {
+        @Override
+        public void onTransitionStart(Transition transition) {
+
+        }
+        @Override
+        public void onTransitionEnd(Transition transition) {
+
+            showSwitcher();
+
+        }
+    };
+
+
+    boolean isFirst =true;
+    void showSwitcher()
+    {
+        if(isFirst) {
+
+            viewSwitcher.showNext();
+            isFirst =false;
+        }
+        else
+        {
+
+            viewSwitcher.showPrevious();
+            isFirst = true;
+        }
+    }
 
 
     @Override
