@@ -43,7 +43,7 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
         initView() ;
 
         getHtAppliction().SetSystemDomain(INavigationService.class, this);
-        this.Navigate(FragmentSampleActivity.SimpleFragment.newInstance(0));
+        this.Navigate(HomeFragment.newInstance());
     }
 
 

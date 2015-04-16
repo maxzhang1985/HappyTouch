@@ -1,17 +1,27 @@
 package com.kuailedian.happytouch;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ViewSwitcher;
+import com.marshalchen.common.uimodule.kenburnsview.KenBurnsView;
+import com.marshalchen.common.uimodule.kenburnsview.Transition;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class HomeFragment extends Fragment {
 
 
+    @InjectView(R.id.kenBurnsImageView)
+    KenBurnsView kenBurnsView;
+    @InjectView(R.id.kenBurnsViewSwitch)
+    ViewSwitcher viewSwitcher;
 
     // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance() {
@@ -27,39 +37,38 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        kenBurnsView.resume();
+
+        kenBurnsView.setTransitionListener(new KenBurnsView.TransitionListener() {
+            @Override
+            public void onTransitionStart(Transition transition) {
+
+            }
+            @Override
+            public void onTransitionEnd(Transition transition) {
+                viewSwitcher.showNext();
+            }
+        });
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ButterKnife.inject(this,view);
+
+        return view;
     }
 
 
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-    }
 
 }
