@@ -12,10 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.applictionservice.MenuProvider;
+import com.kuailedian.components.BottomPopupWindow;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
@@ -127,7 +127,11 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
 
     @Override
     public void onMenuItemLongClick(View clickedView, int position) {
-        Toast.makeText(this, "Long clicked on position: " + position, Toast.LENGTH_SHORT).show();
+
+        BottomPopupWindow popup = new BottomPopupWindow(this,FragmentSampleActivity.SimpleFragment.newInstance(0));
+
+       // popup.
+        //Toast.makeText(this, "Long clicked on position: " + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
