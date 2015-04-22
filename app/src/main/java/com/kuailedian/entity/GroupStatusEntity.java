@@ -1,4 +1,4 @@
-package entity;
+package com.kuailedian.entity;
 
 import java.util.List;
 

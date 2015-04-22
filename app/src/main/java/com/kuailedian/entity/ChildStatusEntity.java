@@ -1,4 +1,4 @@
-package entity;
+package com.kuailedian.entity;
 
 /**
  * 二级Item实体类
