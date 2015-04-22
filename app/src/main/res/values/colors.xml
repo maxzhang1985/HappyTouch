@@ -2,5 +2,6 @@
 <resources>
 
     <color name="text_color">#222222</color>
-
+    <color name="time_line_bg">#b3b3b3</color>
+    <color name="head_line_bg">#cccccc</color>
 </resources>
