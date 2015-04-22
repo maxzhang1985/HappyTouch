@@ -1,6 +1,5 @@
 package com.kuailedian.happytouch;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ViewSwitcher;
+
+import com.kuailedian.applictionservice.INavigationService;
 import com.marshalchen.common.uimodule.kenburnsview.KenBurnsView;
 import com.marshalchen.common.uimodule.kenburnsview.Transition;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class HomeFragment extends Fragment {
@@ -98,6 +100,14 @@ public class HomeFragment extends Fragment {
     }
 
 
+    @OnClick(R.id.reservation)
+    public void onGo_Reservation()
+    {
+        HTApplication app = (HTApplication)getActivity().getApplication();
+        INavigationService navigation = app.GetSystemDomain(INavigationService.class);
+        navigation.Navigate(ReservationFragment.newInstance());
+
+    }
 
 
 }
