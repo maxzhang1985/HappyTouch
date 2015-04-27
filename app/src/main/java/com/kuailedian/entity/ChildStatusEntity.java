@@ -2,9 +2,9 @@ package com.kuailedian.entity;
 
 /**
  * 二级Item实体类
- * 
+ *
  * @author zihao
- * 
+ *
  */
 public class ChildStatusEntity {
 	/** 预计完成时间 **/
