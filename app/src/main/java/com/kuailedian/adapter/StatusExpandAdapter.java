@@ -1,10 +1,14 @@
 package com.kuailedian.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kuailedian.entity.ChildStatusEntity;
@@ -16,16 +20,12 @@ import java.util.List;
 public class StatusExpandAdapter extends BaseExpandableListAdapter {
 	private LayoutInflater inflater = null;
 	private List<GroupStatusEntity> groupList;
+	private Context context;
 
-	/**
-	 * 构造方法
-	 * 
-	 * @param context
-	 * @param oneList
-	 */
 	public StatusExpandAdapter(Context context,
 			List<GroupStatusEntity> group_list) {
 		this.groupList = group_list;
+		this.context = context;
 		inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -98,8 +98,16 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 		holder.groupName = (TextView) convertView
 				.findViewById(R.id.one_status_name);
 
+		holder.Week = (ImageView) convertView.findViewById(R.id.imageView1);
+
+		Log.v("happlyLog","found week imageview");
+
 		holder.groupName.setText(groupList.get(groupPosition).getGroupName());
 
+
+		Drawable db = getResourceDrawableByName("week" + (groupPosition+1));
+
+		holder.Week.setImageDrawable(db);
 		return convertView;
 	}
 
@@ -123,6 +131,15 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 		return convertView;
 	}
 
+	private Drawable getResourceDrawableByName(String name) {
+		Log.v("happlyLog",name);
+		Resources resources = context.getResources();
+		final int resourceId = resources.getIdentifier(name, "mipmap",
+				context.getPackageName());
+		return resources.getDrawable(resourceId);
+	}
+
+
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
@@ -130,6 +147,7 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 	}
 
 	private class GroupViewHolder {
+		ImageView Week;
 		TextView groupName;
 	}
 

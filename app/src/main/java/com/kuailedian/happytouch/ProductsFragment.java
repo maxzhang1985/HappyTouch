@@ -87,7 +87,7 @@ public class ProductsFragment extends Fragment  implements XListView.IXListViewL
     private void onLoad() {
         productsListView.stopRefresh();
         productsListView.stopLoadMore();
-        productsListView.setRefreshTime("¸Õ¸Õ");
+
     }
 
     @Override
