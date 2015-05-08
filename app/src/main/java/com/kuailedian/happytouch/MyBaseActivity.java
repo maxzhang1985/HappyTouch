@@ -12,11 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.applictionservice.MenuProvider;
-import com.kuailedian.components.BottomPopupWindow;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
@@ -57,7 +55,7 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        mToolbar.setNavigationIcon(R.mipmap.btn_back);
+        mToolbar.setNavigationIcon(R.mipmap.ic_arrow_back);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,17 +113,11 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
     @Override
     public void onBackPressed() {
 
-        Toast.makeText(this, "show popup", Toast.LENGTH_SHORT).show();
-        BottomPopupWindow popup = new BottomPopupWindow(this,FragmentSampleActivity.SimpleFragment.newInstance(0));
-        View bottomView = this.findViewById(R.id.act);
-        popup.Show(bottomView);
-
-
-//        if (fragmentManager.getBackStackEntryCount() == 1) {
-//            finish();
-//        } else {
-//            super.onBackPressed();
-//        }
+        if (fragmentManager.getBackStackEntryCount() == 1) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

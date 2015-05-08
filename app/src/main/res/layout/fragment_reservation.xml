@@ -8,7 +8,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="55dp">
 
         <View
             android:id="@+id/group_tiao"
@@ -37,11 +37,7 @@
             android:divider="@null" />
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"></LinearLayout>
+<include  layout="@layout/orderbar"/>
 
 
 </RelativeLayout>

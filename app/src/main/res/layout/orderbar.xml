@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:layout_alignParentBottom="true">
+
+
+<RelativeLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/DarkOrange"
+    android:layout_gravity="bottom">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="290dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true">
+        <TextView
+            android:id="@+id/ordercart_title"
+            android:layout_width="160dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="8dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="￥127"
+            android:textSize="30dp"
+            android:textColor="@color/DarkRed"
+            android:textStyle="bold" />
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/ordersubmit_selector"
+            android:id="@+id/btn_ordersubmit" />
+    </LinearLayout>
+</RelativeLayout>
+
+<ImageButton
+
+    android:layout_width="85dp"
+    android:layout_height="85dp"
+    android:background="@drawable/ordercart_selector"
+    android:layout_marginLeft="5dp"
+    android:id="@+id/btn_showolder" />
+
+
+
+</FrameLayout>
