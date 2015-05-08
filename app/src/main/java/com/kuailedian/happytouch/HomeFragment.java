@@ -110,4 +110,13 @@ public class HomeFragment extends Fragment {
     }
 
 
+    @OnClick(R.id.shopping)
+    public void onGo_Shopping()
+    {
+        HTApplication app = (HTApplication)getActivity().getApplication();
+        INavigationService navigation = app.GetSystemDomain(INavigationService.class);
+        navigation.Navigate(ProductsFragment.newInstance());
+    }
+
+
 }

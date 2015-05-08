@@ -22,9 +22,9 @@ import me.maxwin.view.XListView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductsFragment extends Fragment  implements XListView.IXListViewListener {
+public class ProductsFragment extends OrderFragmentBase  implements XListView.IXListViewListener {
 
-    private Context context;
+
 
     @InjectView(R.id.catalogListView)
     ListView catalogListView;
@@ -63,7 +63,6 @@ public class ProductsFragment extends Fragment  implements XListView.IXListViewL
 
         ButterKnife.inject(this, view);
 
-        context = container.getContext();
 
         return view;
     }
@@ -73,8 +72,15 @@ public class ProductsFragment extends Fragment  implements XListView.IXListViewL
         super.onViewCreated(view, savedInstanceState);
 
         //catalogListView
+        ArrayList<String> array = new ArrayList<String>();
+        array.add("the item 1");
+        array.add("the item 2");
+        array.add("the item 3");
+        array.add("the item 4");
+        array.add("the item 5");
 
-
+        catalogAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.popupwindow_item,R.id.popup_item, array);
+        catalogListView.setAdapter(catalogAdapter);
 
         //productsListView
         productsListView.setPullLoadEnable(true);

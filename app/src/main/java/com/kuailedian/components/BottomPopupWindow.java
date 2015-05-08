@@ -7,9 +7,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import com.kuailedian.happytouch.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by maxzhang on 4/17/2015.
@@ -19,7 +24,16 @@ public class BottomPopupWindow extends PopupWindow {
 
     private  Context owner;
     private Fragment content;
+    private View _view;
 
+    private ArrayList<String> dataSource = new ArrayList<String>();
+
+    private ArrayAdapter<String> adapter;
+
+    public void setShowBottomView(View view)
+    {
+        _view = view;
+    }
 
 
     public BottomPopupWindow(Context context,Fragment fragment)
@@ -45,6 +59,56 @@ public class BottomPopupWindow extends PopupWindow {
         this.setBackgroundDrawable(new ColorDrawable(
                 android.graphics.Color.TRANSPARENT));
 
+
+        //control order popup view ,show or hide;
+        ImageButton btnShowOrder  = (ImageButton) view.findViewById(R.id.btn_showolder);
+        btnShowOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               BottomPopupWindow.this.dismiss();
+            }
+        });
+
+
+        //submit the order
+        ImageButton btnOrderSubmit  = (ImageButton) view.findViewById(R.id.btn_ordersubmit);
+        btnOrderSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomPopupWindow.this.getData();
+
+
+            }
+        });
+
+
+
+        ListView ls = (ListView)view.findViewById(R.id.popupListView);
+
+        adapter = new ArrayAdapter<String>(view.getContext(),R.layout.popupwindow_item,R.id.popup_item,dataSource);
+
+        ls.setAdapter(adapter);
+
+        getData();
+
+    }
+
+
+
+
+
+    private void getData()
+    {
+        ArrayList<String> array = new ArrayList<String>();
+        array.add("the item 1");
+        array.add("the item 2");
+        array.add("the item 3");
+        array.add("the item 4");
+        array.add("the item 5");
+
+        adapter.addAll(array);
+        adapter.notifyDataSetChanged();
+
     }
 
 
@@ -53,6 +117,11 @@ public class BottomPopupWindow extends PopupWindow {
         this.showAtLocation(v, Gravity.BOTTOM, 0, 0);
     }
 
+    public void Show()
+    {
+        if(_view!=null)
+            Show(_view);
+    }
 
 
 }

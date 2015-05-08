@@ -16,6 +16,8 @@ public class OrderFragmentBase extends Fragment {
 
     protected Context context;
     protected View rootView;
+    BottomPopupWindow popupView;
+
 
     protected void InitView()
     {
@@ -28,7 +30,8 @@ public class OrderFragmentBase extends Fragment {
 
         context = view.getContext();
         rootView = view;
-        //显示购物车
+
+        //control order popup view ,show or hide;
         ImageButton btnShowOrder  = (ImageButton) view.findViewById(R.id.btn_showolder);
         btnShowOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +41,7 @@ public class OrderFragmentBase extends Fragment {
         });
 
 
-        //结算提交
+        //submit the order
         ImageButton btnOrderSubmit  = (ImageButton) view.findViewById(R.id.btn_ordersubmit);
         btnOrderSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,12 +53,16 @@ public class OrderFragmentBase extends Fragment {
 
     }
 
+
     protected void ShowOrder()
     {
-        BottomPopupWindow popup = new BottomPopupWindow(context,null);
+        if(popupView==null) {
+            popupView = new BottomPopupWindow(context, null);
+            popupView.setShowBottomView(rootView);
+        }
 
-        popup.Show(rootView);
 
+        popupView.Show(rootView);
     }
 
 
