@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kuailedian.adapter.StatusExpandAdapter;
@@ -145,9 +146,13 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
     }
 
     @Override
-    public void AddProducts(String productsid) {
+    public void AddProducts(View itemview , String productsid) {
         orderNumView.setText(productsid);
-
+        int[] start_location = new int[2];// 一个整型数组，用来存储按钮的在屏幕的X、Y坐标
+        itemview.getLocationInWindow(start_location);// 这是获取购买按钮的在屏幕的X、Y坐标（这也是动画开始的坐标）
+        ImageView buyImg = new ImageView(context);// buyImg是动画的图片，我的是一个小球（R.drawable.sign）
+        buyImg.setImageResource(R.mipmap.sign);// 设置buyImg的图片
+        setAnim(buyImg, start_location);// 开始执行动画
 
 
     }
