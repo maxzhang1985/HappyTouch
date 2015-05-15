@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.kuailedian.adapter.StatusExpandAdapter;
+import com.kuailedian.applictionservice.IOrderCartOperator;
 import com.kuailedian.entity.ChildStatusEntity;
 import com.kuailedian.entity.GroupStatusEntity;
 
@@ -20,10 +22,13 @@ import butterknife.InjectView;
 /**
  * Created by maxzhang on 4/22/2015.
  */
-public class ReservationFragment extends OrderFragmentBase {
+public class ReservationFragment extends OrderFragmentBase implements IOrderCartOperator {
 
     @InjectView(R.id.expandlist)
     ExpandableListView expandlistView;
+
+    @InjectView(R.id.ordercart_num)
+    TextView orderNumView;
 
 
     private StatusExpandAdapter statusAdapter;
@@ -75,7 +80,7 @@ public class ReservationFragment extends OrderFragmentBase {
      * 初始化可拓展列表
      */
     private void initExpandListView() {
-        statusAdapter = new StatusExpandAdapter(context, getListData());
+        statusAdapter = new StatusExpandAdapter(context, this, getListData());
         expandlistView.setAdapter(statusAdapter);
         expandlistView.setGroupIndicator(null); // 去掉默认带的箭头
 
@@ -97,6 +102,18 @@ public class ReservationFragment extends OrderFragmentBase {
                 return true;
             }
         });
+
+        expandlistView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                return true;
+            }
+        });
+
+
+
     }
 
     private List<GroupStatusEntity> getListData() {
@@ -117,8 +134,7 @@ public class ReservationFragment extends OrderFragmentBase {
 
             for (int j = 0; j < childTimeArray[i].length; j++) {
                 ChildStatusEntity childStatusEntity = new ChildStatusEntity();
-                childStatusEntity.setCompleteTime(childTimeArray[i][j]);
-                childStatusEntity.setIsfinished(true);
+                childStatusEntity.setProductName(childTimeArray[i][j]);
                 childList.add(childStatusEntity);
             }
 
@@ -128,4 +144,11 @@ public class ReservationFragment extends OrderFragmentBase {
         return groupList;
     }
 
+    @Override
+    public void AddProducts(String productsid) {
+        orderNumView.setText(productsid);
+
+
+
+    }
 }

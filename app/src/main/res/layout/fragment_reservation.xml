@@ -14,7 +14,7 @@
             android:id="@+id/group_tiao"
             android:layout_width="2dp"
             android:layout_height="fill_parent"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="88px"
             android:background="@color/OrangeRed" />
 
         <TextView

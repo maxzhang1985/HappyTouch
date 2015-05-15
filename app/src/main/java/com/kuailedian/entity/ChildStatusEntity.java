@@ -8,24 +8,30 @@ package com.kuailedian.entity;
  */
 public class ChildStatusEntity {
 	/** 预计完成时间 **/
-	private String completeTime;
+	private String productName;
 	/** 是否已完成 **/
 	private boolean isfinished;
 
-	public String getCompleteTime() {
-		return completeTime;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setCompleteTime(String completeTime) {
-		this.completeTime = completeTime;
+	public void setProductName(String name) {
+		this.productName = name;
 	}
 
-	public boolean isIsfinished() {
-		return isfinished;
+
+	public String getProductsid() {
+		return productsid;
 	}
 
-	public void setIsfinished(boolean isfinished) {
-		this.isfinished = isfinished;
+	public void setProductsid(String productsid) {
+		this.productsid = productsid;
 	}
+
+	private String productsid;
+
+
+
 
 }

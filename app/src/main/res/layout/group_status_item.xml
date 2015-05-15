@@ -8,10 +8,10 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="68px"
-        android:layout_height="68px"
+        android:layout_width="75px"
+        android:layout_height="75px"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="45dp"
+        android:layout_marginLeft="55px"
         android:layout_marginRight="5dp"
         android:background="@mipmap/icons_ok"
         android:contentDescription="@string/app_name" />
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="#000000"
-            android:textSize="32dp"
+            android:textSize="22dp"
             android:layout_marginLeft="15px" />
     </LinearLayout>
 

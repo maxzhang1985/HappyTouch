@@ -8,9 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kuailedian.applictionservice.IOrderCartOperator;
 import com.kuailedian.entity.ChildStatusEntity;
 import com.kuailedian.entity.GroupStatusEntity;
 import com.kuailedian.happytouch.R;
@@ -19,13 +21,16 @@ import java.util.List;
 
 public class StatusExpandAdapter extends BaseExpandableListAdapter {
 	private LayoutInflater inflater = null;
-	private List<GroupStatusEntity> groupList;
+	private final List<GroupStatusEntity> groupList;
 	private Context context;
+	private IOrderCartOperator ordercartOperator;
 
-	public StatusExpandAdapter(Context context,
+
+	public StatusExpandAdapter(Context context,IOrderCartOperator operator,
 			List<GroupStatusEntity> group_list) {
 		this.groupList = group_list;
 		this.context = context;
+		this.ordercartOperator = operator;
 		inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -114,6 +119,9 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
+
+		final int pos = childPosition;
+
 		ChildViewHolder viewHolder = null;
 		ChildStatusEntity entity = (ChildStatusEntity) getChild(groupPosition,
 				childPosition);
@@ -122,10 +130,35 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 		} else {
 			viewHolder = new ChildViewHolder();
 			convertView = inflater.inflate(R.layout.child_status_item, null);
-			viewHolder.twoStatusTime = (TextView) convertView
-					.findViewById(R.id.two_complete_time);
+
+			viewHolder.productName = (TextView) convertView
+					.findViewById(R.id.tv_productname);
+
+			viewHolder.productMoney = (TextView) convertView
+					.findViewById(R.id.tv_productmoney);
+
+			viewHolder.btnAddProduct =  (Button)convertView
+					.findViewById(R.id.btn_addproduct);
+
+			viewHolder.productPicture =  (ImageView)convertView
+					.findViewById(R.id.img_productimg);
+
+
 		}
-		viewHolder.twoStatusTime.setText(entity.getCompleteTime());
+
+
+		viewHolder.productName.setText(entity.getProductName());
+
+		viewHolder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+
+				ordercartOperator.AddProducts(String.valueOf(pos));
+			}
+		});
+
+
 
 		convertView.setTag(viewHolder);
 		return convertView;
@@ -152,7 +185,10 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 	}
 
 	private class ChildViewHolder {
-		public TextView twoStatusTime;
+		public ImageView productPicture;
+		public TextView productName;
+		public TextView productMoney;
+		public Button btnAddProduct;
 	}
 
 }
