@@ -161,7 +161,8 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 			public void onClick(View v) {
 
 
-				ordercartOperator.AddProducts(String.valueOf(pos));
+
+				ordercartOperator.AddProducts(v,String.valueOf(pos));
 			}
 		});
 
