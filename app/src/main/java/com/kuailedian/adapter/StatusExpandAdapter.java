@@ -35,12 +35,19 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
+
+	public void AddItems(List<GroupStatusEntity> ls)
+	{
+		groupList.addAll(ls);
+	}
+
 	/**
 	 * 返回一级Item总数
 	 */
 	@Override
 	public int getGroupCount() {
 		// TODO Auto-generated method stub
+		if(groupList==null) return  0;
 		return groupList.size();
 	}
 
