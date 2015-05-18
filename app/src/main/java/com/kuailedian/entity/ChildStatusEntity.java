@@ -32,6 +32,15 @@ public class ChildStatusEntity {
 	private String productsid;
 
 
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	private String img;
 
 
 }
