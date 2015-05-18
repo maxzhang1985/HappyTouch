@@ -13,6 +13,9 @@ import com.kuailedian.adapter.StatusExpandAdapter;
 import com.kuailedian.applictionservice.IOrderCartOperator;
 import com.kuailedian.entity.ChildStatusEntity;
 import com.kuailedian.entity.GroupStatusEntity;
+import com.kuailedian.repository.AsyncCallBack;
+import com.kuailedian.repository.IAsyncRepository;
+import com.kuailedian.repository.ReservationRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,7 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
 
     private StatusExpandAdapter statusAdapter;
    // private Context context;
-
+    IAsyncRepository repository = new  ReservationRepository();
 
     // TODO: Rename and change types and number of parameters
     public static ReservationFragment newInstance() {
@@ -81,18 +84,34 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
      * 初始化可拓展列表
      */
     private void initExpandListView() {
-        statusAdapter = new StatusExpandAdapter(context, this, getListData());
+
+        final List<GroupStatusEntity> list = new ArrayList<GroupStatusEntity>();
+        statusAdapter = new StatusExpandAdapter(context, this, list);
         expandlistView.setAdapter(statusAdapter);
         expandlistView.setGroupIndicator(null); // 去掉默认带的箭头
 
 
 
-        // 遍历所有group,将所有项设置成默认展开
-        int groupCount = expandlistView.getCount();
-        for (int i = 0; i < groupCount; i++) {
-            expandlistView.expandGroup(i);
-        }
-        expandlistView.setSelection(7);// 设置默认选中项
+        repository.Get(null, new AsyncCallBack() {
+            @Override
+            public void onDataReceive(Object data, Object statusCode) {
+                statusAdapter.AddItems((List<GroupStatusEntity>) data);
+                statusAdapter.notifyDataSetChanged();
+                // 遍历所有group,将所有项设置成默认展开
+                int groupCount = expandlistView.getCount();
+                for (int i = 0; i < groupCount; i++) {
+                    expandlistView.expandGroup(i);
+                }
+                expandlistView.setSelection(7);// 设置默认选中项
+            }
+        });
+
+
+
+
+
+
+
         expandlistView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
             @Override
