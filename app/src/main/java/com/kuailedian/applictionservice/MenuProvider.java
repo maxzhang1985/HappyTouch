@@ -36,32 +36,29 @@ public class MenuProvider {
         List<MenuObject> menuObjects = new ArrayList<>();
 
         MenuObject close = new MenuObject();
-        close.setResource(R.mipmap.icn_close);
+        close.setResource(R.mipmap.ic_renyimen_open);
 
-        MenuObject send = new MenuObject("Send message");
-        send.setResource(R.mipmap.icn_1);
+        MenuObject send = new MenuObject("购物");
+        send.setResource(R.mipmap.ic_shoppingcart);
 
-        MenuObject like = new MenuObject("Like profile");
-        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.mipmap.icn_2);
+        MenuObject like = new MenuObject("美食");
+        Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_food);
         like.setBitmap(b);
 
-        MenuObject addFr = new MenuObject("Add to friends");
+        MenuObject addFr = new MenuObject("个人中心");
         BitmapDrawable bd = new BitmapDrawable(context.getResources(),
-                BitmapFactory.decodeResource(context.getResources(), R.mipmap.icn_3));
+                BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_user));
         addFr.setDrawable(bd);
 
-        MenuObject addFav = new MenuObject("Add to favorites");
-        addFav.setResource(R.mipmap.icn_4);
+        MenuObject addFav = new MenuObject("注销");
+        addFav.setResource(R.mipmap.ic_zhuxiao);
 
-        MenuObject block = new MenuObject("Block user");
-        block.setResource(R.mipmap.icn_5);
 
         menuObjects.add(close);
         menuObjects.add(send);
         menuObjects.add(like);
         menuObjects.add(addFr);
         menuObjects.add(addFav);
-        menuObjects.add(block);
         return menuObjects;
     }
 

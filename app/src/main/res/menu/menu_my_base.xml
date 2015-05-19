@@ -4,7 +4,7 @@
     <item
         android:id="@+id/context_menu"
         android:title="@string/context_menu"
-        android:icon="@mipmap/btn_add"
+        android:icon="@mipmap/ic_renyimen_close"
         android:orderInCategory="100"
         app:showAsAction="always" />
 

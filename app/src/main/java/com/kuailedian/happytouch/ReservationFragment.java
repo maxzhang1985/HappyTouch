@@ -39,14 +39,17 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
    // private Context context;
     IAsyncRepository repository = new  ReservationRepository();
 
+
+
     // TODO: Rename and change types and number of parameters
     public static ReservationFragment newInstance() {
-        ReservationFragment fragment = new ReservationFragment();
+
+        ReservationFragment  _fragment = new ReservationFragment();
 //        Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
 //        fragment.setArguments(args);
-        return fragment;
+        return _fragment;
     }
 
    public ReservationFragment(){

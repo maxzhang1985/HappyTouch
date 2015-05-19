@@ -122,7 +122,28 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
 
     @Override
     public void onMenuItemClick(View clickedView, int position) {
-        Navigate(FragmentSampleActivity.SimpleFragment.newInstance(position));
+        switch (position)
+        {
+            case 0:
+                mMenuDialogFragment.dismiss();
+                break;
+            case 1:
+                this.Navigate(ReservationFragment.newInstance()) ;
+                break;
+            case 2:
+                this.Navigate( ProductsFragment.newInstance() );
+                break;
+            case 3:
+                this.Navigate(FragmentSampleActivity.SimpleFragment.newInstance(position));
+                break;
+            case 4:
+                this.Navigate(FragmentSampleActivity.SimpleFragment.newInstance(position));
+                break;
+
+        }
+
+
+
     }
 
     @Override
@@ -135,6 +156,6 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
 
     @Override
     public void Navigate(android.support.v4.app.Fragment fragment) {
-        addFragment(fragment, true, R.id.container);
+        addFragment(fragment, false, R.id.container);
     }
 }

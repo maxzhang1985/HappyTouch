@@ -1,7 +1,6 @@
 package com.kuailedian.happytouch;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -47,9 +46,11 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
     }
 
 
+
     // TODO: Rename and change types and number of parameters
     public static ProductsFragment newInstance() {
-        ProductsFragment fragment = new ProductsFragment();
+
+        ProductsFragment   fragment = new ProductsFragment();
 
         return fragment;
     }
