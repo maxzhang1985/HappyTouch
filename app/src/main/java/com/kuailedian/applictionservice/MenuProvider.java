@@ -38,19 +38,19 @@ public class MenuProvider {
         MenuObject close = new MenuObject();
         close.setResource(R.mipmap.ic_renyimen_open);
 
-        MenuObject send = new MenuObject("购物");
+        MenuObject send = new MenuObject("璐墿");
         send.setResource(R.mipmap.ic_shoppingcart);
 
-        MenuObject like = new MenuObject("美食");
+        MenuObject like = new MenuObject("缇庨");
         Bitmap b = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_food);
         like.setBitmap(b);
 
-        MenuObject addFr = new MenuObject("个人中心");
+        MenuObject addFr = new MenuObject("涓汉涓績");
         BitmapDrawable bd = new BitmapDrawable(context.getResources(),
                 BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_user));
         addFr.setDrawable(bd);
 
-        MenuObject addFav = new MenuObject("注销");
+        MenuObject addFav = new MenuObject("娉ㄩ攢");
         addFav.setResource(R.mipmap.ic_zhuxiao);
 
 
