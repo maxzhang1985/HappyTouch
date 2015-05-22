@@ -11,6 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.kuailedian.repository.AsyncCallBack;
+import com.kuailedian.repository.IAsyncRepository;
+import com.kuailedian.repository.ProductsCatalogRepository;
+import com.kuailedian.repository.ProductsRepository;
+
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -31,9 +36,11 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
     @InjectView(R.id.productsListView)
     XListView productsListView;
 
-    private ArrayList<String> catalogSource = new ArrayList<String>();
+    IAsyncRepository catalogRepository = new ProductsCatalogRepository();
 
-    private ArrayList<String> productsSource = new ArrayList<String>();
+    IAsyncRepository productRepository = new ProductsRepository();
+
+
 
     private ArrayAdapter<String> catalogAdapter;
 
@@ -73,20 +80,26 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
         super.onViewCreated(view, savedInstanceState);
 
         //catalogListView
-        ArrayList<String> array = new ArrayList<String>();
-        array.add("the item 1");
-        array.add("the item 2");
-        array.add("the item 3");
-        array.add("the item 4");
-        array.add("the item 5");
 
-        catalogAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.popupwindow_item,R.id.popup_item, array);
+        catalogAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.popupwindow_item,R.id.popup_item, new ArrayList<String>());
         catalogListView.setAdapter(catalogAdapter);
 
         //productsListView
         productsListView.setPullLoadEnable(true);
         productsListView.setXListViewListener(this);
         productsListView.setAdapter(productsAdapter);
+
+
+        catalogRepository.Get(null,new AsyncCallBack() {
+            @Override
+            public void onDataReceive(Object data, Object statusCode) {
+                ProductsFragment.this.catalogAdapter.addAll((ArrayList<String>)data);
+                ProductsFragment.this.catalogAdapter.notifyDataSetChanged();
+                ProductsFragment.this.catalogListView.setSelection(0);
+            }
+        });
+
+
 
     }
 
