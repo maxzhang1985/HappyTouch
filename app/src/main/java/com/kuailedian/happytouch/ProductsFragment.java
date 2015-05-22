@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.kuailedian.entity.CatalogEntity;
 import com.kuailedian.repository.AsyncCallBack;
 import com.kuailedian.repository.IAsyncRepository;
 import com.kuailedian.repository.ProductsCatalogRepository;
@@ -42,7 +44,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
 
 
-    private ArrayAdapter<String> catalogAdapter;
+    private ArrayAdapter<CatalogEntity> catalogAdapter;
 
     private ArrayAdapter<String> productsAdapter;
 
@@ -81,7 +83,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
         //catalogListView
 
-        catalogAdapter = new ArrayAdapter<String>(view.getContext(),R.layout.popupwindow_item,R.id.popup_item, new ArrayList<String>());
+        catalogAdapter = new ArrayAdapter<CatalogEntity>(view.getContext(),R.layout.popupwindow_item,R.id.popup_item, new ArrayList<CatalogEntity>());
         catalogListView.setAdapter(catalogAdapter);
 
         //productsListView
@@ -93,7 +95,8 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
         catalogRepository.Get(null,new AsyncCallBack() {
             @Override
             public void onDataReceive(Object data, Object statusCode) {
-                ProductsFragment.this.catalogAdapter.addAll((ArrayList<String>)data);
+                Log.v("productdata",data.toString());
+                ProductsFragment.this.catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
                 ProductsFragment.this.catalogAdapter.notifyDataSetChanged();
                 ProductsFragment.this.catalogListView.setSelection(0);
             }

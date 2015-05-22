@@ -31,4 +31,8 @@ public class CatalogEntity {
     public String categoryname;
 
 
+    @Override
+    public String toString() {
+        return this.categoryname;
+    }
 }
