@@ -11,9 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.kuailedian.adapter.ProductAdapter;
+import com.kuailedian.applictionservice.IOrderCartOperator;
 import com.kuailedian.entity.CatalogEntity;
+import com.kuailedian.entity.ProductEntity;
 import com.kuailedian.repository.AsyncCallBack;
 import com.kuailedian.repository.IAsyncRepository;
 import com.kuailedian.repository.ProductsCatalogRepository;
@@ -29,8 +34,7 @@ import me.maxwin.view.XListView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProductsFragment extends OrderFragmentBase  implements XListView.IXListViewListener {
-
+public class ProductsFragment extends OrderFragmentBase  implements XListView.IXListViewListener , IOrderCartOperator {
 
 
     @InjectView(R.id.catalogListView)
@@ -47,7 +51,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
     private ArrayAdapter<CatalogEntity> catalogAdapter;
 
-    private ArrayAdapter<String> productsAdapter;
+    private ProductAdapter productsAdapter;
 
     private Handler mHandler;
 
@@ -90,10 +94,24 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                productsAdapter.clear();
+                productRepository.Get(null, new AsyncCallBack(){
+                    @Override
+                    public void onDataReceive(Object data, Object statusCode) {
+
+                        productsAdapter.addAll((ArrayList<ProductEntity>)data);
+                        productsAdapter.notifyDataSetChanged();
+                    }
+                });
+
+
             }
         });
         //productsListView
-        //productsListView.setPullLoadEnable(true);
+        productsListView.setPullLoadEnable(true);
+
+        productsAdapter = new ProductAdapter(context,this,null);
+
         productsListView.setXListViewListener(this);
         productsListView.setAdapter(productsAdapter);
 
@@ -102,14 +120,21 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
             @Override
             public void onDataReceive(Object data, Object statusCode) {
                 Log.v("productdata", data.toString());
-                ProductsFragment.this.catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
-                ProductsFragment.this.catalogAdapter.notifyDataSetChanged();
+                catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
+                catalogAdapter.notifyDataSetChanged();
 
             }
         });
 
 
-
+        productRepository.Get(null, new AsyncCallBack(){
+            @Override
+            public void onDataReceive(Object data, Object statusCode) {
+                Log.v("productdata", data.toString());
+                productsAdapter.addAll((ArrayList<ProductEntity>)data);
+                productsAdapter.notifyDataSetChanged();
+            }
+        });
 
 
 
@@ -124,11 +149,30 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
     @Override
     public void onRefresh() {
-
+        productRepository.Get(null, new AsyncCallBack(){
+            @Override
+            public void onDataReceive(Object data, Object statusCode) {
+                productsAdapter.clear();
+                productsAdapter.addAll((ArrayList<ProductEntity>)data);
+                productsAdapter.notifyDataSetChanged();
+                productsListView.stopRefresh();
+            }
+        });
     }
 
     @Override
     public void onLoadMore() {
+        productRepository.Get(null, new AsyncCallBack(){
+            @Override
+            public void onDataReceive(Object data, Object statusCode) {
+                productsAdapter.addAll((ArrayList<ProductEntity>)data);
+                productsAdapter.notifyDataSetChanged();
+                productsListView.stopLoadMore();
+
+            }
+        });
 
     }
+
+
 }

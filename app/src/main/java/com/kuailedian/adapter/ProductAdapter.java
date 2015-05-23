@@ -1,6 +1,7 @@
 package com.kuailedian.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import com.kuailedian.applictionservice.IOrderCartOperator;
 import com.kuailedian.entity.ProductEntity;
 import com.kuailedian.happytouch.R;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -41,12 +43,23 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
     }
 
     @Override
+    public void clear() {
+        this.productList.clear();
+    }
+
+    @Override
     public ProductEntity getItem(int position) {
 
 
        return productList.get(position);
 
 
+    }
+
+
+    @Override
+    public void addAll(Collection<? extends ProductEntity> collection) {
+        productList.addAll(collection);
     }
 
     @Override
@@ -76,6 +89,8 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
 
 
         }
+
+        Log.v("productsdata",String.valueOf(pos));
 
 
         viewHolder.productName.setText(entity.getProductname());

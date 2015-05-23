@@ -15,7 +15,7 @@
         android:id="@+id/img_productimg"
         android:layout_width="48dp "
         android:layout_height="48dp"
-        android:background="@color/DarkOliveGreen" />
+        android:background="@mipmap/no_photo" />
 
 
     <LinearLayout

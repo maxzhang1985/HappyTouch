@@ -15,6 +15,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -184,6 +185,16 @@ public class OrderFragmentBase extends Fragment {
             }
         });
 
+    }
+
+    public void AddProducts(View itemview, String content) {
+
+        tv_orderNum.setText(content);
+        int[] start_location = new int[2];// 一个整型数组，用来存储按钮的在屏幕的X、Y坐标
+        itemview.getLocationInWindow(start_location);// 这是获取购买按钮的在屏幕的X、Y坐标（这也是动画开始的坐标）
+        ImageView buyImg = new ImageView(context);// buyImg是动画的图片，我的是一个小球（R.drawable.sign）
+        buyImg.setImageResource(R.mipmap.sign);// 设置buyImg的图片
+        setAnim(buyImg, start_location);// 开始执行动画
     }
 
 

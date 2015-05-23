@@ -57,8 +57,8 @@ public class ProductEntity {
     }
 
 
-
-
-
-
+    @Override
+    public String toString() {
+        return this.getProductname();
+    }
 }

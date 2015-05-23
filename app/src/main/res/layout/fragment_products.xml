@@ -17,7 +17,7 @@
         android:layout_height="match_parent"
         android:id="@+id/catalogListView"
         android:layout_weight="1"
-        android:background="@color/grey_title"
+        android:background="#ffaaaaaa"
         android:listSelector="@drawable/catalog_listitem_selector"
         />
 
@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:background="@color/White">
+        android:background="#ffeeeeee">
     </me.maxwin.view.XListView>
 
 </LinearLayout>
