@@ -57,7 +57,7 @@
             android:layout_height="48px"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
-            android:background="@mipmap/btn_add" />
+            android:background="@mipmap/btn_plus" />
     </LinearLayout>
 
 

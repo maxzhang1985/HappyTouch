@@ -128,10 +128,11 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
                 mMenuDialogFragment.dismiss();
                 break;
             case 1:
-                this.Navigate(ReservationFragment.newInstance()) ;
+                this.Navigate( ProductsFragment.newInstance() );
                 break;
             case 2:
-                this.Navigate( ProductsFragment.newInstance() );
+                this.Navigate(ReservationFragment.newInstance()) ;
+
                 break;
             case 3:
                 this.Navigate(FragmentSampleActivity.SimpleFragment.newInstance(position));

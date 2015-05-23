@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -83,9 +84,14 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
         //catalogListView
 
-        catalogAdapter = new ArrayAdapter<CatalogEntity>(view.getContext(),R.layout.popupwindow_item,R.id.popup_item, new ArrayList<CatalogEntity>());
+        catalogAdapter = new ArrayAdapter<CatalogEntity>(view.getContext(),R.layout.catalog_item,R.id.catalog_item_name, new ArrayList<CatalogEntity>());
         catalogListView.setAdapter(catalogAdapter);
+        catalogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+            }
+        });
         //productsListView
         productsListView.setPullLoadEnable(true);
         productsListView.setXListViewListener(this);
@@ -95,12 +101,15 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
         catalogRepository.Get(null,new AsyncCallBack() {
             @Override
             public void onDataReceive(Object data, Object statusCode) {
-                Log.v("productdata",data.toString());
+                Log.v("productdata", data.toString());
                 ProductsFragment.this.catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
                 ProductsFragment.this.catalogAdapter.notifyDataSetChanged();
-                ProductsFragment.this.catalogListView.setSelection(0);
+
             }
         });
+
+
+
 
 
 

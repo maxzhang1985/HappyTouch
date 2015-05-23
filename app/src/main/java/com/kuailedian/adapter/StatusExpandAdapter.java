@@ -130,7 +130,7 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 		final int pos = childPosition;
 
 		ChildViewHolder viewHolder = null;
-		ChildStatusEntity entity = (ChildStatusEntity) getChild(groupPosition,
+		final ChildStatusEntity entity = (ChildStatusEntity) getChild(groupPosition,
 				childPosition);
 		if (convertView != null) {
 			viewHolder = (ChildViewHolder) convertView.getTag();
@@ -162,7 +162,7 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 
 
 
-				ordercartOperator.AddProducts(v,String.valueOf(pos));
+				ordercartOperator.AddProducts(v,entity.getProductsid());
 			}
 		});
 
