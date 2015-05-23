@@ -93,7 +93,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
             }
         });
         //productsListView
-        productsListView.setPullLoadEnable(true);
+        //productsListView.setPullLoadEnable(true);
         productsListView.setXListViewListener(this);
         productsListView.setAdapter(productsAdapter);
 
