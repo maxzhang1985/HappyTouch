@@ -135,7 +135,7 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
 
                 break;
             case 3:
-                this.Navigate(FragmentSampleActivity.SimpleFragment.newInstance(position));
+                this.Navigate(PersonalCenterFragment.newInstance());
                 break;
             case 4:
                 this.Navigate(FragmentSampleActivity.SimpleFragment.newInstance(position));

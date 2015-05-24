@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kuailedian.reveallayout.RevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/reveal_layout"
+              android:background="@color/White"
+    >
+<RelativeLayout android:layout_width="match_parent" android:layout_height="150dp"
+                android:background="@mipmap/ic_bg">
+
+    <ImageView android:layout_width="95dp" android:layout_height="96dp"
+               android:src="@mipmap/user_no_photo" android:layout_centerVertical="true"
+               android:layout_marginLeft="20dp"/>
+
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginLeft="135dp"
+                  android:orientation="vertical" android:layout_alignParentLeft="false"
+                  android:layout_alignParentBottom="false" android:gravity="center">
+
+
+        <TextView android:layout_width="match_parent" android:layout_height="50dp" android:text="用户名"  android:textSize="35dp"  android:textColor="@color/black" />
+
+
+        <TextView android:layout_width="match_parent" android:layout_height="30dp" android:text="13055113584"  android:textSize="30dp"  android:textColor="@color/black"
+            android:id="@+id/tv_person_name"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
+<LinearLayout android:layout_width="match_parent"
+              android:layout_height="match_parent" android:orientation="vertical"
+    android:layout_marginTop="150dp"
+    android:weightSum="1">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal"
+                  android:gravity="center">
+        <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_shoppinglist"
+                   android:layout_marginLeft="20dp"/>
+        <TextView android:text="我的订单" android:textColor="@color/black" android:textSize="20dp" android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:gravity="center_vertical" android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal"
+                  android:gravity="center">
+        <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_address"
+                   android:layout_marginLeft="20dp"/>
+        <TextView android:text="我的地址" android:textColor="@color/black" android:textSize="20dp" android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:gravity="center_vertical" android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal"
+                  android:gravity="center">
+        <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_key"
+                   android:layout_marginLeft="20dp"/>
+        <TextView android:text="我的密码" android:textColor="@color/black" android:textSize="20dp" android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:gravity="center_vertical" android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal"
+                  android:gravity="center">
+        <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_about"
+                   android:layout_marginLeft="20dp"/>
+        <TextView android:text="关于" android:textColor="@color/black" android:textSize="20dp" android:layout_width="match_parent" android:layout_height="match_parent"
+                  android:gravity="center_vertical" android:layout_marginLeft="20dp"/>
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+
+</com.kuailedian.reveallayout.RevealLayout>
