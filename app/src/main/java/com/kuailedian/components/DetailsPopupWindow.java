@@ -25,13 +25,11 @@ public class DetailsPopupWindow extends PopupWindow {
 
 
         this.setContentView(view);
-        //设置SelectPicPopupWindow弹出窗体的宽
+
         this.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
-        //设置SelectPicPopupWindow弹出窗体的高
+
         this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        //设置SelectPicPopupWindow弹出窗体可点击
         this.setFocusable(true);
-        //设置SelectPicPopupWindow弹出窗体动画效果
         this.setAnimationStyle(R.style.AnimBottom);
 
         this.setBackgroundDrawable(new ColorDrawable(
