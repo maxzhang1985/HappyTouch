@@ -155,20 +155,18 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 
 
 		viewHolder.productName.setText(entity.getProductName());
-
+		viewHolder.btnAddProduct.setFocusable(false);
 		viewHolder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
 
-
-				ordercartOperator.AddProducts(v,entity.getProductsid());
+				ordercartOperator.AddProducts(v, entity.getProductsid());
 			}
 		});
 
-
-
 		convertView.setTag(viewHolder);
+		convertView.setClickable(false);
 		return convertView;
 	}
 
@@ -184,7 +182,7 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	private class GroupViewHolder {

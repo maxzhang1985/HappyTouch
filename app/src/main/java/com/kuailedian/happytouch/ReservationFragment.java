@@ -2,16 +2,16 @@ package com.kuailedian.happytouch;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.kuailedian.adapter.StatusExpandAdapter;
 import com.kuailedian.applictionservice.IOrderCartOperator;
-import com.kuailedian.entity.ChildStatusEntity;
+import com.kuailedian.components.DetailsPopupWindow;
 import com.kuailedian.entity.GroupStatusEntity;
 import com.kuailedian.repository.AsyncCallBack;
 import com.kuailedian.repository.IAsyncRepository;
@@ -118,6 +118,7 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
                 // TODO Auto-generated method stub
+                Log.v("popwindow","show the window111");
                 expandlistView.expandGroup(groupPosition);
                 return true;
             }
@@ -127,7 +128,9 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
 
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-
+                Log.v("popwindow","show the window");
+                DetailsPopupWindow window = new DetailsPopupWindow(context);
+                window.showAtLocation(rootView,Gravity.CENTER,0,0);
                 return true;
             }
         });

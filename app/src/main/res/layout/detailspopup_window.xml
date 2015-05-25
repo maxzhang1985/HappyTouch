@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b0000000"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="90dp"
+        android:orientation="vertical"
+        android:background="@color/White"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/no_photo"
+            android:scaleType="centerCrop" />
+
+        <View  android:layout_width="wrap_content"
+            android:layout_height="1dp"
+
+            android:background="@android:color/darker_gray" />
+
+
+        <LinearLayout  android:layout_width="match_parent"  android:layout_height="75dp" android:orientation="horizontal" android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="50dp" android:text="配菜" android:textSize="18dp" android:textColor="@color/black"
+            android:layout_marginLeft="10dp" />
+
+            <ImageView   android:src="@mipmap/no_photo"
+                android:scaleType="centerCrop"
+                android:layout_width="38dp"
+                android:layout_height="38dp" />
+            <ImageView   android:src="@mipmap/no_photo"
+                android:scaleType="centerCrop"
+                android:layout_width="38dp"
+                android:layout_height="38dp" />
+            <ImageView   android:src="@mipmap/no_photo"
+                android:scaleType="centerCrop"
+                android:layout_width="38dp"
+                android:layout_height="38dp" />
+        </LinearLayout>
+
+
+
+        <View  android:layout_width="wrap_content"  android:layout_height="1dp"  android:background="@android:color/darker_gray" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24dp" android:textColor="@color/black"
+                android:text="备注"
+                android:layout_marginLeft="10dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="16dp"
+                android:text="路北区往东，路南区往北"
+                android:layout_marginLeft="10dp" />
+
+
+        </LinearLayout>
+
+        <View  android:layout_width="wrap_content"
+            android:layout_height="1dp"
+
+            android:background="@android:color/darker_gray" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:divider="@color/black"
+            android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24dp" android:textColor="@color/black"
+                    android:text="配送范围"
+                    android:layout_marginLeft="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:text="路北区往东，路南区往北"
+                    android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
