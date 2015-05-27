@@ -11,11 +11,17 @@ import java.util.List;
  */
 public class ReservationRepository extends BaseAsyncRepository {
 
-
+    public ReservationRepository()
+    {
+        super.HostUri = "http://60.2.176.70:21121/test/jiekou/OrderAppInterFace.ashx?methed=GetReservationList";
+    }
 
 
     @Override
     public Object getData(Object responseObj) {
+
+
+
 
 
          return getListData();
