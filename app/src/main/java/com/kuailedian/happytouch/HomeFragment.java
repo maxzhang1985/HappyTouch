@@ -1,14 +1,18 @@
 package com.kuailedian.happytouch;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ViewSwitcher;
 
 import com.kuailedian.applictionservice.INavigationService;
+import com.kuailedian.components.LoginPopupWindow;
+import com.kuailedian.domain.Account;
 import com.marshalchen.common.uimodule.kenburnsview.KenBurnsView;
 import com.marshalchen.common.uimodule.kenburnsview.Transition;
 
@@ -29,6 +33,8 @@ public class HomeFragment extends Fragment {
     @InjectView(R.id.kenBurnsViewSwitch)
     ViewSwitcher viewSwitcher;
 
+    private Context context;
+    private View rootView;
     // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -54,6 +60,11 @@ public class HomeFragment extends Fragment {
 
         kenBurnsView1.setTransitionListener(listener);
         kenBurnsView.setTransitionListener(listener);
+
+        context = view.getContext();
+        rootView = view;
+
+
     }
 
 
@@ -92,6 +103,8 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         ButterKnife.inject(this,view);
@@ -104,9 +117,16 @@ public class HomeFragment extends Fragment {
     public void onGo_Reservation()
     {
         HTApplication app = (HTApplication)getActivity().getApplication();
-        INavigationService navigation = app.GetSystemDomain(INavigationService.class);
-        navigation.Navigate(ReservationFragment.newInstance());
-
+        Account account = app.GetSystemDomain(Account.class);
+        if(account !=null) {
+            INavigationService navigation = app.GetSystemDomain(INavigationService.class);
+            navigation.Navigate(ReservationFragment.newInstance());
+        }
+        else
+        {
+            LoginPopupWindow popup = new LoginPopupWindow(context);
+            popup.showAtLocation(rootView , Gravity.CENTER , 0 , 0);
+        }
     }
 
 
@@ -114,8 +134,16 @@ public class HomeFragment extends Fragment {
     public void onGo_Shopping()
     {
         HTApplication app = (HTApplication)getActivity().getApplication();
-        INavigationService navigation = app.GetSystemDomain(INavigationService.class);
-        navigation.Navigate(ProductsFragment.newInstance());
+        Account account = app.GetSystemDomain(Account.class);
+        if(account !=null) {
+            INavigationService navigation = app.GetSystemDomain(INavigationService.class);
+            navigation.Navigate(ProductsFragment.newInstance());
+        }
+        else
+        {
+            LoginPopupWindow popup = new LoginPopupWindow(context);
+            popup.showAtLocation(rootView , Gravity.CENTER , 0 , 0);
+        }
     }
 
 
