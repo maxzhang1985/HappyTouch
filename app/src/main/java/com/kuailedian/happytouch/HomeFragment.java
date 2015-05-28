@@ -1,6 +1,8 @@
 package com.kuailedian.happytouch;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -49,7 +51,12 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    private HTApplication getAppliction()
+    {
+        Activity act = (Activity)context;
+        HTApplication app =(HTApplication)act.getApplication();
+        return app;
+    }
 
 
     @Override
@@ -64,7 +71,14 @@ public class HomeFragment extends Fragment {
         context = view.getContext();
         rootView = view;
 
+        SharedPreferences sp = context.getSharedPreferences("SP", Context.MODE_PRIVATE);
+        String phone = sp.getString("phone","none");
+        if(phone != "none")
+        {
+            Account account = new Account(phone.toString());
+            getAppliction().SetSystemDomain(Account.class,account);
 
+        }
     }
 
 

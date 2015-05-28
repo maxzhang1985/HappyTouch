@@ -17,20 +17,22 @@
             android:hint="请输入手机号码"  android:textColor="@color/black" android:background="@null"
             testattr:LineColor="#757575" android:textSize="18dp"
             android:textColorHint="#ff939393"
-            android:inputType="phone"    />
+            android:inputType="phone"
+            android:id="@+id/edit_login_username"
+            />
 
         <RelativeLayout android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             >
 
-            <com.kuailedian.components.MyEditText android:layout_width="match_parent" android:layout_height="35dp"
+            <com.kuailedian.components.MyEditText  android:layout_width="match_parent" android:layout_height="35dp"
                 android:layout_marginLeft="12dp" android:layout_marginRight="12dp"
                 android:hint="请输出密码"  android:textColor="@color/black" android:background="@null"
                 testattr:LineColor="#757575" android:textSize="18dp"
                 android:textColorHint="#ff939393"
                 android:inputType="textPassword"
-                android:id="@+id/edit_reg_password"
+                android:id="@+id/edit_login_password"
                 android:password="true"/>
             <Button android:id="@+id/btn_showpassword"
                 android:background="@mipmap/icansee" android:layout_width="24dp" android:layout_height="24dp"
@@ -47,7 +49,9 @@
             <Button android:layout_width="match_parent" android:layout_height="35dp"
                 android:layout_alignParentBottom="false" android:layout_centerInParent="true"
                 android:layout_marginLeft="12dp" android:layout_marginRight="12dp"
-                android:background="@drawable/user_login_selector"/>
+                android:background="@drawable/user_login_selector"
+                 android:id="@+id/btn_login"
+                />
 
         </RelativeLayout>
 

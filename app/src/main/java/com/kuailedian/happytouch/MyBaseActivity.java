@@ -1,5 +1,6 @@
 package com.kuailedian.happytouch;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.applictionservice.MenuProvider;
+import com.kuailedian.domain.Account;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
@@ -138,13 +140,23 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
                 this.Navigate(PersonalCenterFragment.newInstance());
                 break;
             case 4:
-                this.Navigate(UserRegisterFragment.newInstance());
+                getAppliction().SetSystemDomain(Account.class,null);
+                INavigationService inav = getAppliction().GetSystemDomain(INavigationService.class);
+                inav.Navigate(HomeFragment.newInstance());
                 break;
 
         }
 
 
 
+    }
+
+
+    private HTApplication getAppliction()
+    {
+
+        HTApplication app =(HTApplication)this.getApplication();
+        return app;
     }
 
     @Override
