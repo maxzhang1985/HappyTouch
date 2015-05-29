@@ -1,8 +1,5 @@
 package com.kuailedian.domain;
 
-import de.greenrobot.event.EventBus;
-
-
 import java.util.Date;
 
 
@@ -77,9 +74,10 @@ public class Account {
 
     private boolean lockChecked ;
 
-    public Account(String phone)
+    public Account(String phone,String passwrod)
     {
         this.mobilePhone = phone;
+        this.passwrod = passwrod;
         lockChecked = false;
     }
 

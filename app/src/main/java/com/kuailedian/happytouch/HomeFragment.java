@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,11 +72,14 @@ public class HomeFragment extends Fragment {
         context = view.getContext();
         rootView = view;
 
-        SharedPreferences sp = context.getSharedPreferences("SP", Context.MODE_PRIVATE);
-        String phone = sp.getString("phone","none");
-        if(phone != "none")
+        SharedPreferences sp = context.getSharedPreferences("com.kuailedian.happytouch", Context.MODE_PRIVATE);
+        String phone = sp.getString("phone", "none");
+
+        String password = sp.getString("password","none");
+        Log.v("login",phone + password);
+        if(!phone.equals( "none"))
         {
-            Account account = new Account(phone.toString());
+            Account account = new Account(phone,password);
             getAppliction().SetSystemDomain(Account.class,account);
 
         }
