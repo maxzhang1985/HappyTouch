@@ -141,10 +141,12 @@ public class LoginPopupWindow extends PopupWindow {
                     {
                         Account account = new Account(edit_username.getText().toString(),edit_password.getText().toString());
                         getAppliction().SetSystemDomain(Account.class, account);
-                        SharedPreferences sp = owner.getSharedPreferences("com.kuailedian.happytouch", Context.MODE_PRIVATE);
-                        sp.edit().putString("phone",account.getMobilePhone());
-                        sp.edit().putString("password",account.getPasswrod());
-                        sp.edit().commit();
+                        SharedPreferences sp = owner.getApplicationContext().getSharedPreferences("com.kuailedian.happytouch", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("phone",account.getMobilePhone());
+                        editor.putString("password",account.getPasswrod());
+                        editor.commit();
+
                         Log.v("login success",sp.getString("phone","") + account.getPasswrod());
                         LoginPopupWindow.this.dismiss();
 

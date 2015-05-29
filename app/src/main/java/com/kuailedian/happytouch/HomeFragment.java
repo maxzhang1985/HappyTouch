@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         context = view.getContext();
         rootView = view;
 
-        SharedPreferences sp = context.getSharedPreferences("com.kuailedian.happytouch", Context.MODE_PRIVATE);
+        SharedPreferences sp = getActivity().getApplicationContext().getSharedPreferences("com.kuailedian.happytouch", Context.MODE_PRIVATE);
         String phone = sp.getString("phone", "none");
 
         String password = sp.getString("password","none");
