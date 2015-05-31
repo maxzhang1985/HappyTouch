@@ -25,9 +25,15 @@
                 android:src="@mipmap/loginbackground_2"/>
         </ViewSwitcher>
 
+    <ImageView android:layout_centerHorizontal="true"
+        android:layout_margin="50dp"
+android:background="@mipmap/logo"
+        android:layout_width="220dp"
+        android:layout_height="96dp" />
+
 <RelativeLayout
     android:layout_width="fill_parent"
-    android:layout_height="200dp"
+    android:layout_height="100dp"
     android:layout_alignParentBottom="true"
     >
    <LinearLayout
