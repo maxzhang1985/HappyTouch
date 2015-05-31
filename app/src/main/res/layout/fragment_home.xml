@@ -17,12 +17,12 @@
                 android:id="@+id/kenBurnsImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/test_back"/>
+                android:src="@mipmap/loginbackground_1"/>
             <com.marshalchen.common.uimodule.kenburnsview.KenBurnsView
                 android:id="@+id/kenBurnsImageView1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/test_back1"/>
+                android:src="@mipmap/loginbackground_2"/>
         </ViewSwitcher>
 
 <RelativeLayout
