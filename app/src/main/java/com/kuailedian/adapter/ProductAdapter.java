@@ -56,6 +56,10 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
 
     }
 
+    @Override
+    public boolean isEmpty() {
+        return  this.productList==null || this.productList.isEmpty();
+    }
 
     @Override
     public void addAll(Collection<? extends ProductEntity> collection) {

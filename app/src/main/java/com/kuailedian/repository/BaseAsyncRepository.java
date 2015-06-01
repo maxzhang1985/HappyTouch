@@ -14,17 +14,15 @@ import org.apache.http.Header;
 public abstract class BaseAsyncRepository implements  IAsyncRepository {
 
     protected String HostUri = null;
-   protected  RequestParams params = new RequestParams();
-
 
     @Override
-    public  void Get(PageModel page, final AsyncCallBack callback) {
+    public  void Get(RequestParams params, final AsyncCallBack callback) {
 
         if(!HostUri.equals(null)) {
 
 
             Log.v("print uri", HostUri + params.toString());
-
+            HttpUtilsAsync.setTimeout(8000);
 
             HttpUtilsAsync.get(HostUri, params, new TextHttpResponseHandler("GB2312") {
 
@@ -42,6 +40,9 @@ public abstract class BaseAsyncRepository implements  IAsyncRepository {
                     Log.v("getdatalog", "failure");
                     callback.onDataReceive(null, null);
                 }
+
+
+
             });
         }
         else

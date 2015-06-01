@@ -20,15 +20,7 @@ public class ProductsRepository extends  BaseAsyncRepository {
         super.HostUri = HostsPath.HostUri + "OrderAppInterFace.ashx?method=GetProductsList";
     }
 
-    @Override
-    public void Get(PageModel page, AsyncCallBack callback) {
 
-        String catalogid = page.getParams().get("catalogid");
-        Log.v("product get data child",catalogid);
-        params = new RequestParams();
-        params.add("catalogid",catalogid);
-        super.Get(page, callback);
-    }
 
     @Override
     public Object getData(String responseObj) {

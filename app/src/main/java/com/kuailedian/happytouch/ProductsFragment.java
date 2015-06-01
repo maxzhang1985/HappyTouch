@@ -1,6 +1,7 @@
 package com.kuailedian.happytouch;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -9,9 +10,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.kuailedian.adapter.ProductAdapter;
 import com.kuailedian.applictionservice.IOrderCartOperator;
@@ -22,6 +25,7 @@ import com.kuailedian.repository.IAsyncRepository;
 import com.kuailedian.repository.PageModel;
 import com.kuailedian.repository.ProductsCatalogRepository;
 import com.kuailedian.repository.ProductsRepository;
+import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 
@@ -46,7 +50,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
     IAsyncRepository productRepository = new ProductsRepository();
 
-
+    ProgressDialog pd =null;
 
     private ArrayAdapter<CatalogEntity> catalogAdapter;
 
@@ -84,7 +88,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        pd = ProgressDialog.show(context, "提示", "加载中，请稍后……");
         //catalogListView
 
         catalogAdapter = new ArrayAdapter<CatalogEntity>(view.getContext(),R.layout.catalog_item,R.id.catalog_item_name, new ArrayList<CatalogEntity>());
@@ -95,18 +99,8 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
                 productsAdapter.clear();
                 CatalogEntity catalog = catalogAdapter.getItem(i);
-                PageModel page = new PageModel();
-                page.getParams().put("catalogid",catalog.categoryid);
-                Log.v("print get product",catalog.categoryid);
-                productRepository.Get(page, new AsyncCallBack(){
-                    @Override
-                    public void onDataReceive(Object data, Object statusCode) {
 
-                        productsAdapter.addAll((ArrayList<ProductEntity>)data);
-                        productsAdapter.notifyDataSetChanged();
-                    }
-                });
-
+                getProductByCatelogid(catalog.categoryid);
 
             }
         });
@@ -117,20 +111,56 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
         productsListView.setXListViewListener(this);
         productsListView.setAdapter(productsAdapter);
+        ViewStub mViewStub = (ViewStub)view.findViewById(R.id.productempty);
+        productsListView.setEmptyView(mViewStub);
 
-
-        catalogRepository.Get(null,new AsyncCallBack() {
+        catalogRepository.Get(new RequestParams(),new AsyncCallBack() {
             @Override
             public void onDataReceive(Object data, Object statusCode) {
+                pd.dismiss();
                 Log.v("productdata", data.toString());
-                catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
-                catalogAdapter.notifyDataSetChanged();
+                if(!data.equals(null) && !((ArrayList<CatalogEntity>) data).isEmpty()) {
+                    catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
+                    catalogAdapter.notifyDataSetChanged();
+
+                    productsAdapter.clear();
+                    CatalogEntity catalog = catalogAdapter.getItem(0);
+                    getProductByCatelogid(catalog.categoryid);
+
+
+                }
+
 
             }
         });
 
 
     }
+
+    private void getProductByCatelogid(String categoryid)
+    {
+        RequestParams params = new RequestParams();
+        params.add("categoryid", categoryid);
+
+        Log.v("print get product",categoryid);
+        pd = ProgressDialog.show(context, "提示", "加载中，请稍后……");
+        productRepository.Get(params, new AsyncCallBack(){
+            @Override
+            public void onDataReceive(Object data, Object statusCode) {
+                Log.v("ondatareceive","111111");
+                if(data == null) {
+                    Toast.makeText(context,"获取数据失败！",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+                productsAdapter.addAll((ArrayList<ProductEntity>)data);
+                productsAdapter.notifyDataSetChanged();
+                pd.dismiss();
+            }
+        });
+
+    }
+
 
 
     private void onLoad() {

@@ -16,6 +16,7 @@ import com.kuailedian.entity.GroupStatusEntity;
 import com.kuailedian.repository.AsyncCallBack;
 import com.kuailedian.repository.IAsyncRepository;
 import com.kuailedian.repository.ReservationRepository;
+import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +93,7 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
 
 
 
-        repository.Get(null, new AsyncCallBack() {
+        repository.Get(new RequestParams(), new AsyncCallBack() {
             @Override
             public void onDataReceive(Object data, Object statusCode) {
                 statusAdapter.AddItems((List<GroupStatusEntity>) data);
