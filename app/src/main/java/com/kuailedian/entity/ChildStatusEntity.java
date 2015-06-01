@@ -12,6 +12,16 @@ public class ChildStatusEntity {
 	/** 是否已完成 **/
 	private boolean isfinished;
 
+	public String getUnitprice() {
+		return unitprice;
+	}
+
+	public void setUnitprice(String unitprice) {
+		this.unitprice = unitprice;
+	}
+
+	private String unitprice;
+
 	public String getProductName() {
 		return productName;
 	}

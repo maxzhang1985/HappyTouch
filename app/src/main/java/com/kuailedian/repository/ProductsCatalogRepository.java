@@ -1,5 +1,8 @@
 package com.kuailedian.repository;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.kuailedian.entity.CatalogEntity;
 
 import java.util.ArrayList;
@@ -10,16 +13,30 @@ import java.util.List;
  */
 public class ProductsCatalogRepository extends  BaseAsyncRepository{
 
+    public ProductsCatalogRepository()
+    {
+        super.HostUri = HostsPath.HostUri + "OrderAppInterFace.ashx?method=GetProductsCategory";
+    }
+
+
+
+
+
     @Override
-    public Object getData(Object responseObj) {
+    public Object getData(String responseObj) {
+
+        JSONArray objectArray = JSON.parseArray(responseObj);
 
         List<CatalogEntity> catalogList = new ArrayList<CatalogEntity>();
 
-        catalogList.add(new CatalogEntity("001","the item 1"));
-        catalogList.add(new CatalogEntity("002","the item 2"));
-        catalogList.add(new CatalogEntity("003","the item 3"));
-        catalogList.add(new CatalogEntity("004","the item 4"));
-        catalogList.add(new CatalogEntity("005","the item 5"));
+        for(int i=0 ; i<=objectArray.size()-1;i++)
+        {
+            JSONObject item = objectArray.getJSONObject(i);
+            catalogList.add(new CatalogEntity( item.getString("categoryid") , item.getString("categoryname") ));
+        }
+
+
+
 
         return catalogList;
     }

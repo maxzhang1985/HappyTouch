@@ -1,7 +1,11 @@
 package com.kuailedian.repository;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.kuailedian.entity.ChildStatusEntity;
 import com.kuailedian.entity.GroupStatusEntity;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,18 +17,52 @@ public class ReservationRepository extends BaseAsyncRepository {
 
     public ReservationRepository()
     {
-        super.HostUri = "http://60.2.176.70:21121/test/jiekou/OrderAppInterFace.ashx?methed=GetReservationList";
+        super.HostUri = HostsPath.HostUri + "OrderAppInterFace.ashx?method=GetReservationList";
     }
 
 
     @Override
-    public Object getData(Object responseObj) {
+    public Object getData(String responseObj) {
+
+        JSONArray objectArray = JSON.parseArray(responseObj);
+        //Day array = object.getJSONObject(0).getJSONArray("days").getObject(0, Day.class);
+        //Log.v("getdatalog", array.getDate());
 
 
+        List<GroupStatusEntity> groupList = new ArrayList<>();
+        for(int i=0;i<=objectArray.size() - 1 ; i++)
+        {
+
+            GroupStatusEntity groupItem = new GroupStatusEntity();
+            JSONObject jsonObject = objectArray.getJSONObject(i);
+
+            groupItem.setGroupName(jsonObject.getString("date"));
+            groupItem.setIstoday(jsonObject.getBoolean("istoday"));
+            JSONArray foodList =  jsonObject.getJSONArray("foods");
+
+            List<ChildStatusEntity> childList = new ArrayList<ChildStatusEntity>();
+            for(int j=0;j<=foodList.size()-1;j++)
+            {
+                JSONObject food = foodList.getJSONObject(j);
+
+                ChildStatusEntity child = new ChildStatusEntity();
+                child.setProductsid(food.getString("productid"));
+                child.setProductName(food.getString("productname"));
+               // child.setImg(food.getJSONArray("img").get(0).toString());
+                child.setUnitprice(food.getString("unitprice"));
 
 
+                childList.add(child);
+            }
 
-         return getListData();
+            groupItem.setChildList(childList);
+            groupList.add(groupItem);
+
+
+        }
+
+
+         return groupList;
 
     }
 

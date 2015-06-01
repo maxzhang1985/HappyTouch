@@ -1,6 +1,7 @@
 package com.kuailedian.happytouch;
 
-import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -140,6 +141,10 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
                 this.Navigate(PersonalCenterFragment.newInstance());
                 break;
             case 4:
+                SharedPreferences sp = this.getSharedPreferences("com.kuailedian.happytouch", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editer = sp.edit();
+                editer.clear();
+                editer.apply();
                 getAppliction().SetSystemDomain(Account.class,null);
                 INavigationService inav = getAppliction().GetSystemDomain(INavigationService.class);
                 inav.Navigate(HomeFragment.newInstance());

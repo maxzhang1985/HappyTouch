@@ -23,6 +23,7 @@ import com.kuailedian.domain.Account;
 import com.kuailedian.happytouch.HTApplication;
 import com.kuailedian.happytouch.R;
 import com.kuailedian.happytouch.UserRegisterFragment;
+import com.kuailedian.repository.HostsPath;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.marshalchen.common.commonUtils.urlUtils.HttpUtilsAsync;
@@ -126,7 +127,7 @@ public class LoginPopupWindow extends PopupWindow {
         @Override
         public void onClick(View v) {
 
-            String hosturi = "http://60.2.176.70:21121/test/jiekou/OrderAppInterFace.ashx?method=Login";
+            String hosturi = HostsPath.HostUri + "OrderAppInterFace.ashx?method=Login";
             RequestParams params = new RequestParams();
             params.add("phone",edit_username.getText().toString() );
             params.add("password",edit_password.getText().toString());

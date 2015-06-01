@@ -10,6 +10,16 @@ import java.util.List;
  */
 public class GroupStatusEntity {
 	private String groupName;
+
+	public boolean istoday() {
+		return istoday;
+	}
+
+	public void setIstoday(boolean istoday) {
+		this.istoday = istoday;
+	}
+
+	private boolean istoday;
 	/** 二级Item数据列表 **/
 	private List<ChildStatusEntity> childList;
 

@@ -1,6 +1,12 @@
 package com.kuailedian.repository;
 
+import android.util.Log;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.kuailedian.entity.ProductEntity;
+import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
 
@@ -9,22 +15,32 @@ import java.util.ArrayList;
  */
 public class ProductsRepository extends  BaseAsyncRepository {
 
+    public ProductsRepository()
+    {
+        super.HostUri = HostsPath.HostUri + "OrderAppInterFace.ashx?method=GetProductsList";
+    }
+
     @Override
-    public Object getData(Object responseObj) {
+    public void Get(PageModel page, AsyncCallBack callback) {
 
+        String catalogid = page.getParams().get("catalogid");
+        Log.v("product get data child",catalogid);
+        params = new RequestParams();
+        params.add("catalogid",catalogid);
+        super.Get(page, callback);
+    }
+
+    @Override
+    public Object getData(String responseObj) {
+
+        JSONArray objectArray = JSON.parseArray(responseObj);
         ArrayList<ProductEntity> productList =new ArrayList<ProductEntity>();
-        productList.add(new ProductEntity("","1","p1","100"));
-        productList.add(new ProductEntity("","2","p2","100"));
-        productList.add(new ProductEntity("","3","p3","100"));
-        productList.add(new ProductEntity("","4","p4","100"));
-        productList.add(new ProductEntity("","5","p5","100"));
-        productList.add(new ProductEntity("","6","p6","100"));
-        productList.add(new ProductEntity("","7","p7","100"));
-        productList.add(new ProductEntity("","8","p8","100"));
-        productList.add(new ProductEntity("","9","p9","100"));
-        productList.add(new ProductEntity("","10","p10","100"));
 
-
+        for(int i=0 ; i<=objectArray.size()-1;i++)
+        {
+            JSONObject item = objectArray.getJSONObject(i);
+            productList.add(new ProductEntity( "", item.getString("productid") , item.getString("productname"),item.getString("unitprice") ));
+        }
 
         return productList;
 

@@ -11,9 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.kuailedian.adapter.ProductAdapter;
 import com.kuailedian.applictionservice.IOrderCartOperator;
@@ -21,6 +19,7 @@ import com.kuailedian.entity.CatalogEntity;
 import com.kuailedian.entity.ProductEntity;
 import com.kuailedian.repository.AsyncCallBack;
 import com.kuailedian.repository.IAsyncRepository;
+import com.kuailedian.repository.PageModel;
 import com.kuailedian.repository.ProductsCatalogRepository;
 import com.kuailedian.repository.ProductsRepository;
 
@@ -95,7 +94,11 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 productsAdapter.clear();
-                productRepository.Get(null, new AsyncCallBack(){
+                CatalogEntity catalog = catalogAdapter.getItem(i);
+                PageModel page = new PageModel();
+                page.getParams().put("catalogid",catalog.categoryid);
+                Log.v("print get product",catalog.categoryid);
+                productRepository.Get(page, new AsyncCallBack(){
                     @Override
                     public void onDataReceive(Object data, Object statusCode) {
 
@@ -127,17 +130,6 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
         });
 
 
-        productRepository.Get(null, new AsyncCallBack(){
-            @Override
-            public void onDataReceive(Object data, Object statusCode) {
-                Log.v("productdata", data.toString());
-                productsAdapter.addAll((ArrayList<ProductEntity>)data);
-                productsAdapter.notifyDataSetChanged();
-            }
-        });
-
-
-
     }
 
 
@@ -149,29 +141,14 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
 
     @Override
     public void onRefresh() {
-        productRepository.Get(null, new AsyncCallBack(){
-            @Override
-            public void onDataReceive(Object data, Object statusCode) {
-                productsAdapter.clear();
-                productsAdapter.addAll((ArrayList<ProductEntity>)data);
-                productsAdapter.notifyDataSetChanged();
-                productsListView.stopRefresh();
-            }
-        });
+
+        productsListView.stopRefresh();
     }
 
     @Override
     public void onLoadMore() {
-        productRepository.Get(null, new AsyncCallBack(){
-            @Override
-            public void onDataReceive(Object data, Object statusCode) {
-                productsAdapter.addAll((ArrayList<ProductEntity>)data);
-                productsAdapter.notifyDataSetChanged();
-                productsListView.stopLoadMore();
 
-            }
-        });
-
+        productsListView.stopLoadMore();
     }
 
 
