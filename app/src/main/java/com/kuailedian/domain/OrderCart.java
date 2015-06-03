@@ -57,9 +57,11 @@ public class OrderCart  {
     public int getTotalAmount()
     {
         int amout = 0;
-       for(Object key : items.keySet())
-            amout += items.get(key).getAmount() ;
-
+       for(Object key : items.keySet()) {
+           CartItem item = items.get(key);
+           if(item.getIsSelected())
+                amout += item.getAmount();
+       }
         return  amout;
     }
 
@@ -68,7 +70,8 @@ public class OrderCart  {
         int money = 0;
         for(Object key : items.keySet()) {
             CartItem item = items.get(key);
-            money += item.getAmount() * item.getMoney() ;
+            if(item.getIsSelected())
+                money += item.getAmount() * item.getMoney() ;
         }
         return money;
     }

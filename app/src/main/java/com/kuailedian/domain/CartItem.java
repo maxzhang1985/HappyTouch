@@ -4,10 +4,26 @@ package com.kuailedian.domain;
  * Created by maxzhang on 6/3/2015.
  */
 public class CartItem {
+
+    public CartItem()
+    {
+        isselected = true;
+    }
+
     private String id;
     private String name;
     private float money;
     private String type;
+
+    public boolean getIsSelected() {
+        return isselected;
+    }
+
+    public void setIsSelected(boolean isselected) {
+        this.isselected = isselected;
+    }
+
+    private boolean isselected;
 
     public int getAmount() {
         return amount;
