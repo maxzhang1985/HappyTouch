@@ -25,11 +25,29 @@
                 android:src="@mipmap/loginbackground_2"/>
         </ViewSwitcher>
 
-    <ImageView android:layout_centerHorizontal="true"
-        android:layout_margin="50dp"
-android:background="@mipmap/logo"
-        android:layout_width="220dp"
-        android:layout_height="96dp" />
+    <RelativeLayout android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+
+
+            <ImageView  android:layout_centerHorizontal="true"
+                android:background="@mipmap/logo"
+                android:layout_width="220dp"
+                android:layout_height="96dp" />
+
+        <ImageView  android:layout_centerHorizontal="true"
+            android:background="@mipmap/logo_1"
+            android:layout_marginTop="150dp"
+            android:layout_width="263dp"
+            android:layout_height="69dp" />
+
+
+
+
+    </RelativeLayout>
+
+
 
 <RelativeLayout
     android:layout_width="fill_parent"
