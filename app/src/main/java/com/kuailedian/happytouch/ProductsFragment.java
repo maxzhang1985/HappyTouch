@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import com.kuailedian.adapter.ProductAdapter;
 import com.kuailedian.applictionservice.IOrderCartOperator;
+import com.kuailedian.components.DetailsPopupWindow;
 import com.kuailedian.entity.CatalogEntity;
 import com.kuailedian.entity.ProductEntity;
 import com.kuailedian.repository.AsyncCallBack;
@@ -113,6 +115,16 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
         productsListView.setAdapter(productsAdapter);
         ViewStub mViewStub = (ViewStub)view.findViewById(R.id.productempty);
         productsListView.setEmptyView(mViewStub);
+
+
+        productsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                DetailsPopupWindow window = new DetailsPopupWindow(context);
+                window.showAtLocation(rootView, Gravity.CENTER,0,0);
+            }
+        });
+
 
         catalogRepository.Get(new RequestParams(),new AsyncCallBack() {
             @Override

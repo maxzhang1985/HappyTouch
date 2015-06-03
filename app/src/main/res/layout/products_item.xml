@@ -8,7 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="72dp" android:layout_margin="3dp"
-        android:background="@drawable/kuang">
+        android:background="@drawable/kuang"
+        android:descendantFocusability="blocksDescendants"
+        >
 
         <ImageView
             android:id="@+id/img_productimg"
