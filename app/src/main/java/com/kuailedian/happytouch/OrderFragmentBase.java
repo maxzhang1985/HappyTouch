@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kuailedian.components.BottomPopupWindow;
+import com.kuailedian.domain.CartItem;
+import com.kuailedian.domain.OrderCart;
 
 /**
  * Created by maxzhang on 5/8/2015.
@@ -31,6 +33,8 @@ public class OrderFragmentBase extends Fragment {
     BottomPopupWindow popupView;
 
     protected TextView tv_orderNum;//购物车
+
+    private  TextView tv_ordercartTitle; //购物车总额
 
     protected ViewGroup anim_mask_layout;//动画层
 
@@ -47,6 +51,8 @@ public class OrderFragmentBase extends Fragment {
         rootView = view;
 
         tv_orderNum = (TextView)view.findViewById(R.id.ordercart_num);
+
+        tv_ordercartTitle = (TextView)view.findViewById(R.id.ordercart_title);
 
         //control order popup view ,show or hide;
         ImageButton btnShowOrder  = (ImageButton) view.findViewById(R.id.btn_showolder);
@@ -187,9 +193,24 @@ public class OrderFragmentBase extends Fragment {
 
     }
 
-    public void AddProducts(View itemview, String content) {
+    public void AddProducts(View itemview, CartItem item) {
 
-        tv_orderNum.setText(content);
+        OrderCart cart = OrderCart.getOrderCart();
+        cart.addCart(item);
+        float money =  cart.getToalMoney();
+        int amount =  cart.getTotalAmount();
+
+        Log.v("print money",String.valueOf(money));
+        Log.v("print amount",String.valueOf(amount));
+
+        CharSequence strMoney = String.valueOf(money);
+        tv_ordercartTitle.setText(strMoney);
+
+        CharSequence strAmount = String.valueOf(amount);
+        tv_orderNum.setText(strAmount);
+
+
+
         int[] start_location = new int[2];// 一个整型数组，用来存储按钮的在屏幕的X、Y坐标
         itemview.getLocationInWindow(start_location);// 这是获取购买按钮的在屏幕的X、Y坐标（这也是动画开始的坐标）
         ImageView buyImg = new ImageView(context);// buyImg是动画的图片，我的是一个小球（R.drawable.sign）

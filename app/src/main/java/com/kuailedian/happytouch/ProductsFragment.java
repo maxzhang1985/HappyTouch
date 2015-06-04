@@ -24,7 +24,6 @@ import com.kuailedian.entity.CatalogEntity;
 import com.kuailedian.entity.ProductEntity;
 import com.kuailedian.repository.AsyncCallBack;
 import com.kuailedian.repository.IAsyncRepository;
-import com.kuailedian.repository.PageModel;
 import com.kuailedian.repository.ProductsCatalogRepository;
 import com.kuailedian.repository.ProductsRepository;
 import com.loopj.android.http.RequestParams;
@@ -159,7 +158,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
         productRepository.Get(params, new AsyncCallBack(){
             @Override
             public void onDataReceive(Object data, Object statusCode) {
-                Log.v("ondatareceive","111111");
+                pd.dismiss();
                 if(data == null) {
                     Toast.makeText(context,"获取数据失败！",
                             Toast.LENGTH_LONG).show();
@@ -167,7 +166,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
                 }
                 productsAdapter.addAll((ArrayList<ProductEntity>)data);
                 productsAdapter.notifyDataSetChanged();
-                pd.dismiss();
+
             }
         });
 

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kuailedian.applictionservice.IOrderCartOperator;
+import com.kuailedian.domain.CartItem;
 import com.kuailedian.entity.ChildStatusEntity;
 import com.kuailedian.entity.GroupStatusEntity;
 import com.kuailedian.happytouch.R;
@@ -160,8 +161,15 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 			@Override
 			public void onClick(View v) {
 
+				CartItem item = new CartItem();
+				item.setId(entity.getProductsid());
+				item.setName(entity.getProductName());
+				item.setMoney( Float.parseFloat( entity.getUnitprice() ));
+				item.setIsSelected(true);
+				item.setAmount(1);
+				item.setType("product");
 
-				ordercartOperator.AddProducts(v, entity.getProductsid());
+				ordercartOperator.AddProducts(v, item);
 			}
 		});
 

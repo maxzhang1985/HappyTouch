@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.kuailedian.applictionservice.IOrderCartOperator;
+import com.kuailedian.domain.CartItem;
 import com.kuailedian.entity.ProductEntity;
 import com.kuailedian.happytouch.R;
 import java.util.ArrayList;
@@ -103,9 +104,15 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
             @Override
             public void onClick(View v) {
 
+                CartItem item = new CartItem();
+                item.setId(entity.getProductid());
+                item.setName(entity.getProductname());
+                item.setMoney( Float.parseFloat( entity.getProductmoney() ));
+                item.setIsSelected(true);
+                item.setAmount(1);
+                item.setType("product");
 
-
-                ordercartOperator.AddProducts(v,entity.getProductid());
+                ordercartOperator.AddProducts(v,item);
             }
         });
 

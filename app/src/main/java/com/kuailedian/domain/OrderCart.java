@@ -7,12 +7,25 @@ import java.util.HashMap;
  */
 public class OrderCart  {
 
+
+
     private HashMap<String,CartItem> items;
 
     public OrderCart()
     {
         items = new HashMap<String,CartItem>();
     }
+
+    private static OrderCart instance;
+    public static synchronized  OrderCart getOrderCart()
+    {
+            if (instance == null) {
+                instance = new OrderCart();
+            }
+            return instance;
+    }
+
+
 
     public void addCart(CartItem addtionitem)
     {
@@ -67,7 +80,7 @@ public class OrderCart  {
 
     public float getToalMoney()
     {
-        int money = 0;
+        float money = 0.0f;
         for(Object key : items.keySet()) {
             CartItem item = items.get(key);
             if(item.getIsSelected())
@@ -76,7 +89,10 @@ public class OrderCart  {
         return money;
     }
 
-
+    public void clear()
+    {
+        items.clear();
+    }
 
 
     private void onItemChanged()
