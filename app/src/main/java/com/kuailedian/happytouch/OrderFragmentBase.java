@@ -203,7 +203,7 @@ public class OrderFragmentBase extends Fragment {
         Log.v("print money",String.valueOf(money));
         Log.v("print amount",String.valueOf(amount));
 
-        CharSequence strMoney = String.valueOf(money);
+        CharSequence strMoney = "￥" + String.valueOf(money);
         tv_ordercartTitle.setText(strMoney);
 
         CharSequence strAmount = String.valueOf(amount);
