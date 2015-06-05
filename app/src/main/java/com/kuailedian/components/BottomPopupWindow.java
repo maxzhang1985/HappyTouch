@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
+import com.kuailedian.adapter.OrderCartAdapter;
 import com.kuailedian.happytouch.R;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class BottomPopupWindow extends PopupWindow {
 
     private ArrayList<String> dataSource = new ArrayList<String>();
 
-    private ArrayAdapter<String> adapter;
+    private OrderCartAdapter adapter;
 
     public void setShowBottomView(View view)
     {
@@ -75,7 +76,7 @@ public class BottomPopupWindow extends PopupWindow {
         btnOrderSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BottomPopupWindow.this.getData();
+
 
 
             }
@@ -85,11 +86,11 @@ public class BottomPopupWindow extends PopupWindow {
 
         ListView ls = (ListView)view.findViewById(R.id.popupListView);
 
-        adapter = new ArrayAdapter<String>(view.getContext(),R.layout.popupwindow_item,R.id.popup_item,dataSource);
+        adapter = new OrderCartAdapter(view.getContext());
 
         ls.setAdapter(adapter);
 
-        getData();
+        //getData();
 
     }
 
@@ -97,19 +98,19 @@ public class BottomPopupWindow extends PopupWindow {
 
 
 
-    private void getData()
-    {
-        ArrayList<String> array = new ArrayList<String>();
-        array.add("the item 1");
-        array.add("the item 2");
-        array.add("the item 3");
-        array.add("the item 4");
-        array.add("the item 5");
-
-        adapter.addAll(array);
-        adapter.notifyDataSetChanged();
-
-    }
+//    private void getData()
+//    {
+//        ArrayList<String> array = new ArrayList<String>();
+//        array.add("the item 1");
+//        array.add("the item 2");
+//        array.add("the item 3");
+//        array.add("the item 4");
+//        array.add("the item 5");
+//
+//        adapter.addAll(array);
+//        adapter.notifyDataSetChanged();
+//
+//    }
 
 
     public void Show(View v)

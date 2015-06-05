@@ -48,7 +48,7 @@ public class ReservationRepository extends BaseAsyncRepository {
                 ChildStatusEntity child = new ChildStatusEntity();
                 child.setProductsid(food.getString("productid"));
                 child.setProductName(food.getString("productname"));
-               // child.setImg(food.getJSONArray("img").get(0).toString());
+                child.setImg(food.getString("img"));
                 child.setUnitprice(food.getString("unitprice"));
 
 

@@ -6,14 +6,15 @@
                 >
 
     <TextView
-        android:id="@+id/popup_item"
+        android:id="@+id/cartitem_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:maxWidth="135dp"
         android:singleLine="true"
         android:ellipsize="none"
-        android:text="XXXXXX"
+        android:text=""
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="16dp"
         android:gravity="center"
         android:layout_marginLeft="10dp"/>
 
@@ -23,35 +24,51 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:layout_gravity="right"
-    android:gravity="right">
+    android:gravity="right|center">
 
 
-    <EditText
-        android:text="1"
+    <Button android:id="@+id/btn_cartitem_sub"
+        android:background="@mipmap/btn_sub"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
+
+    <TextView
+        android:id="@+id/cartitem_amount"
+        android:text="9"
         android:layout_width="30dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_marginRight="10dp"/>
+        android:textSize="18dp"
+        android:textColor="@color/Red"
+        />
 
+
+    <Button android:id="@+id/btn_cartitem_add"
+        android:background="@mipmap/btn_plus"
+        android:layout_width="24dp"
+        android:layout_height="24dp" />
 
     <TextView
-        android:layout_width="100dp"
+        android:id="@+id/cartitem_price"
+        android:layout_width="70dp"
         android:layout_height="match_parent"
         android:textStyle="bold"
         android:singleLine="true"
         android:ellipsize="end"
-        android:text="￥1280"
+        android:textSize="18dp"
+        android:text="￥128"
 
         android:textColor="@color/OrangeRed"
-        android:textSize="24dp"
+
         android:gravity="center"
-        android:layout_marginRight="15dp"/>
+        />
 
     <CheckBox
-        android:layout_width="68dp"
+        android:id="@+id/cartitem_selected"
+        android:layout_width="38dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="35dp"
+        android:layout_marginRight="15dp"
         style="@style/MyCheckBox"/>
 
 

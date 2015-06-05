@@ -1,5 +1,6 @@
 package com.kuailedian.happytouch;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
     @InjectView(R.id.expandlist)
     ExpandableListView expandlistView;
 
+    private ProgressDialog pd;
 
     private StatusExpandAdapter statusAdapter;
    // private Context context;
@@ -92,7 +94,7 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
         expandlistView.setGroupIndicator(null); // 去掉默认带的箭头
 
 
-
+        pd = ProgressDialog.show(context, "提示", "加载中，请稍后……");
         repository.Get(new RequestParams(), new AsyncCallBack() {
             @Override
             public void onDataReceive(Object data, Object statusCode) {
@@ -103,7 +105,8 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
                 for (int i = 0; i < groupCount; i++) {
                     expandlistView.expandGroup(i);
                 }
-                expandlistView.setSelection(7);// 设置默认选中项
+                //expandlistView.setSelection(7);// 设置默认选中项
+                pd.dismiss();
             }
         });
 

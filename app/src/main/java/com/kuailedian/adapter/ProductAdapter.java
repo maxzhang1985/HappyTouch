@@ -100,6 +100,8 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
 
         viewHolder.productName.setText(entity.getProductname());
 
+        viewHolder.productMoney.setText(entity.getProductmoney());
+
         viewHolder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

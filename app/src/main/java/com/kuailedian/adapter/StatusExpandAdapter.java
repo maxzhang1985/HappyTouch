@@ -121,6 +121,10 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 		Drawable db = getResourceDrawableByName("week" + (groupPosition+1));
 
 		holder.Week.setImageDrawable(db);
+
+		if(groupList.get(groupPosition).istoday())
+			convertView.setSelected(true);
+
 		return convertView;
 	}
 
@@ -156,6 +160,9 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 
 
 		viewHolder.productName.setText(entity.getProductName());
+		viewHolder.productMoney.setText( entity.getUnitprice());
+		//viewHolder.productPicture = entity.getImg()
+
 		viewHolder.btnAddProduct.setFocusable(false);
 		viewHolder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -175,6 +182,10 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 
 		convertView.setTag(viewHolder);
 		convertView.setClickable(false);
+
+		//if(entity)
+		//convertView.setSelected();
+
 		return convertView;
 	}
 

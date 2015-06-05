@@ -1,5 +1,6 @@
 package com.kuailedian.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -63,7 +64,7 @@ public class OrderCart  {
 
     public CartItem get(int pos)
     {
-        return items.get(pos);
+        return  (new ArrayList<CartItem>(items.values())).get(pos);
     }
 
 
@@ -92,6 +93,11 @@ public class OrderCart  {
     public void clear()
     {
         items.clear();
+    }
+
+    public int size()
+    {
+        return items.size();
     }
 
 

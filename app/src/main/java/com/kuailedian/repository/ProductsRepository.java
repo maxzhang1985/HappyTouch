@@ -31,7 +31,7 @@ public class ProductsRepository extends  BaseAsyncRepository {
         for(int i=0 ; i<=objectArray.size()-1;i++)
         {
             JSONObject item = objectArray.getJSONObject(i);
-            productList.add(new ProductEntity( "", item.getString("productid") , item.getString("productname"),item.getString("unitprice") ));
+            productList.add(new ProductEntity( item.getString("img"), item.getString("productid") , item.getString("productname"),item.getString("unitprice") ));
         }
 
         return productList;
