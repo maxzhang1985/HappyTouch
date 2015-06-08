@@ -1,5 +1,7 @@
 package com.kuailedian.domain;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -43,6 +45,15 @@ public class OrderCart  {
         }
 
         onItemChanged();
+    }
+
+    public void selectItem(String id,boolean selected)
+    {
+        if(items.containsKey(id)) {
+            CartItem item = items.get(id);
+            item.setIsSelected(selected);
+            onItemChanged();
+        }
     }
 
 
@@ -90,6 +101,17 @@ public class OrderCart  {
         return money;
     }
 
+    public int getSelectedItemsCount()
+    {
+        int count = 0;
+        for(Object key : items.keySet()) {
+            CartItem item = items.get(key);
+            if(item.getIsSelected())
+                count ++;
+        }
+        return  count;
+    }
+
     public void clear()
     {
         items.clear();
@@ -103,7 +125,10 @@ public class OrderCart  {
 
     private void onItemChanged()
     {
-
+        for(Object key : items.keySet()) {
+            CartItem item = items.get(key);
+            Log.v("ordercart", item.toString());
+        }
     }
 
 }

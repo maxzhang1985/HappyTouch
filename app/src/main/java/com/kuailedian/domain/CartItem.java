@@ -67,4 +67,9 @@ public class CartItem {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return String.format("id:%s,name:%s,money:%f,selected:%b",id,name,money,isselected);
+    }
 }

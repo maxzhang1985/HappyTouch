@@ -1,18 +1,20 @@
 package com.kuailedian.components;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.kuailedian.adapter.OrderCartAdapter;
+import com.kuailedian.domain.OrderCart;
 import com.kuailedian.happytouch.R;
 
 import java.util.ArrayList;
@@ -30,6 +32,9 @@ public class BottomPopupWindow extends PopupWindow {
     private ArrayList<String> dataSource = new ArrayList<String>();
 
     private OrderCartAdapter adapter;
+
+    TextView tvpop_count;
+    TextView tvpop_price;
 
     public void setShowBottomView(View view)
     {
@@ -90,6 +95,24 @@ public class BottomPopupWindow extends PopupWindow {
 
         ls.setAdapter(adapter);
 
+        tvpop_count = (TextView) view.findViewById(R.id.bpop_count);
+        tvpop_price = (TextView) view.findViewById(R.id.bpop_price);
+
+
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                OrderCart cart = OrderCart.getOrderCart();
+                CharSequence strcount = String.valueOf(cart.getSelectedItemsCount());
+                tvpop_count.setText(strcount);
+                CharSequence strprice = String.valueOf(cart.getToalMoney());
+                tvpop_price.setText(strprice);
+            }
+        });
+
+
+
+
         //getData();
 
     }
@@ -111,6 +134,7 @@ public class BottomPopupWindow extends PopupWindow {
 //        adapter.notifyDataSetChanged();
 //
 //    }
+
 
 
     public void Show(View v)

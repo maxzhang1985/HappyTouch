@@ -1,12 +1,14 @@
 package com.kuailedian.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.kuailedian.domain.CartItem;
@@ -52,7 +54,6 @@ public class OrderCartAdapter extends BaseAdapter  {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
 
-        final int pos = position;
         CartViewHolder holder;
         if (view != null) {
             holder = (CartViewHolder) view.getTag();
@@ -62,21 +63,60 @@ public class OrderCartAdapter extends BaseAdapter  {
             view.setTag(holder);
         }
 
-        CartItem item = orderCart.get(pos);
+        holder.selected.setTag(position);
+        holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton v, boolean isChecked) {
+                int pos = (int)v.getTag();
+                CartItem item = orderCart.get(pos);
+                orderCart.selectItem(item.getId(), isChecked);
+                OrderCartAdapter.this.notifyDataSetChanged();
+            }
+        });
 
+        holder.btnAdd.setTag(position);
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = (int)v.getTag();
+                CartItem item = orderCart.get(pos);
+                orderCart.addCart(item);
+                OrderCartAdapter.this.notifyDataSetChanged();
+            }
+        });
+
+        holder.btnSub.setTag(position);
+        holder.btnSub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = (int)v.getTag();
+                CartItem item = orderCart.get(pos);
+                orderCart.removeById(item.getId());
+                OrderCartAdapter.this.notifyDataSetChanged();
+            }
+        });
+
+        CartItem item = orderCart.get(position);
         holder.name.setText(item.getName());
         CharSequence money = String.valueOf( item.getAmount() );
         holder.amount.setText(money);
         CharSequence cs =  "￥" + String.valueOf( item.getMoney());
         holder.price.setText(cs);
+        Log.v("ordercartadapter",String.valueOf(  item.getIsSelected() ) );
         holder.selected.setChecked(item.getIsSelected());
+
+
+
 
         return view;
     }
 
 
 
-    static class CartViewHolder {
+
+
+
+    static   class CartViewHolder {
         @InjectView(R.id.cartitem_name)
         TextView name;
         @InjectView(R.id.cartitem_amount)
