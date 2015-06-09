@@ -106,8 +106,6 @@ public class OrderCartAdapter extends BaseAdapter  {
         holder.selected.setChecked(item.getIsSelected());
 
 
-
-
         return view;
     }
 

@@ -17,6 +17,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kuailedian.components.BottomPopupWindow;
@@ -84,6 +85,21 @@ public class OrderFragmentBase extends Fragment {
             popupView.setShowBottomView(rootView);
         }
 
+        popupView.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                OrderCart cart = OrderCart.getOrderCart();
+                float money =  cart.getToalMoney();
+                int amount =  cart.getTotalAmount();
+
+                CharSequence strMoney = "￥" + String.valueOf(money);
+                tv_ordercartTitle.setText(strMoney);
+
+                CharSequence strAmount = String.valueOf(amount);
+                tv_orderNum.setText(strAmount);
+
+            }
+        });
 
         popupView.Show(rootView);
     }

@@ -8,12 +8,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kuailedian.adapter.OrderCartAdapter;
+import com.kuailedian.domain.CartItem;
 import com.kuailedian.domain.OrderCart;
 import com.kuailedian.happytouch.R;
 
@@ -35,6 +38,7 @@ public class BottomPopupWindow extends PopupWindow {
 
     TextView tvpop_count;
     TextView tvpop_price;
+    CheckBox cb_selectedall;
 
     public void setShowBottomView(View view)
     {
@@ -87,6 +91,20 @@ public class BottomPopupWindow extends PopupWindow {
             }
         });
 
+        cb_selectedall = (CheckBox)view.findViewById(R.id.cb_selectedall);
+        cb_selectedall.setChecked(true);
+        cb_selectedall.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                OrderCart cart = OrderCart.getOrderCart();
+                for(int i=0;i<=cart.size()-1;i++)
+                {
+                    CartItem item = cart.get(i);
+                    item.setIsSelected(isChecked);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
 
 
         ListView ls = (ListView)view.findViewById(R.id.popupListView);
@@ -109,7 +127,6 @@ public class BottomPopupWindow extends PopupWindow {
                 tvpop_price.setText(strprice);
             }
         });
-
 
 
 
