@@ -119,8 +119,12 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
         productsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DetailsPopupWindow window = new DetailsPopupWindow(context);
-                window.showAtLocation(rootView, Gravity.CENTER,0,0);
+
+                ProductEntity entity = productsAdapter.getItem(position-1);
+                if(!entity.getProductid().equals("")) {
+                    DetailsPopupWindow window = new DetailsPopupWindow(context, "product", entity.getProductid());
+                    window.showAtLocation(rootView, Gravity.CENTER, 0, 0);
+                }
             }
         });
 

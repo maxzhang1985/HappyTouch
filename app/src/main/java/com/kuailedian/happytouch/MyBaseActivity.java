@@ -18,6 +18,8 @@ import android.widget.TextView;
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.applictionservice.MenuProvider;
 import com.kuailedian.domain.Account;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
@@ -40,7 +42,7 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_base);
-
+        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(this));
         ButterKnife.inject(this);
         initView() ;
 

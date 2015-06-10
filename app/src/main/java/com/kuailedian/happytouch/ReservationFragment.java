@@ -133,7 +133,7 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Log.v("popwindow","show the window");
-                DetailsPopupWindow window = new DetailsPopupWindow(context);
+                DetailsPopupWindow window = new DetailsPopupWindow(context,"reservation","");
                 window.showAtLocation(rootView,Gravity.CENTER,0,0);
                 return true;
             }

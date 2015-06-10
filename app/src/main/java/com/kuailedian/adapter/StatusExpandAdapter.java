@@ -17,6 +17,7 @@ import com.kuailedian.domain.CartItem;
 import com.kuailedian.entity.ChildStatusEntity;
 import com.kuailedian.entity.GroupStatusEntity;
 import com.kuailedian.happytouch.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -161,6 +162,11 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 
 		viewHolder.productName.setText(entity.getProductName());
 		viewHolder.productMoney.setText( entity.getUnitprice());
+		String imgurl = entity.getImg();
+		if(!imgurl.equals(""))
+		{
+			ImageLoader.getInstance().displayImage(imgurl , viewHolder.productPicture );
+		}
 		//viewHolder.productPicture = entity.getImg()
 
 		viewHolder.btnAddProduct.setFocusable(false);

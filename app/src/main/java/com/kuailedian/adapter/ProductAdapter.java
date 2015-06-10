@@ -9,10 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.kuailedian.applictionservice.IOrderCartOperator;
 import com.kuailedian.domain.CartItem;
 import com.kuailedian.entity.ProductEntity;
 import com.kuailedian.happytouch.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,7 +53,6 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
 
     @Override
     public ProductEntity getItem(int position) {
-
 
        return productList.get(position);
 
@@ -101,6 +103,13 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
         viewHolder.productName.setText(entity.getProductname());
 
         viewHolder.productMoney.setText(entity.getProductmoney());
+
+        String imgurl = entity.getImgurl();
+        if(!imgurl.equals(""))
+        {
+            ImageLoader.getInstance().displayImage(imgurl , viewHolder.productPicture );
+        }
+
 
         viewHolder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override

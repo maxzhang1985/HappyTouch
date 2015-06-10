@@ -11,12 +11,15 @@
 
         android:orientation="vertical"
         android:background="@color/White"
-        android:layout_margin="35dp">
-        <ImageView
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginRight="35dp">
+        <Gallery android:id="@+id/detail_gallery"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@mipmap/no_photo"
-            android:scaleType="centerCrop" />
+             ></Gallery>
 
         <View  android:layout_width="wrap_content"
             android:layout_height="1dp"
@@ -24,8 +27,9 @@
             android:background="@android:color/darker_gray" />
 
 
-        <LinearLayout  android:layout_width="match_parent"  android:layout_height="75dp" android:orientation="horizontal" android:layout_marginTop="8dp"
-            android:gravity="center_vertical">
+        <LinearLayout android:id="@+id/detail_peicai_layout"
+            android:layout_width="match_parent"  android:layout_height="75dp" android:orientation="horizontal" android:layout_marginTop="8dp"
+            android:gravity="center_vertical" >
 
         <TextView
             android:layout_width="30dp"
@@ -63,6 +67,7 @@
                 android:text="备注"
                 android:layout_marginLeft="10dp" />
             <TextView
+                android:id="@+id/detail_remark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
@@ -90,6 +95,7 @@
                     android:text="配送范围"
                     android:layout_marginLeft="10dp" />
                 <TextView
+                    android:id="@+id/detail_deliveryare"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
