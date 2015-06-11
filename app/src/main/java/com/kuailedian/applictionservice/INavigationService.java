@@ -9,4 +9,8 @@ public interface INavigationService {
 
      public void Navigate(Fragment fragment);
 
+     void Push(Fragment fragment);
+
+     void SetTitleContent(String title);
+
 }

@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.kuailedian.adapter.ProductGalleryAdpater;
 import com.kuailedian.entity.ProductDetailEntity;
 import com.kuailedian.happytouch.R;
 import com.kuailedian.repository.AsyncCallBack;
@@ -25,7 +26,7 @@ public class DetailsPopupWindow extends PopupWindow {
     private String _type;
 
 
-    public DetailsPopupWindow(Context context,String type,String productid)
+    public DetailsPopupWindow(final Context context,String type,String productid)
     {
         _context = context;
         _type = type;
@@ -36,7 +37,7 @@ public class DetailsPopupWindow extends PopupWindow {
 
         this.setContentView(view);
 
-        Gallery gallery = (Gallery)view.findViewById(R.id.detail_gallery);
+        final Gallery gallery = (Gallery)view.findViewById(R.id.detail_gallery);
 
         LinearLayout detail_layout =  (LinearLayout)view.findViewById(R.id.detail_peicai_layout);
         if(type.equals("product"))
@@ -55,7 +56,7 @@ public class DetailsPopupWindow extends PopupWindow {
 
                     setDetailInfomation(view,detailEntity.getRemark(),detailEntity.getDeliveryare());
 
-
+                    gallery.setAdapter(new ProductGalleryAdpater(context,detailEntity.getImglist()));
 
                 }
             });

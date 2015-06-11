@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment {
         Account account = app.GetSystemDomain(Account.class);
         if(account !=null) {
             INavigationService navigation = app.GetSystemDomain(INavigationService.class);
-            navigation.Navigate(ReservationFragment.newInstance());
+            navigation.Push(ReservationFragment.newInstance());
         }
         else
         {
@@ -155,7 +155,7 @@ public class HomeFragment extends Fragment {
         Account account = app.GetSystemDomain(Account.class);
         if(account !=null) {
             INavigationService navigation = app.GetSystemDomain(INavigationService.class);
-            navigation.Navigate(ProductsFragment.newInstance());
+            navigation.Push(ProductsFragment.newInstance());
         }
         else
         {

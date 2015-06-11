@@ -47,7 +47,7 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
         initView() ;
 
         getHtAppliction().SetSystemDomain(INavigationService.class, this);
-        this.Navigate(HomeFragment.newInstance());
+        this.Push(HomeFragment.newInstance());
     }
 
 
@@ -133,14 +133,14 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
                 mMenuDialogFragment.dismiss();
                 break;
             case 1:
-                this.Navigate( ProductsFragment.newInstance() );
+                this.Push(ProductsFragment.newInstance());
                 break;
             case 2:
-                this.Navigate(ReservationFragment.newInstance()) ;
+                this.Push(ReservationFragment.newInstance()) ;
 
                 break;
             case 3:
-                this.Navigate(PersonalCenterFragment.newInstance());
+                this.Push(PersonalCenterFragment.newInstance());
                 break;
             case 4:
                 SharedPreferences sp = this.getSharedPreferences("com.kuailedian.happytouch", Context.MODE_PRIVATE);
@@ -149,6 +149,7 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
                 editer.apply();
                 getAppliction().SetSystemDomain(Account.class,null);
                 INavigationService inav = getAppliction().GetSystemDomain(INavigationService.class);
+
                 inav.Navigate(HomeFragment.newInstance());
                 break;
 
@@ -177,5 +178,18 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
     @Override
     public void Navigate(android.support.v4.app.Fragment fragment) {
         addFragment(fragment, false, R.id.container);
+    }
+
+
+    @Override
+    public void Push(Fragment fragment) {
+        addFragment(fragment, true, R.id.container);
+    }
+
+    @Override
+    public void SetTitleContent(String title) {
+        CharSequence cs = title;
+        TextView tv = (TextView)this.findViewById(R.id.text_view_toolbar_title);
+        tv.setText(cs);
     }
 }
