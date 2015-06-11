@@ -87,8 +87,10 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
         boolean fragmentPopped = fragmentManager.popBackStackImmediate(backStackName, 0);
         if (!fragmentPopped) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.add(containerId, fragment, backStackName)
+            transaction.replace(containerId, fragment, backStackName)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+
             if (addToBackStack)
                 transaction.addToBackStack(backStackName);
             transaction.commit();

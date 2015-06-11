@@ -70,12 +70,12 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
-        final int pos = position;
+        int pos = position;
 
         ChildViewHolder viewHolder = null;
-        final ProductEntity entity = getItem(position);
+        ProductEntity entity = getItem(position);
         if (convertView != null) {
             viewHolder = (ChildViewHolder) convertView.getTag();
         } else {
@@ -114,7 +114,7 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
         viewHolder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ProductEntity entity =  getItem(position);
                 CartItem item = new CartItem();
                 item.setId(entity.getProductid());
                 item.setName(entity.getProductname());

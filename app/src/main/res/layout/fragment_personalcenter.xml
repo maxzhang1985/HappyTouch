@@ -37,7 +37,7 @@
     android:layout_marginTop="150dp"
     android:weightSum="1">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal" android:id="@+id/person_center_myorder"
                   android:gravity="center">
         <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_shoppinglist"
                    android:layout_marginLeft="20dp"/>
@@ -47,7 +47,7 @@
 
 
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal" android:id="@+id/person_center_myaddress"
                   android:gravity="center">
         <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_address"
                    android:layout_marginLeft="20dp"/>
@@ -56,7 +56,7 @@
     </LinearLayout>
 
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal" android:id="@+id/person_center_mypasswrod"
                   android:gravity="center">
         <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_key"
                    android:layout_marginLeft="20dp"/>
@@ -64,7 +64,7 @@
                   android:gravity="center_vertical" android:layout_marginLeft="20dp"/>
     </LinearLayout>
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal"
+    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal" android:id="@+id/person_center_aboat"
                   android:gravity="center">
         <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_about"
                    android:layout_marginLeft="20dp"/>
