@@ -1,13 +1,25 @@
 package com.kuailedian.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by maxzhang on 6/11/2015.
  */
-public class AddressEntity {
+public class AddressEntity implements Serializable {
 
     private String name;
     private String mobile;
     private String Address;
+
+    public boolean getIsdefault() {
+        return isdefault;
+    }
+
+    public void setIsdefault(boolean isdefault) {
+        this.isdefault = isdefault;
+    }
+
+    private boolean isdefault;
 
     public String getName() {
         return name;
@@ -31,5 +43,10 @@ public class AddressEntity {
 
     public void setAddress(String address) {
         Address = address;
+    }
+
+    @Override
+    public String toString() {
+        return this.getAddress();
     }
 }

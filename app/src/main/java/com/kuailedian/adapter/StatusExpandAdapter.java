@@ -143,7 +143,7 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 		} else {
 			viewHolder = new ChildViewHolder();
 			convertView = inflater.inflate(R.layout.child_status_item, null);
-
+			convertView.setTag(viewHolder);
 			viewHolder.productName = (TextView) convertView
 					.findViewById(R.id.tv_productname);
 

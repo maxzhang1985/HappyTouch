@@ -2,9 +2,11 @@ package com.kuailedian.happytouch;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.domain.Account;
+import com.kuailedian.entity.AddressEntity;
 import com.kuailedian.reveallayout.RevealLayout;
 
 import butterknife.ButterKnife;
@@ -84,10 +87,10 @@ public class PersonalCenterFragment extends Fragment{
 
         HTApplication app = (HTApplication)getActivity().getApplication();
         Account account = app.GetSystemDomain(Account.class);
-
-        TextView personName = (TextView)view.findViewById(R.id.tv_person_name);
-        personName.setText(account.getMobilePhone());
-
+        if(account!= null) {
+            TextView personName = (TextView) view.findViewById(R.id.tv_person_name);
+            personName.setText(account.getMobilePhone());
+        }
         LinearLayout l1 = (LinearLayout)view.findViewById(R.id.person_center_myaddress);
         LinearLayout l2 = (LinearLayout)view.findViewById(R.id.person_center_myorder);
         LinearLayout l3 = (LinearLayout)view.findViewById(R.id.person_center_mypasswrod);
@@ -112,15 +115,28 @@ public class PersonalCenterFragment extends Fragment{
                 case R.id.person_center_myorder:
                     break;
                 case R.id.person_center_myaddress:
-                    navigation.Push(AddressManagementFragment.newInstance());
+                    Intent intent = new Intent(context,AddressManagementActivity.class);
+                    intent.putExtra("callback",false);
+                    startActivity(intent);
                     break;
                 case R.id.person_center_mypasswrod:
+                    Intent intent1 = new Intent(context,AddressManagementActivity.class);
+                    intent1.putExtra("callback",true);
+                    startActivityForResult(intent1, 1);
                     break;
                 case R.id.person_center_aboat:
                     break;
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        AddressEntity entity = (AddressEntity)data.getSerializableExtra("address");
+        Log.v("address",entity.toString());
+
+    }
 
 
 }

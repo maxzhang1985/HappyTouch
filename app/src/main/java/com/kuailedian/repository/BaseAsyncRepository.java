@@ -18,7 +18,7 @@ public abstract class BaseAsyncRepository implements  IAsyncRepository {
     @Override
     public  void Get(RequestParams params, final AsyncCallBack callback) {
 
-        if(!HostUri.equals(null)) {
+        if(HostUri != null) {
 
 
             Log.v("print uri", HostUri + params.toString());

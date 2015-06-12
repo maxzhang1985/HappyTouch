@@ -29,13 +29,13 @@ public class ProductGalleryAdpater extends BaseAdapter {
         return mImgList.size();
     }
 
-    // »ñÈ¡Í¼Æ¬Î»ÖÃ
+    // ï¿½ï¿½È¡Í¼Æ¬Î»ï¿½ï¿½
     @Override
     public Object getItem(int position) {
         return mImgList.get(position);
     }
 
-    // »ñÈ¡Í¼Æ¬ID
+    // ï¿½ï¿½È¡Í¼Æ¬ID
     @Override
     public long getItemId(int position) {
         return position;
@@ -46,8 +46,8 @@ public class ProductGalleryAdpater extends BaseAdapter {
 
         ImageView imageview = new ImageView(mContext);
         ImageLoader.getInstance().displayImage(mImgList.get(position),imageview);
-	// ÉèÖÃ²¼¾Ö Í¼Æ¬120¡Á120ÏÔÊ¾
-        imageview.setScaleType(ImageView.ScaleType.CENTER);				// ÉèÖÃÏÔÊ¾±ÈÀýÀàÐÍ£¨²»Ëõ·Å£©
+	// ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ Í¼Æ¬120ï¿½ï¿½120ï¿½ï¿½Ê¾
+        imageview.setScaleType(ImageView.ScaleType.CENTER);				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å£ï¿½
         return imageview;
 
     }

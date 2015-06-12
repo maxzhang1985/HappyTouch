@@ -1,6 +1,7 @@
 package com.kuailedian.happytouch;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.applictionservice.MenuProvider;
 import com.kuailedian.domain.Account;
+import com.kuailedian.entity.AddressEntity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
@@ -194,4 +196,6 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
         TextView tv = (TextView)this.findViewById(R.id.text_view_toolbar_title);
         tv.setText(cs);
     }
+
+
 }
