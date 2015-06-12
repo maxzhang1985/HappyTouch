@@ -12,6 +12,8 @@ import com.kuailedian.happytouch.R;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by maxzhang on 6/11/2015.
  */
@@ -61,12 +63,17 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
         if (convertView != null) {
             viewHolder = (AddressViewHolder) convertView.getTag();
         } else {
-            viewHolder = new AddressViewHolder();
+            viewHolder = new AddressViewHolder(convertView);
             convertView = inflater.inflate(R.layout.products_item, null);
-
-
-
+            convertView.setTag(viewHolder);
         }
+        AddressEntity address = addressList.get(position);
+
+
+        viewHolder.Name.setText(address.getName());
+        viewHolder.Mobile.setText(address.getMobile());
+        viewHolder.Address.setText(address.getAddress());
+
 
 
 
@@ -75,12 +82,18 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
 
 
 
-    private class AddressViewHolder {
+    static class AddressViewHolder {
         public TextView Name;
         public TextView Mobile;
         public TextView Address;
         public TextView ActionDelete;
         public TextView ActionDefalut;
         public TextView ActionModify;
+
+        public AddressViewHolder(View view)
+        {
+            ButterKnife.inject(this, view);
+        }
+
     }
 }

@@ -81,6 +81,7 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
         } else {
             viewHolder = new ChildViewHolder();
             convertView = inflater.inflate(R.layout.products_item, null);
+            convertView.setTag(viewHolder);
 
             viewHolder.productName = (TextView) convertView
                     .findViewById(R.id.tv_productname);
