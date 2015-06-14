@@ -36,6 +36,10 @@
             android:name=".AddressManagementActivity"
             android:label="@string/title_activity_address_management" >
         </activity>
+        <activity
+            android:name=".SettleAccountActivity"
+            android:label="@string/title_activity_settle_account" >
+        </activity>
     </application>
 
 </manifest>

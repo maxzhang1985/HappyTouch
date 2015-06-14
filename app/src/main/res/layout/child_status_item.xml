@@ -54,8 +54,8 @@
 
         <Button
             android:id="@+id/btn_addproduct"
-            android:layout_width="48px"
-            android:layout_height="48px"
+            android:layout_width="68px"
+            android:layout_height="68px"
             android:layout_gravity="center"
             android:layout_marginRight="20dp"
             android:background="@mipmap/btn_plus" />

@@ -1,6 +1,7 @@
 package com.kuailedian.components;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import com.kuailedian.adapter.OrderCartAdapter;
 import com.kuailedian.domain.CartItem;
 import com.kuailedian.domain.OrderCart;
 import com.kuailedian.happytouch.R;
+import com.kuailedian.happytouch.SettleAccountActivity;
 
 import java.util.ArrayList;
 
@@ -46,7 +48,7 @@ public class BottomPopupWindow extends PopupWindow {
     }
 
 
-    public BottomPopupWindow(Context context,Fragment fragment)
+    public BottomPopupWindow(final Context context,Fragment fragment)
     {
         super(context);
         this.owner = context;
@@ -86,7 +88,7 @@ public class BottomPopupWindow extends PopupWindow {
             @Override
             public void onClick(View v) {
 
-
+                context.startActivity(new Intent(context, SettleAccountActivity.class));
 
             }
         });

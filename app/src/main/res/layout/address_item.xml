@@ -2,9 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:padding="15dp"
-    android:layout_margin="8dp"
-    android:background="@drawable/popo_or"
+    android:padding="25dp"
+    android:layout_margin="18dp"
+    android:background="@drawable/kuang"
+    android:id="@+id/address_item_container"
     >
 
     <LinearLayout
@@ -44,15 +45,16 @@
            android:id="@+id/address_item_address"
            android:text="13020315551151"
            android:textColor="@color/black"
-           android:layout_width="120dp"
-           android:layout_height="35dp" />
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
 
    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="45dp"
+        >
 
         <TextView
             android:id="@+id/address_item_action_delete"

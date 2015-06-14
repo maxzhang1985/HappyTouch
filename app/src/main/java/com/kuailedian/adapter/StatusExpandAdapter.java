@@ -133,8 +133,6 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent) {
 
-		final int pos = childPosition;
-
 		ChildViewHolder viewHolder = null;
 		final ChildStatusEntity entity = (ChildStatusEntity) getChild(groupPosition,
 				childPosition);
@@ -168,23 +166,30 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 			ImageLoader.getInstance().displayImage(imgurl , viewHolder.productPicture );
 		}
 		//viewHolder.productPicture = entity.getImg()
-
 		viewHolder.btnAddProduct.setFocusable(false);
-		viewHolder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+		if(groupList.get(groupPosition).istoday()) {
 
-				CartItem item = new CartItem();
-				item.setId(entity.getProductsid());
-				item.setName(entity.getProductName());
-				item.setMoney( Float.parseFloat( entity.getUnitprice() ));
-				item.setIsSelected(true);
-				item.setAmount(1);
-				item.setType("product");
+			viewHolder.btnAddProduct.setVisibility(View.VISIBLE);
+			viewHolder.btnAddProduct.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
 
-				ordercartOperator.AddProducts(v, item);
-			}
-		});
+					CartItem item = new CartItem();
+					item.setId(entity.getProductsid());
+					item.setName(entity.getProductName());
+					item.setMoney(Float.parseFloat(entity.getUnitprice()));
+					item.setIsSelected(true);
+					item.setAmount(1);
+					item.setType("product");
+
+					ordercartOperator.AddProducts(v, item);
+				}
+			});
+		}
+		else
+		{
+			viewHolder.btnAddProduct.setVisibility(View.GONE);
+		}
 
 		convertView.setTag(viewHolder);
 		convertView.setClickable(false);

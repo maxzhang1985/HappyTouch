@@ -27,6 +27,7 @@ public class AddressManagentRepository extends BaseAsyncRepository {
         for(int i=0;i<=3;i++)
         {
             AddressEntity entity = new AddressEntity();
+            entity.setId(String.valueOf(i));
             entity.setName("某人" + String.valueOf(i));
             entity.setAddress("河北省唐山市路北区高新技术开发区创业公司B座" + String.valueOf(i) + "层" );
             entity.setMobile("1300000000" + String.valueOf(i));

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by maxzhang on 6/3/2015.
@@ -78,6 +79,10 @@ public class OrderCart  {
         return  (new ArrayList<CartItem>(items.values())).get(pos);
     }
 
+    public List<CartItem> toArray()
+    {
+        return new ArrayList<CartItem>(items.values());
+    }
 
     public int getTotalAmount()
     {

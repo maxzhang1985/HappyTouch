@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kuailedian.entity.AddressEntity;
@@ -80,6 +81,35 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
         viewHolder.Mobile.setText(address.getMobile());
         viewHolder.Address.setText(address.getAddress());
 
+        if(address.getIsdefault())
+        {
+            viewHolder.container.setBackgroundResource(R.drawable.popo_or);
+
+            viewHolder.ActionDefalut.setTextColor(context.getResources().getColor(R.color.grey));
+        }
+
+        viewHolder.ActionDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        viewHolder.ActionModify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+        viewHolder.ActionDefalut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
 
 
@@ -89,6 +119,8 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
 
 
     static class AddressViewHolder {
+        @InjectView(R.id.address_item_container)
+        LinearLayout container;
         @InjectView(R.id.address_item_name)
         TextView Name;
         @InjectView(R.id.address_item_mobile)
