@@ -56,6 +56,7 @@ public class OrderFragmentBase extends Fragment {
 
         tv_ordercartTitle = (TextView)view.findViewById(R.id.ordercart_title);
 
+        setOrderBar();
         //control order popup view ,show or hide;
         ImageButton btnShowOrder  = (ImageButton) view.findViewById(R.id.btn_showolder);
         btnShowOrder.setOnClickListener(new View.OnClickListener() {
@@ -90,16 +91,7 @@ public class OrderFragmentBase extends Fragment {
         popupView.setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
-                OrderCart cart = OrderCart.getOrderCart();
-                float money =  cart.getToalMoney();
-                int amount =  cart.getTotalAmount();
-
-                CharSequence strMoney = "￥" + String.valueOf(money);
-                tv_ordercartTitle.setText(strMoney);
-
-                CharSequence strAmount = String.valueOf(amount);
-                tv_orderNum.setText(strAmount);
-
+                setOrderBar();
             }
         });
 
@@ -107,6 +99,18 @@ public class OrderFragmentBase extends Fragment {
     }
 
 
+    private void setOrderBar()
+    {
+        OrderCart cart = OrderCart.getOrderCart();
+        float money =  cart.getToalMoney();
+        int amount =  cart.getTotalAmount();
+
+        CharSequence strMoney = "￥" + String.valueOf(money);
+        tv_ordercartTitle.setText(strMoney);
+
+        CharSequence strAmount = String.valueOf(amount);
+        tv_orderNum.setText(strAmount);
+    }
 
 
     /**

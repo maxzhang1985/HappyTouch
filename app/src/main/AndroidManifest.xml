@@ -26,11 +26,7 @@
         <activity
             android:name=".MyBaseActivity"
             android:label="@string/title_activity_my_base" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".AddressManagementActivity"
@@ -39,6 +35,14 @@
         <activity
             android:name=".SettleAccountActivity"
             android:label="@string/title_activity_settle_account" >
+        </activity>
+        <activity
+            android:name=".SplashscreenActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

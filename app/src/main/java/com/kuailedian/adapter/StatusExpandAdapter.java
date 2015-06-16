@@ -161,6 +161,8 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 		viewHolder.productName.setText(entity.getProductName());
 		viewHolder.productMoney.setText( entity.getUnitprice());
 		String imgurl = entity.getImg();
+		viewHolder.productPicture.setImageResource(R.mipmap.no_photo);
+		viewHolder.productPicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		if(!imgurl.equals(""))
 		{
 			ImageLoader.getInstance().displayImage(imgurl , viewHolder.productPicture );

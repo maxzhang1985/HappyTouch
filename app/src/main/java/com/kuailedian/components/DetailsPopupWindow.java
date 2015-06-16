@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kuailedian.adapter.ProductGalleryAdpater;
+import com.kuailedian.adapter.SubFoodAdapter;
 import com.kuailedian.entity.FoodDetailEntity;
 import com.kuailedian.entity.ProductDetailEntity;
 import com.kuailedian.happytouch.R;
@@ -40,7 +41,12 @@ public class DetailsPopupWindow extends PopupWindow {
 
         this.setContentView(view);
 
+        final RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_horizontal);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
 
+
+        recyclerView.setLayoutManager(layoutManager);
         final Gallery gallery = (Gallery)view.findViewById(R.id.detail_gallery);
         LinearLayout detail_layout =  (LinearLayout)view.findViewById(R.id.detail_peicai_layout);
         RequestParams params = new RequestParams();
@@ -70,12 +76,9 @@ public class DetailsPopupWindow extends PopupWindow {
         else
         {
             detail_layout.setVisibility(View.VISIBLE);
-            RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_horizontal);
-            // 创建一个线性布局管理器
-            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            // 设置布局管理器
-            recyclerView.setLayoutManager(layoutManager);
+
+
+            recyclerView.setVisibility(View.VISIBLE);
 
             ReservationDetailRepository repository = new ReservationDetailRepository();
             repository.Get(params,new AsyncCallBack(){
@@ -84,8 +87,7 @@ public class DetailsPopupWindow extends PopupWindow {
                     FoodDetailEntity detailEntity =  (FoodDetailEntity)data;
                     setDetailInfomation(view,detailEntity.getRemark(),detailEntity.getDeliveryare());
                     gallery.setAdapter(new ProductGalleryAdpater(context,detailEntity.getImglist()));
-
-
+                    recyclerView.setAdapter(new SubFoodAdapter(detailEntity.getSubfoodlist()));
                 }
             });
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#b0000000"
-    >
+    android:background="#b0000000">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +29,7 @@
 
 
         <LinearLayout android:id="@+id/detail_peicai_layout"
-            android:layout_width="match_parent"  android:layout_height="75dp" android:orientation="horizontal" android:layout_marginTop="8dp"
+            android:layout_width="match_parent"  android:layout_height="110dp" android:orientation="horizontal" android:layout_marginTop="8dp"
             android:gravity="center_vertical" >
 
         <TextView
@@ -39,8 +40,8 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview_horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal" />
+                android:layout_height="fill_parent"
+                />
 
             <ImageView   android:src="@mipmap/no_photo"
                 android:scaleType="centerCrop"
@@ -57,13 +58,14 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="90dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="24dp" android:textColor="@color/black"
                 android:text="备注"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp" />
             <TextView
                 android:id="@+id/detail_remark"
@@ -72,19 +74,21 @@
                 android:textColor="@color/black"
                 android:textSize="16dp"
                 android:text="路北区往东，路南区往北"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+
+                />
 
 
         </LinearLayout>
 
         <View  android:layout_width="wrap_content"
             android:layout_height="1dp"
-
+            android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray" />
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="match_parent"
             android:divider="@color/black"
             android:layout_marginTop="10dp">
                 <TextView
@@ -99,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:textSize="16dp"
-                    android:text="路北区往东，路南区往北"
+                    android:text=""
                     android:layout_marginLeft="10dp" />
 
         </LinearLayout>
