@@ -36,18 +36,17 @@
             android:layout_height="50dp" android:text="配菜" android:textSize="18dp" android:textColor="@color/black"
             android:layout_marginLeft="10dp" />
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="horizontal" />
+
             <ImageView   android:src="@mipmap/no_photo"
                 android:scaleType="centerCrop"
                 android:layout_width="38dp"
                 android:layout_height="38dp" />
-            <ImageView   android:src="@mipmap/no_photo"
-                android:scaleType="centerCrop"
-                android:layout_width="38dp"
-                android:layout_height="38dp" />
-            <ImageView   android:src="@mipmap/no_photo"
-                android:scaleType="centerCrop"
-                android:layout_width="38dp"
-                android:layout_height="38dp" />
+
         </LinearLayout>
 
 

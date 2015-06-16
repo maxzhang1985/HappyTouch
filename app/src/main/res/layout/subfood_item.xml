@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <com.marshalchen.common.ui.roundedimageview.RoundedImageView
+        android:id="@+id/subfood_item_img"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="center"
+        app:riv_corner_radius="30dip"
+        app:riv_border_width="3dip"
+        app:riv_oval="false"
+        android:src="@mipmap/ic_launcher">
+
+
+
+    </com.marshalchen.common.ui.roundedimageview.RoundedImageView>
+
+    <TextView
+        android:id="@+id/subfood_item_name"
+        android:text="item1"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_width="48dp"
+        android:layout_height="24dp" />
+
+</LinearLayout>

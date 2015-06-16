@@ -3,7 +3,8 @@ package com.kuailedian.repository;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.kuailedian.entity.ProductDetailEntity;
+import com.kuailedian.entity.FoodDetailEntity;
+import com.kuailedian.entity.SubFoodEntity;
 
 import java.util.ArrayList;
 
@@ -23,7 +24,7 @@ public class ReservationDetailRepository extends BaseAsyncRepository {
 
         JSONObject object = JSON.parseObject(responseObj);
 
-        ProductDetailEntity detailEntity = new ProductDetailEntity();
+        FoodDetailEntity detailEntity = new FoodDetailEntity();
 
         detailEntity.setRemark(object.getString("remark"));
         detailEntity.setDeliveryare(object.getString("deliveryarea"));
@@ -35,6 +36,25 @@ public class ReservationDetailRepository extends BaseAsyncRepository {
         }
 
         detailEntity.setImglist(imglist);
+
+        JSONArray subfoodArray =  object.getJSONArray("subfoodlist");
+
+        ArrayList<SubFoodEntity> subFoodEntities = new ArrayList<SubFoodEntity>();
+        if(subfoodArray!=null)
+        {
+            for(int i =0;i<=subfoodArray.size()-1;i++) {
+               JSONObject subfoodJson =  subfoodArray.getJSONObject(i);
+                SubFoodEntity subfood = new SubFoodEntity();
+                subfood.setName(subfoodJson.getString("productname"));
+
+                JSONArray subfoodImgArray = subfoodJson.getJSONArray("img");
+                subfood.setImage(subfoodImgArray.getString(0));
+
+                subFoodEntities.add(subfood);
+
+            }
+            detailEntity.setSubfoodlist(subFoodEntities);
+        }
 
 
         return detailEntity;

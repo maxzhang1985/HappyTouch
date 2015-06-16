@@ -2,6 +2,8 @@ package com.kuailedian.components;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +13,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kuailedian.adapter.ProductGalleryAdpater;
+import com.kuailedian.entity.FoodDetailEntity;
 import com.kuailedian.entity.ProductDetailEntity;
 import com.kuailedian.happytouch.R;
 import com.kuailedian.repository.AsyncCallBack;
 import com.kuailedian.repository.ProductDetailRepository;
+import com.kuailedian.repository.ReservationDetailRepository;
 import com.loopj.android.http.RequestParams;
-
 /**
  * Created by maxzhang on 5/25/2015.
  */
@@ -37,17 +40,18 @@ public class DetailsPopupWindow extends PopupWindow {
 
         this.setContentView(view);
 
-        final Gallery gallery = (Gallery)view.findViewById(R.id.detail_gallery);
 
+        final Gallery gallery = (Gallery)view.findViewById(R.id.detail_gallery);
         LinearLayout detail_layout =  (LinearLayout)view.findViewById(R.id.detail_peicai_layout);
+        RequestParams params = new RequestParams();
+        params.add("productid", productid);
+
         if(type.equals("product"))
         {
 
             detail_layout.setVisibility(View.GONE);
 
             ProductDetailRepository repository = new ProductDetailRepository();
-            RequestParams params = new RequestParams();
-            params.add("productid", productid);
 
             repository.Get(params,new AsyncCallBack(){
                 @Override
@@ -66,6 +70,33 @@ public class DetailsPopupWindow extends PopupWindow {
         else
         {
             detail_layout.setVisibility(View.VISIBLE);
+            RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_horizontal);
+            // 创建一个线性布局管理器
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            // 设置布局管理器
+            recyclerView.setLayoutManager(layoutManager);
+
+            ReservationDetailRepository repository = new ReservationDetailRepository();
+            repository.Get(params,new AsyncCallBack(){
+                @Override
+                public void onDataReceive(Object data, Object statusCode) {
+                    FoodDetailEntity detailEntity =  (FoodDetailEntity)data;
+                    setDetailInfomation(view,detailEntity.getRemark(),detailEntity.getDeliveryare());
+                    gallery.setAdapter(new ProductGalleryAdpater(context,detailEntity.getImglist()));
+
+
+                }
+            });
+
+
+
+
+
+
+
+
+
         }
 
         this.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
