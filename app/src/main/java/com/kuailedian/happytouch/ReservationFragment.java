@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.kuailedian.adapter.StatusExpandAdapter;
 import com.kuailedian.applictionservice.IOrderCartOperator;
@@ -99,15 +100,21 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
         repository.Get(new RequestParams(), new AsyncCallBack() {
             @Override
             public void onDataReceive(Object data, Object statusCode) {
-                List<GroupStatusEntity> entityList = (List<GroupStatusEntity>) data;
-                statusAdapter.AddItems(entityList);
-                statusAdapter.notifyDataSetChanged();
-                // 遍历所有group,将所有项设置成默认展开
-                int groupCount = expandlistView.getCount();
-                for (int i = 0; i < groupCount; i++) {
-                    expandlistView.expandGroup(i);
-                    if(entityList.get(i).istoday())
-                        expandlistView.setSelection(i);
+                if(data!=null) {
+                    List<GroupStatusEntity> entityList = (List<GroupStatusEntity>) data;
+                    statusAdapter.AddItems(entityList);
+                    statusAdapter.notifyDataSetChanged();
+                    // 遍历所有group,将所有项设置成默认展开
+                    int groupCount = expandlistView.getCount();
+                    for (int i = 0; i < groupCount; i++) {
+                        expandlistView.expandGroup(i);
+                        if (entityList.get(i).istoday())
+                            expandlistView.setSelection(i);
+                    }
+                }
+                else
+                {
+                    Toast.makeText(context, "网格错误！", Toast.LENGTH_LONG).show();
                 }
                 //expandlistView.setSelection(7);// 设置默认选中项
                 pd.dismiss();
@@ -132,13 +139,13 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
             }
         });
 
-        expandlistView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
+        expandlistView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Log.v("popwindow","show the window");
-                ChildStatusEntity entity = (ChildStatusEntity)statusAdapter.getChild(groupPosition,childPosition);
-                if(entity!=null && !entity.getProductsid().equals("")) {
+                Log.v("popwindow", "show the window");
+                ChildStatusEntity entity = (ChildStatusEntity) statusAdapter.getChild(groupPosition, childPosition);
+                if (entity != null && !entity.getProductsid().equals("")) {
 
                     DetailsPopupWindow window = new DetailsPopupWindow(context, "reservation", entity.getProductsid());
                     window.showAtLocation(rootView, Gravity.CENTER, 0, 0);

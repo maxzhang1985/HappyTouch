@@ -1,28 +1,26 @@
 package com.kuailedian.happytouch;
 
-import android.app.Activity;
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kuailedian.adapter.AddressAdapter;
+import com.kuailedian.domain.Account;
 import com.kuailedian.entity.AddressEntity;
 import com.kuailedian.repository.AddressManagentRepository;
 import com.kuailedian.repository.AsyncCallBack;
+import com.loopj.android.http.RequestParams;
 import com.marshalchen.common.ui.FloatActionButton;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -33,6 +31,7 @@ public class AddressManagementActivity extends ActionBarActivity {
     private FloatActionButton fabButton;
     private AddressManagentRepository repository = new AddressManagentRepository();
     private AddressAdapter addressAdapter;
+    ProgressDialog pd;
 
     @InjectView(R.id.toolbar) Toolbar mToolbar;
 
@@ -71,14 +70,21 @@ public class AddressManagementActivity extends ActionBarActivity {
                 .create();
 
 
-        repository.Get(null,new AsyncCallBack(){
-            @Override
-            public void onDataReceive(Object data, Object statusCode) {
-                addressAdapter.addAll((ArrayList<AddressEntity>)data);
-                addressAdapter.notifyDataSetChanged();
-            }
-        });
-
+        HTApplication app = getAppliction();
+        Account account = app.GetSystemDomain(Account.class);
+        if(account!= null) {
+            pd = ProgressDialog.show(this, "提示", "加载中，请稍后……");
+            RequestParams params = new RequestParams();
+            params.add("usercode",account.getMobilePhone());
+            repository.Get(params,new AsyncCallBack(){
+                @Override
+                public void onDataReceive(Object data, Object statusCode) {
+                    addressAdapter.addAll((ArrayList<AddressEntity>)data);
+                    addressAdapter.notifyDataSetChanged();
+                    pd.dismiss();
+                }
+            });
+        }
 
         Intent intent = getIntent();
         boolean callback = intent.getBooleanExtra("callback",false);
@@ -106,6 +112,16 @@ public class AddressManagementActivity extends ActionBarActivity {
         });
 
         //fabButton.showFloatingActionButton();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("address",new AddressEntity());
+        setResult(RESULT_OK,intent);
+        this.finish();
+        super.onBackPressed();
     }
 
     private HTApplication getAppliction()

@@ -1,12 +1,10 @@
 package com.kuailedian.happytouch;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -116,10 +114,12 @@ public class SettleAccountActivity extends ActionBarActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         AddressEntity entity = (AddressEntity)data.getSerializableExtra("address");
-        Log.v("address", entity.toString());
-        selectedAddress = entity;
-        settleAddressName.setText(entity.getName());
-        settleDetailAddress.setText(entity.getAddress());
+        if(!entity.getId().equals("")  || !(entity.getId()==null) ) {
+            Log.v("address", entity.toString());
+            selectedAddress = entity;
+            settleAddressName.setText(entity.getName());
+            settleDetailAddress.setText(entity.getAddress());
+        }
     }
 
 

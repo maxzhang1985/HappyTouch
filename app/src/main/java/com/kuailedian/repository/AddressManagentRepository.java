@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kuailedian.entity.AddressEntity;
-import com.kuailedian.entity.CatalogEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,26 +15,32 @@ public class AddressManagentRepository extends BaseAsyncRepository {
 
     public AddressManagentRepository()
     {
-        super.HostUri = null;
+        super.HostUri = HostsPath.HostUri + "OrderAppInterFace.ashx?method=GetUserAddressList";
     }
 
     @Override
     public Object getData(String responseObj) {
-
         List<AddressEntity> addressEntityList = new ArrayList<AddressEntity>();
+        try {
 
-        for(int i=0;i<=3;i++)
-        {
-            AddressEntity entity = new AddressEntity();
-            entity.setId(String.valueOf(i));
-            entity.setName("某人" + String.valueOf(i));
-            entity.setAddress("河北省唐山市路北区高新技术开发区创业公司B座" + String.valueOf(i) + "层" );
-            entity.setMobile("1300000000" + String.valueOf(i));
-
-            addressEntityList.add(entity);
+            JSONArray objectArray = JSON.parseArray(responseObj);
+            for(int i =0 ; i<=objectArray.size()-1 ; i++)
+            {
+                JSONObject object = objectArray.getJSONObject(i);
+                AddressEntity entity = new AddressEntity();
+                entity.setId(  object.getString("id"));
+                entity.setName( object.getString("name"));
+                entity.setAddress( object.getString("address"));
+                entity.setMobile( object.getString("tel"));
+                boolean isdef = false;
+                if(object.getString("flag").equals("1"))
+                    isdef = true;
+                entity.setIsdefault(isdef);
+                addressEntityList.add(entity);
+            }
         }
-        addressEntityList.get(0).setIsdefault(true);
-
+        catch (Exception e) {
+        }
         return addressEntityList;
     }
 

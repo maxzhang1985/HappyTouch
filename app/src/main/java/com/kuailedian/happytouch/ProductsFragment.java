@@ -132,20 +132,21 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
         catalogRepository.Get(new RequestParams(),new AsyncCallBack() {
             @Override
             public void onDataReceive(Object data, Object statusCode) {
-                pd.dismiss();
-                Log.v("productdata", data.toString());
-                if(!data.equals(null) && !((ArrayList<CatalogEntity>) data).isEmpty()) {
-                    catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
-                    catalogAdapter.notifyDataSetChanged();
+                if(data!=null) {
 
-                    productsAdapter.clear();
-                    CatalogEntity catalog = catalogAdapter.getItem(0);
-                    getProductByCatelogid(catalog.categoryid);
+                    if (!data.equals(null) && !((ArrayList<CatalogEntity>) data).isEmpty()) {
+                        catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
+                        catalogAdapter.notifyDataSetChanged();
+                        productsAdapter.clear();
+                        CatalogEntity catalog = catalogAdapter.getItem(0);
+                        getProductByCatelogid(catalog.categoryid);
 
-
+                    }
                 }
-
-
+                else {
+                    Toast.makeText(context, "网格错误！", Toast.LENGTH_LONG).show();
+                }
+                pd.dismiss();
             }
         });
 
