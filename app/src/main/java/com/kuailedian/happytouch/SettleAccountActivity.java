@@ -6,11 +6,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kuailedian.adapter.SettleOrderAdapter;
+import com.kuailedian.alipay.PayDemoActivity;
 import com.kuailedian.domain.OrderCart;
 import com.kuailedian.entity.AddressEntity;
 import com.kuailedian.repository.AddressManagentRepository;
@@ -41,6 +43,9 @@ public class SettleAccountActivity extends ActionBarActivity {
 
     @InjectView(R.id.settle_order_price)
     TextView settleTotalPrice;
+
+    @InjectView(R.id.btn_ordersubmit)
+    ImageButton orderSubmit;
 
     private AddressEntity selectedAddress;
 
@@ -76,6 +81,14 @@ public class SettleAccountActivity extends ActionBarActivity {
                 Intent intent1 = new Intent(SettleAccountActivity.this,AddressManagementActivity.class);
                 intent1.putExtra("callback",true);
                 startActivityForResult(intent1, 1);
+            }
+        });
+
+
+        orderSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent(SettleAccountActivity.this,PayDemoActivity.class) );
             }
         });
 
