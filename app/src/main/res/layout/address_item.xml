@@ -69,7 +69,7 @@
 
         <TextView
             android:id="@+id/address_item_action_default"
-            android:text="设置默认"
+            android:text="默认"
             android:textSize="20dp"
             android:textColor="@color/OrangeRed"
             android:layout_width="match_parent"

@@ -69,22 +69,7 @@ public class AddressManagementActivity extends ActionBarActivity {
                 .withMargins(0, 0, 16, 16)
                 .create();
 
-
-        HTApplication app = getAppliction();
-        Account account = app.GetSystemDomain(Account.class);
-        if(account!= null) {
-            pd = ProgressDialog.show(this, "提示", "加载中，请稍后……");
-            RequestParams params = new RequestParams();
-            params.add("usercode",account.getMobilePhone());
-            repository.Get(params,new AsyncCallBack(){
-                @Override
-                public void onDataReceive(Object data, Object statusCode) {
-                    addressAdapter.addAll((ArrayList<AddressEntity>)data);
-                    addressAdapter.notifyDataSetChanged();
-                    pd.dismiss();
-                }
-            });
-        }
+        onLoadData();
 
         Intent intent = getIntent();
         boolean callback = intent.getBooleanExtra("callback",false);
@@ -107,7 +92,9 @@ public class AddressManagementActivity extends ActionBarActivity {
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(AddressManagementActivity.this,AddressEditerActivity.class);
+                intent.putExtra("addtion", true);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -129,4 +116,38 @@ public class AddressManagementActivity extends ActionBarActivity {
         HTApplication app =(HTApplication)this.getApplication();
         return app;
     }
+
+
+    private void onLoadData()
+    {
+        HTApplication app = getAppliction();
+        Account account = app.GetSystemDomain(Account.class);
+        if(account!= null) {
+            pd = ProgressDialog.show(this, "提示", "加载中，请稍后……");
+            RequestParams params = new RequestParams();
+            params.add("usercode",account.getMobilePhone());
+            repository.Get(params,new AsyncCallBack(){
+                @Override
+                public void onDataReceive(Object data, Object statusCode) {
+                    addressAdapter.clear();
+                    addressAdapter.addAll((ArrayList<AddressEntity>)data);
+                    addressAdapter.notifyDataSetChanged();
+                    pd.dismiss();
+                }
+            });
+        }
+
+    }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        onLoadData();
+
+    }
+
+
+
 }

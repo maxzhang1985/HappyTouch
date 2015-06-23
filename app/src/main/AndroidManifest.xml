@@ -49,6 +49,8 @@
         <activity android:name="com.kuailedian.alipay.PayDemoActivity"
             android:label="PayDemoActivity"/>
 
+        <activity android:name=".AddressEditerActivity"/>
+
     </application>
 
 </manifest>

@@ -1,16 +1,32 @@
 package com.kuailedian.adapter;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.kuailedian.domain.Account;
 import com.kuailedian.entity.AddressEntity;
+import com.kuailedian.happytouch.AddressEditerActivity;
+import com.kuailedian.happytouch.HTApplication;
 import com.kuailedian.happytouch.R;
+import com.kuailedian.repository.HostsPath;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.marshalchen.common.commonUtils.urlUtils.HttpUtilsAsync;
+
+import org.apache.http.Header;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,6 +42,7 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
     List<AddressEntity> addressList;
     private LayoutInflater inflater = null;
     private Context context;
+    ProgressDialog pd;
 
     public AddressAdapter(Context c, List<AddressEntity> adlist) {
         super(c, R.layout.address_item);
@@ -88,33 +105,96 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
             viewHolder.ActionDefalut.setTextColor(context.getResources().getColor(R.color.grey));
         }
 
+        viewHolder.ActionDelete.setTag(position);
         viewHolder.ActionDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final int pos = Integer.valueOf(v.getTag().toString());
+                new AlertDialog.Builder(context)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("提示")
+                        .setMessage("确认要删除这个地址吗?")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                AddressEntity addressEntity =  addressList.get(pos);
+                                deleteAddress(addressEntity.getId());
+                            }
+
+                        })
+                        .setNegativeButton("取消", null)
+                        .show();
+
+
+
 
             }
         });
 
+        viewHolder.ActionModify.setTag(position);
         viewHolder.ActionModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int pos = Integer.valueOf(v.getTag().toString());
+               AddressEntity addressEntity =  addressList.get(pos);
+                Intent intent = new Intent(context, AddressEditerActivity.class);
+                intent.putExtra("address", addressEntity);
+                ((Activity) context).startActivityForResult(intent, 2);
             }
         });
-
-
-        viewHolder.ActionDefalut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-
 
 
         return convertView;
     }
+
+    private HTApplication getAppliction()
+    {
+        HTApplication app =(HTApplication)context.getApplicationContext();
+        return app;
+    }
+
+    private void deleteAddress(String id)
+    {
+        String url = HostsPath.HostUri + "OrderAppInterFace.ashx?method=UserAddressDelete";
+        HTApplication app = getAppliction();
+        Account account = app.GetSystemDomain(Account.class);
+
+        if(account!=null) {
+            RequestParams params = new RequestParams();
+            params.add("id",id);
+            pd = ProgressDialog.show(context, "提示", "加载中，请稍后……");
+            HttpUtilsAsync.get(url, params, new TextHttpResponseHandler("GB2312") {
+                @Override
+                public void onSuccess(int i, Header[] headers, String responseString) {
+
+                    JSONObject stateObject = JSON.parseObject(responseString);
+                    //String code = stateObject.getString("statecode");
+                    Toast.makeText(context, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
+                    pd.dismiss();
+
+                }
+
+                @Override
+                public void onFailure(int i, Header[] headers, String responseString, Throwable throwable) {
+                    Toast.makeText(context, "网络错误！",
+                            Toast.LENGTH_LONG).show();
+                    pd.dismiss();
+                }
+            });
+
+
+        }
+        else
+        {
+            Toast.makeText(context, "请重新登录系统！",
+                    Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+
+
 
 
 
