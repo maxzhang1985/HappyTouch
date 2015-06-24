@@ -88,7 +88,11 @@ public class SettleAccountActivity extends ActionBarActivity {
         orderSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 startActivity( new Intent(SettleAccountActivity.this,PayDemoActivity.class) );
+
+
             }
         });
 

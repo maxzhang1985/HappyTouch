@@ -119,7 +119,7 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 AddressEntity addressEntity =  addressList.get(pos);
-                                deleteAddress(addressEntity.getId());
+                                deleteAddress(addressEntity.getId(),pos);
                             }
 
                         })
@@ -154,7 +154,7 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
         return app;
     }
 
-    private void deleteAddress(String id)
+    private void deleteAddress(String id,final int pos)
     {
         String url = HostsPath.HostUri + "OrderAppInterFace.ashx?method=UserAddressDelete";
         HTApplication app = getAppliction();
@@ -171,7 +171,10 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
                     JSONObject stateObject = JSON.parseObject(responseString);
                     //String code = stateObject.getString("statecode");
                     Toast.makeText(context, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
+                    addressList.remove(pos);
+                    AddressAdapter.this.notifyDataSetChanged();
                     pd.dismiss();
+
 
                 }
 

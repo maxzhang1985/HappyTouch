@@ -1,11 +1,27 @@
 package com.kuailedian.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 
 /**
  * Created by maxzhang on 6/11/2015.
  */
 public class AddressEntity implements Serializable {
+
+    @JSONField(name="userCode")
+    public String getUsercode() {
+        return usercode;
+    }
+
+    public void setUsercode(String usercode) {
+        this.usercode = usercode;
+    }
+
+    private String usercode;
+
+
+    @JSONField(name="id")
     public String getId() {
         return id;
     }
@@ -19,6 +35,7 @@ public class AddressEntity implements Serializable {
     private String mobile;
     private String Address;
 
+
     public boolean getIsdefault() {
         return isdefault;
     }
@@ -29,6 +46,16 @@ public class AddressEntity implements Serializable {
 
     private boolean isdefault;
 
+    @JSONField(name="flag")
+    public String getFlag()
+    {
+        String flag = "0";
+        if(isdefault)
+            flag = "1";
+        return flag;
+    }
+
+    @JSONField(name="name")
     public String getName() {
         return name;
     }
@@ -36,7 +63,7 @@ public class AddressEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
+    @JSONField(name="tel")
     public String getMobile() {
         return mobile;
     }
@@ -44,7 +71,7 @@ public class AddressEntity implements Serializable {
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
-
+    @JSONField(name="address")
     public String getAddress() {
         return Address;
     }

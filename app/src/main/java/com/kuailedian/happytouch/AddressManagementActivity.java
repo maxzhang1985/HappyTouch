@@ -129,9 +129,11 @@ public class AddressManagementActivity extends ActionBarActivity {
             repository.Get(params,new AsyncCallBack(){
                 @Override
                 public void onDataReceive(Object data, Object statusCode) {
-                    addressAdapter.clear();
-                    addressAdapter.addAll((ArrayList<AddressEntity>)data);
-                    addressAdapter.notifyDataSetChanged();
+                    if(data!=null) {
+                        addressAdapter.clear();
+                        addressAdapter.addAll((ArrayList<AddressEntity>) data);
+                        addressAdapter.notifyDataSetChanged();
+                    }
                     pd.dismiss();
                 }
             });

@@ -113,11 +113,17 @@ public class AddressEditerActivity extends ActionBarActivity {
         Account account = app.GetSystemDomain(Account.class);
 
         if(account!=null) {
-            RequestParams params = getResquestParams();
-            params.add("usercode",account.getMobilePhone());
-            Log.v("params",params.toString());
+
+            RequestParams params = new RequestParams();
+            AddressEntity addressEntity = getAddressEntity(account.getMobilePhone());
+            //params.add("userCode",account.getMobilePhone());
+
+            String jsonAddress = JSON.toJSONString(addressEntity);
+            params.add("addressdetails", jsonAddress );
+
+            Log.v("params",jsonAddress);
             pd = ProgressDialog.show(this, "提示", "加载中，请稍后……");
-            HttpUtilsAsync.get(url, params, new TextHttpResponseHandler("GB2312") {
+            HttpUtilsAsync.post(url, params, new TextHttpResponseHandler("GB2312") {
                 @Override
                 public void onSuccess(int i, Header[] headers, String responseString) {
 
@@ -160,7 +166,7 @@ public class AddressEditerActivity extends ActionBarActivity {
             RequestParams params = getResquestParams();
             params.add("id",address.getId());
             Log.v("params",params.toString());
-            HttpUtilsAsync.get(url, params, new TextHttpResponseHandler("GB2312") {
+            HttpUtilsAsync.post(url, params, new TextHttpResponseHandler("GB2312") {
                 @Override
                 public void onSuccess(int i, Header[] headers, String responseString) {
 
@@ -212,6 +218,20 @@ public class AddressEditerActivity extends ActionBarActivity {
 
         return params;
     }
+
+    private AddressEntity getAddressEntity(String userCode)
+    {
+        AddressEntity entity = new AddressEntity();
+        entity.setUsercode(userCode);
+        entity.setId("");
+        entity.setName(edit_addressName.getText().toString());
+        entity.setMobile(edit_mobile.getText().toString());
+        entity.setAddress(edit_address.getText().toString());
+        entity.setIsdefault(sch_default.isChecked());
+        return entity;
+    }
+
+
 
     private HTApplication getAppliction()
     {
