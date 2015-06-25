@@ -36,7 +36,7 @@ public class AddressEntity implements Serializable {
     private String Address;
 
 
-    public boolean getIsdefault() {
+    public boolean Isdefault() {
         return isdefault;
     }
 

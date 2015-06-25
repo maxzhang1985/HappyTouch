@@ -1,5 +1,6 @@
 package com.kuailedian.happytouch;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,14 +11,24 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.kuailedian.adapter.SettleOrderAdapter;
 import com.kuailedian.alipay.PayDemoActivity;
+import com.kuailedian.domain.Account;
 import com.kuailedian.domain.OrderCart;
 import com.kuailedian.entity.AddressEntity;
+import com.kuailedian.entity.MyOrderEntity;
 import com.kuailedian.repository.AddressManagentRepository;
 import com.kuailedian.repository.AsyncCallBack;
+import com.kuailedian.repository.HostsPath;
 import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.marshalchen.common.commonUtils.urlUtils.HttpUtilsAsync;
+
+import org.apache.http.Header;
 
 import java.util.List;
 
@@ -49,6 +60,8 @@ public class SettleAccountActivity extends ActionBarActivity {
 
     private AddressEntity selectedAddress;
 
+    ProgressDialog pd;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +81,7 @@ public class SettleAccountActivity extends ActionBarActivity {
         });
         mToolBarTextView.setText("结算");
 
-        OrderCart orderCart = OrderCart.getOrderCart();
+       final OrderCart orderCart = OrderCart.getOrderCart();
 
         settleTotalPrice.setText(String.valueOf(orderCart.getToalMoney()));
 
@@ -84,20 +97,72 @@ public class SettleAccountActivity extends ActionBarActivity {
             }
         });
 
+        HTApplication app = getAppliction();
+        final Account account = app.GetSystemDomain(Account.class);
 
         orderSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if(selectedAddress!=null) {
 
-                startActivity( new Intent(SettleAccountActivity.this,PayDemoActivity.class) );
+                    MyOrderEntity orderEntity = new MyOrderEntity(account.getMobilePhone(), selectedAddress.getId());
+                    orderEntity.setCart( orderCart.toArray() );
 
+                    String orderjson  = JSON.toJSONString(orderEntity);
+
+                    if(account!=null) {
+
+                        String url = HostsPath.HostUri + "OrderAppInterFace.ashx?method=GenerateOrders";
+                        RequestParams params = new RequestParams();
+                        params.setContentEncoding("GB2312");
+                        params.add("orderdetails", orderjson );
+                        Log.v("params",orderjson);
+                        pd = ProgressDialog.show(SettleAccountActivity.this, "提示", "正在生成订单，请稍后……");
+                        HttpUtilsAsync.post(url, params, new TextHttpResponseHandler("GB2312") {
+                            @Override
+                            public void onSuccess(int i, Header[] headers, String responseString) {
+
+                                JSONObject stateObject = JSON.parseObject(responseString);
+                                //String code = stateObject.getString("statecode");
+                                Toast.makeText(SettleAccountActivity.this, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
+                                pd.dismiss();
+
+                                startActivity(new Intent(SettleAccountActivity.this, PayDemoActivity.class));
+                                //这里写支付接口
+
+                            }
+
+                            @Override
+                            public void onFailure(int i, Header[] headers, String responseString, Throwable throwable) {
+                                Toast.makeText(SettleAccountActivity.this, "网络错误！",
+                                        Toast.LENGTH_LONG).show();
+                                pd.dismiss();
+                            }
+                        });
+
+
+                    }
+                    else
+                    {
+                        Toast.makeText(SettleAccountActivity.this, "请重新登录系统！",
+                                Toast.LENGTH_LONG).show();
+
+                    }
+
+
+
+
+                }
 
             }
         });
 
+
         AddressManagentRepository repository = new AddressManagentRepository();
-        repository.Get(new RequestParams(),new AsyncCallBack(){
+        RequestParams params = new RequestParams();
+        params.add("usercode",account.getMobilePhone());
+        repository.Get(params,new AsyncCallBack(){
             @Override
             public void onDataReceive(Object data, Object statusCode) {
                 if(data!=null) {
@@ -107,12 +172,13 @@ public class SettleAccountActivity extends ActionBarActivity {
                         for(int i =0 ; i<=addressEntityList.size() -1 ; i++)
                         {
                             AddressEntity item = addressEntityList.get(i);
-                            if(item.getIsdefault())
+                            if(item.Isdefault())
                                 selectedAddress = item;
                         }
                         if(selectedAddress == null)
                             selectedAddress = addressEntityList.get(0);
 
+                        Log.v("selectedaddress",selectedAddress.toString());
                         settleAddressName.setText(selectedAddress.getName());
                         settleDetailAddress.setText(selectedAddress.getAddress());
 

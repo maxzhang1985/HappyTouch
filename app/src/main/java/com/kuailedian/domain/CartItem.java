@@ -1,5 +1,7 @@
 package com.kuailedian.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * Created by maxzhang on 6/3/2015.
  */
@@ -15,7 +17,7 @@ public class CartItem {
     private float money;
     private String type;
 
-    public boolean getIsSelected() {
+    public boolean IsSelected() {
         return isselected;
     }
 
@@ -25,6 +27,7 @@ public class CartItem {
 
     private boolean isselected;
 
+    @JSONField(name="amount")
     public int getAmount() {
         return amount;
     }
@@ -35,7 +38,7 @@ public class CartItem {
 
     private int amount;
 
-
+    @JSONField(name="id")
     public String getId() {
         return id;
     }
@@ -44,6 +47,7 @@ public class CartItem {
         this.id = id;
     }
 
+    @JSONField(name="name")
     public String getName() {
         return name;
     }
@@ -52,6 +56,7 @@ public class CartItem {
         this.name = name;
     }
 
+    @JSONField(name="price")
     public float getMoney() {
         return money;
     }
@@ -60,6 +65,7 @@ public class CartItem {
         this.money = money;
     }
 
+    @JSONField(name="type")
     public String getType() {
         return type;
     }

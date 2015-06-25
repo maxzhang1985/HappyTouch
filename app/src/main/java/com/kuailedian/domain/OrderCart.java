@@ -81,7 +81,14 @@ public class OrderCart  {
 
     public List<CartItem> toArray()
     {
-        return new ArrayList<CartItem>(items.values());
+        List<CartItem> list = new ArrayList<CartItem>();
+        for(CartItem item :  items.values())
+        {
+            if(item.IsSelected())
+                list.add(item);
+        }
+
+        return list;
     }
 
     public int getTotalAmount()
@@ -89,7 +96,7 @@ public class OrderCart  {
         int amout = 0;
        for(Object key : items.keySet()) {
            CartItem item = items.get(key);
-           if(item.getIsSelected())
+           if(item.IsSelected())
                 amout += item.getAmount();
        }
         return  amout;
@@ -100,7 +107,7 @@ public class OrderCart  {
         float money = 0.0f;
         for(Object key : items.keySet()) {
             CartItem item = items.get(key);
-            if(item.getIsSelected())
+            if(item.IsSelected())
                 money += item.getAmount() * item.getMoney() ;
         }
         return money;
@@ -111,7 +118,7 @@ public class OrderCart  {
         int count = 0;
         for(Object key : items.keySet()) {
             CartItem item = items.get(key);
-            if(item.getIsSelected())
+            if(item.IsSelected())
                 count ++;
         }
         return  count;

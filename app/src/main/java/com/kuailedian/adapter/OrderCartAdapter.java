@@ -102,8 +102,8 @@ public class OrderCartAdapter extends BaseAdapter  {
         holder.amount.setText(money);
         CharSequence cs =  "￥" + String.valueOf( item.getMoney());
         holder.price.setText(cs);
-        Log.v("ordercartadapter",String.valueOf(  item.getIsSelected() ) );
-        holder.selected.setChecked(item.getIsSelected());
+        Log.v("ordercartadapter",String.valueOf(  item.IsSelected() ) );
+        holder.selected.setChecked(item.IsSelected());
 
 
         return view;

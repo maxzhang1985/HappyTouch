@@ -122,7 +122,7 @@ public class ProductAdapter extends ArrayAdapter<ProductEntity> {
                 item.setMoney( Float.parseFloat( entity.getProductmoney() ));
                 item.setIsSelected(true);
                 item.setAmount(1);
-                item.setType("product");
+                item.setType("C");
 
                 ordercartOperator.AddProducts(v,item);
             }

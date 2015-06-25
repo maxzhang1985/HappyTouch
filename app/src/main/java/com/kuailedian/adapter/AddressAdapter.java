@@ -98,7 +98,7 @@ public class AddressAdapter extends ArrayAdapter<AddressEntity> {
         viewHolder.Mobile.setText(address.getMobile());
         viewHolder.Address.setText(address.getAddress());
 
-        if(address.getIsdefault())
+        if(address.Isdefault())
         {
             viewHolder.container.setBackgroundResource(R.drawable.popo_or);
 

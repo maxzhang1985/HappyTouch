@@ -182,7 +182,7 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 					item.setMoney(Float.parseFloat(entity.getUnitprice()));
 					item.setIsSelected(true);
 					item.setAmount(1);
-					item.setType("product");
+					item.setType("D");
 
 					ordercartOperator.AddProducts(v, item);
 				}

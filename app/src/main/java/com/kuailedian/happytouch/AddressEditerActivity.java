@@ -80,7 +80,7 @@ public class AddressEditerActivity extends ActionBarActivity {
             edit_addressName.setText(address.getName());
             edit_mobile.setText(address.getMobile());
             edit_address.setText(address.getAddress());
-            sch_default.setChecked(address.getIsdefault());
+            sch_default.setChecked(address.Isdefault());
 
         }
 
@@ -115,9 +115,8 @@ public class AddressEditerActivity extends ActionBarActivity {
         if(account!=null) {
 
             RequestParams params = new RequestParams();
+            params.setContentEncoding("GB2312");
             AddressEntity addressEntity = getAddressEntity(account.getMobilePhone());
-            //params.add("userCode",account.getMobilePhone());
-
             String jsonAddress = JSON.toJSONString(addressEntity);
             params.add("addressdetails", jsonAddress );
 
@@ -163,9 +162,13 @@ public class AddressEditerActivity extends ActionBarActivity {
 
         if(account!=null) {
             pd = ProgressDialog.show(this, "提示", "加载中，请稍后……");
-            RequestParams params = getResquestParams();
-            params.add("id",address.getId());
-            Log.v("params",params.toString());
+            RequestParams params = new RequestParams();
+            params.setContentEncoding("GB2312");
+            AddressEntity addressEntity = getAddressEntity(account.getMobilePhone());
+            addressEntity.setId(address.getId());
+            String jsonAddress = JSON.toJSONString(addressEntity);
+            params.add("addressdetails", jsonAddress);
+            Log.v("params",jsonAddress);
             HttpUtilsAsync.post(url, params, new TextHttpResponseHandler("GB2312") {
                 @Override
                 public void onSuccess(int i, Header[] headers, String responseString) {
