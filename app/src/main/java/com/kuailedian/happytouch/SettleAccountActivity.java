@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.kuailedian.adapter.SettleOrderAdapter;
+import com.kuailedian.alipay.OrderInfo;
+import com.kuailedian.alipay.PayApiHelper;
 import com.kuailedian.alipay.PayDemoActivity;
 import com.kuailedian.domain.Account;
 import com.kuailedian.domain.OrderCart;
@@ -124,11 +126,27 @@ public class SettleAccountActivity extends ActionBarActivity {
                             public void onSuccess(int i, Header[] headers, String responseString) {
 
                                 JSONObject stateObject = JSON.parseObject(responseString);
-                                //String code = stateObject.getString("statecode");
+                                String code = stateObject.getString("statecode");
                                 Toast.makeText(SettleAccountActivity.this, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
                                 pd.dismiss();
 
-                                startActivity(new Intent(SettleAccountActivity.this, PayDemoActivity.class));
+                                //订单生成成功，开始支付
+                                if(code.equals("0000")) {
+                                    OrderInfo info = new OrderInfo();
+                                    info.ID = stateObject.getString("msg");
+                                    info.Subject = "快乐购物体验 e点外卖商超 送货到家";
+                                    info.Body =  "快乐购物体验 e点外卖商超 送货到家";
+                                    info.Price = String.valueOf( orderCart.getToalMoney() );
+                                    PayApiHelper payApiHelper = new PayApiHelper(SettleAccountActivity.this);
+                                    payApiHelper.payAsync(info , new AsyncCallBack() {
+                                        @Override
+                                        public void onDataReceive(Object data, Object statusCode) {
+
+                                        }
+                                    });
+                                }
+
+                                //startActivity(new Intent(SettleAccountActivity.this, PayDemoActivity.class));
                                 //这里写支付接口
 
                             }

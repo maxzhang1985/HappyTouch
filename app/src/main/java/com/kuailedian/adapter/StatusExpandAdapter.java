@@ -176,15 +176,16 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 				@Override
 				public void onClick(View v) {
 
-					CartItem item = new CartItem();
-					item.setId(entity.getProductsid());
-					item.setName(entity.getProductName());
-					item.setMoney(Float.parseFloat(entity.getUnitprice()));
-					item.setIsSelected(true);
-					item.setAmount(1);
-					item.setType("D");
-
-					ordercartOperator.AddProducts(v, item);
+					if(!entity.getProductsid().equals("")) {
+						CartItem item = new CartItem();
+						item.setId(entity.getProductsid());
+						item.setName(entity.getProductName());
+						item.setMoney(Float.parseFloat(entity.getUnitprice()));
+						item.setIsSelected(true);
+						item.setAmount(1);
+						item.setType("D");
+						ordercartOperator.AddProducts(v, item);
+					}
 				}
 			});
 		}
