@@ -113,6 +113,7 @@ public class PersonalCenterFragment extends Fragment{
             switch (v.getId())
             {
                 case R.id.person_center_myorder:
+                    navigation.Navigate(MyOrderListFragment.newInstance());
                     break;
                 case R.id.person_center_myaddress:
                     Intent intent = new Intent(context,AddressManagementActivity.class);
