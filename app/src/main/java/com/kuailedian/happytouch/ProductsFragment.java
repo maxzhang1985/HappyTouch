@@ -98,7 +98,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                productsAdapter.clear();
+
                 CatalogEntity catalog = catalogAdapter.getItem(i);
 
                 getProductByCatelogid(catalog.categoryid);
@@ -170,6 +170,7 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
                             Toast.LENGTH_LONG).show();
                     return;
                 }
+                productsAdapter.clear();
                 productsAdapter.addAll((ArrayList<ProductEntity>)data);
                 productsAdapter.notifyDataSetChanged();
 

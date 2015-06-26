@@ -1,8 +1,11 @@
 package com.kuailedian.happytouch;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -125,9 +128,9 @@ public class SettleAccountActivity extends ActionBarActivity {
                             @Override
                             public void onSuccess(int i, Header[] headers, String responseString) {
 
-                                JSONObject stateObject = JSON.parseObject(responseString);
+                                final JSONObject stateObject = JSON.parseObject(responseString);
                                 String code = stateObject.getString("statecode");
-                                Toast.makeText(SettleAccountActivity.this, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
+                                //Toast.makeText(SettleAccountActivity.this, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
                                 pd.dismiss();
 
                                 //订单生成成功，开始支付
@@ -141,7 +144,22 @@ public class SettleAccountActivity extends ActionBarActivity {
                                     payApiHelper.payAsync(info , new AsyncCallBack() {
                                         @Override
                                         public void onDataReceive(Object data, Object statusCode) {
+                                            if(stateObject.toString().equals("9000")) {
 
+                                               final AlertDialog dialog =  new AlertDialog.Builder(SettleAccountActivity.this)
+                                                        .setIcon(R.mipmap.icn_2)
+                                                        .setTitle("提示")
+                                                        .setMessage("支付成功")
+                                                        .show();
+                                                Handler mHandler = new Handler();
+                                                mHandler.postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        dialog.dismiss();
+                                                        SettleAccountActivity.this.finish();
+                                                    }
+                                                }, 800L);
+                                            }
                                         }
                                     });
                                 }
@@ -214,12 +232,16 @@ public class SettleAccountActivity extends ActionBarActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        AddressEntity entity = (AddressEntity)data.getSerializableExtra("address");
-        if(!entity.getId().equals("")  || !(entity.getId()==null) ) {
-            Log.v("address", entity.toString());
-            selectedAddress = entity;
-            settleAddressName.setText(entity.getName());
-            settleDetailAddress.setText(entity.getAddress());
+        try {
+            AddressEntity entity = (AddressEntity) data.getSerializableExtra("address");
+            if (!entity.getId().equals("") || !(entity.getId() == null)) {
+                Log.v("address", entity.toString());
+                selectedAddress = entity;
+                settleAddressName.setText(entity.getName());
+                settleDetailAddress.setText(entity.getAddress());
+            }
+        }catch (Exception e){
+
         }
     }
 

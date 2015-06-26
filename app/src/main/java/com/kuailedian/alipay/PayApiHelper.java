@@ -23,13 +23,13 @@ import java.util.Random;
  */
 public class PayApiHelper {
 
-    //ÉÌ»§PID
+    //å•†æˆ·PID
     public static final String PARTNER = "2088912427616293";
-    //ÉÌ»§ÊÕ¿îÕËºÅ
+    //å•†æˆ·æ”¶æ¬¾è´¦å·
     public static final String SELLER = "kldtscom@sina.com";
-    //ÉÌ»§Ë½Ô¿£¬pkcs8¸ñÊ½
+    //å•†æˆ·ç§é’¥ï¼Œpkcs8æ ¼å¼
     public static final String RSA_PRIVATE = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMGdIuOHm87hdONxBymHn3qoTHZu4abrx4fz20glLVgjtIUcN30LuodU+s7puKsw2tM2iH8QTU2WlwxPAB3BXfyLuDXJdlMK/NfAMm3HU+RvyhpmNhREaEOT+pJx/41exp4UmFC0LkAd4ZDDWodN/+ADM3ZsjAXAIJzKydkBKzjxAgMBAAECgYAiQ3q/JWqPbBrRfVk1Ikk43bvaYbkRXzyKdL9jvyCNLpRt0haHzKGP/Zv9LiN+OEEhi88QHYRwrKvCg+CTY3sMPaY+Wc0qlsmgQhcx1a9KnWfBqQOmor1kArlmg6cw56ElxsE+hJ354SNVlL1gVhJHiaUhOboJhNYBL6vfPFGkAQJBAOJvkxf/3avR4wi/Q5zRLUfaNHP0MvE99Wqs1gvu2RglZJ3TSDtaX75ZUj3OXtQWUl8UPXEbAT+bcxf8d6PjBxECQQDa5INv6tFIphlRy3UbFDZph3hyx7y4NrzgNi3UWOn7oBb9CbIJvx35y0kSIUIMdkD2Qxf8j7cjx+kTlw+w39PhAkBc/Ja6N0+vvIxwTiMU5e2jYR9DMtgsq1X6DaoE0nwCZ3CvQ1GZVh6VS5bzXKkijVwcQXKN3RohJdQY2IvFGHkRAkBCqNB2JrZxP1P6mtEg2/juDjlaCwWnu9OtHBK81g77d/dIO8miOjdwuL2Z7dLlZKXH2QrW+RU2qkyKkLhQjvlBAkEAzMdREBF183w6/mn0lFHIXNz2BK46ZSqSUvUH43C/63c1NkVouNlfc6ABmTa89r3NNGPJ36hCylAdjfRJwT3GlQ==";
-    //Ö§¸¶±¦¹«Ô¿
+    //æ”¯ä»˜å®å…¬é’¥
     public static final String RSA_PUBLIC = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
     private static final int SDK_PAY_FLAG = 1;
     private static final int SDK_CHECK_FLAG = 2;
@@ -43,28 +43,28 @@ public class PayApiHelper {
                 case SDK_PAY_FLAG: {
                     PayResult payResult = new PayResult((String) msg.obj);
 
-                    // Ö§¸¶±¦·µ»Ø´Ë´ÎÖ§¸¶½á¹û¼°¼ÓÇ©£¬½¨Òé¶ÔÖ§¸¶±¦Ç©ÃûĞÅÏ¢ÄÃÇ©Ô¼Ê±Ö§¸¶±¦Ìá¹©µÄ¹«Ô¿×öÑéÇ©
+                    // æ”¯ä»˜å®è¿”å›æ­¤æ¬¡æ”¯ä»˜ç»“æœåŠåŠ ç­¾ï¼Œå»ºè®®å¯¹æ”¯ä»˜å®ç­¾åä¿¡æ¯æ‹¿ç­¾çº¦æ—¶æ”¯ä»˜å®æä¾›çš„å…¬é’¥åšéªŒç­¾
                     String resultInfo = payResult.getResult();
 
                     String resultStatus = payResult.getResultStatus();
 
-                    // ÅĞ¶ÏresultStatus Îª¡°9000¡±Ôò´ú±íÖ§¸¶³É¹¦£¬¾ßÌå×´Ì¬Âë´ú±íº¬Òå¿É²Î¿¼½Ó¿ÚÎÄµµ
+                    // åˆ¤æ–­resultStatus ä¸ºâ€œ9000â€åˆ™ä»£è¡¨æ”¯ä»˜æˆåŠŸï¼Œå…·ä½“çŠ¶æ€ç ä»£è¡¨å«ä¹‰å¯å‚è€ƒæ¥å£æ–‡æ¡£
                     if (TextUtils.equals(resultStatus, "9000")) {
-                        Toast.makeText(context, "Ö§¸¶³É¹¦",
+                        Toast.makeText(context, "æ”¯ä»˜æˆåŠŸ",
                                 Toast.LENGTH_SHORT).show();
                         handerCallback.onDataReceive(null,resultStatus);
                     } else {
-                        // ÅĞ¶ÏresultStatus Îª·Ç¡°9000¡±Ôò´ú±í¿ÉÄÜÖ§¸¶Ê§°Ü
-                        // ¡°8000¡±´ú±íÖ§¸¶½á¹ûÒòÎªÖ§¸¶ÇşµÀÔ­Òò»òÕßÏµÍ³Ô­Òò»¹ÔÚµÈ´ıÖ§¸¶½á¹ûÈ·ÈÏ£¬×îÖÕ½»Ò×ÊÇ·ñ³É¹¦ÒÔ·şÎñ¶ËÒì²½Í¨ÖªÎª×¼£¨Ğ¡¸ÅÂÊ×´Ì¬£©
+                        // åˆ¤æ–­resultStatus ä¸ºéâ€œ9000â€åˆ™ä»£è¡¨å¯èƒ½æ”¯ä»˜å¤±è´¥
+                        // â€œ8000â€ä»£è¡¨æ”¯ä»˜ç»“æœå› ä¸ºæ”¯ä»˜æ¸ é“åŸå› æˆ–è€…ç³»ç»ŸåŸå› è¿˜åœ¨ç­‰å¾…æ”¯ä»˜ç»“æœç¡®è®¤ï¼Œæœ€ç»ˆäº¤æ˜“æ˜¯å¦æˆåŠŸä»¥æœåŠ¡ç«¯å¼‚æ­¥é€šçŸ¥ä¸ºå‡†ï¼ˆå°æ¦‚ç‡çŠ¶æ€ï¼‰
                         if (TextUtils.equals(resultStatus, "8000")) {
-                            Toast.makeText(context, "Ö§¸¶½á¹ûÈ·ÈÏÖĞ",
+                            Toast.makeText(context, "æ”¯ä»˜ç»“æœç¡®è®¤ä¸­",
                                     Toast.LENGTH_SHORT).show();
                             handerCallback.onDataReceive(null,resultStatus);
 
                         } else {
-                            // ÆäËûÖµ¾Í¿ÉÒÔÅĞ¶ÏÎªÖ§¸¶Ê§°Ü£¬°üÀ¨ÓÃ»§Ö÷¶¯È¡ÏûÖ§¸¶£¬»òÕßÏµÍ³·µ»ØµÄ´íÎó
-                            Toast.makeText(context, "Ö§¸¶Ê§°Ü",
-                                    Toast.LENGTH_SHORT).show();
+                            // å…¶ä»–å€¼å°±å¯ä»¥åˆ¤æ–­ä¸ºæ”¯ä»˜å¤±è´¥ï¼ŒåŒ…æ‹¬ç”¨æˆ·ä¸»åŠ¨å–æ¶ˆæ”¯ä»˜ï¼Œæˆ–è€…ç³»ç»Ÿè¿”å›çš„é”™è¯¯
+                            Toast.makeText(context, "æ”¯ä»˜å¤±è´¥",
+                                    Toast.LENGTH_LONG).show();
                             handerCallback.onDataReceive(null,resultStatus);
 
                         }
@@ -72,7 +72,7 @@ public class PayApiHelper {
                     break;
                 }
                 case SDK_CHECK_FLAG: {
-                    Toast.makeText(context, "¼ì²é½á¹ûÎª£º" + msg.obj,
+                    Toast.makeText(context, "æ£€æŸ¥ç»“æœä¸ºï¼š" + msg.obj,
                             Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -93,19 +93,19 @@ public class PayApiHelper {
     {
         handerCallback = callback;
 
-        // ¶©µ¥
+        // è®¢å•
         String orderInfo = getOrderInfo(info.ID,info.Subject, info.Body, info.Price);
 
-        // ¶Ô¶©µ¥×öRSA Ç©Ãû
+        // å¯¹è®¢å•åšRSA ç­¾å
         String sign = sign(orderInfo);
         try {
-            // ½öĞè¶Ôsign ×öURL±àÂë
+            // ä»…éœ€å¯¹sign åšURLç¼–ç 
             sign = URLEncoder.encode(sign, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        // ÍêÕûµÄ·ûºÏÖ§¸¶±¦²ÎÊı¹æ·¶µÄ¶©µ¥ĞÅÏ¢
+        // å®Œæ•´çš„ç¬¦åˆæ”¯ä»˜å®å‚æ•°è§„èŒƒçš„è®¢å•ä¿¡æ¯
         final String payInfo = orderInfo + "&sign=\"" + sign + "\"&"
                 + getSignType();
 
@@ -113,9 +113,9 @@ public class PayApiHelper {
 
             @Override
             public void run() {
-                // ¹¹ÔìPayTask ¶ÔÏó
+                // æ„é€ PayTask å¯¹è±¡
                 PayTask alipay = new PayTask( (Activity)context );
-                // µ÷ÓÃÖ§¸¶½Ó¿Ú£¬»ñÈ¡Ö§¸¶½á¹û
+                // è°ƒç”¨æ”¯ä»˜æ¥å£ï¼Œè·å–æ”¯ä»˜ç»“æœ
                 String result = alipay.pay(payInfo);
 
                 Message msg = new Message();
@@ -125,7 +125,7 @@ public class PayApiHelper {
             }
         };
 
-        // ±ØĞëÒì²½µ÷ÓÃ
+        // å¿…é¡»å¼‚æ­¥è°ƒç”¨
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
@@ -134,16 +134,16 @@ public class PayApiHelper {
 
     /**
      * check whether the device has authentication alipay account.
-     * ²éÑ¯ÖÕ¶ËÉè±¸ÊÇ·ñ´æÔÚÖ§¸¶±¦ÈÏÖ¤ÕË»§
+     * æŸ¥è¯¢ç»ˆç«¯è®¾å¤‡æ˜¯å¦å­˜åœ¨æ”¯ä»˜å®è®¤è¯è´¦æˆ·
      **/
     public void checkAsync() {
         Runnable checkRunnable = new Runnable() {
 
             @Override
             public void run() {
-                // ¹¹ÔìPayTask ¶ÔÏó
+                // æ„é€ PayTask å¯¹è±¡
                 PayTask payTask = new PayTask( (Activity)context );
-                // µ÷ÓÃ²éÑ¯½Ó¿Ú£¬»ñÈ¡²éÑ¯½á¹û
+                // è°ƒç”¨æŸ¥è¯¢æ¥å£ï¼Œè·å–æŸ¥è¯¢ç»“æœ
                 boolean isExist = payTask.checkAccountIfExist();
 
                 Message msg = new Message();
@@ -161,7 +161,7 @@ public class PayApiHelper {
 
 
     /**
-     * get the sdk version. »ñÈ¡SDK°æ±¾ºÅ
+     * get the sdk version. è·å–SDKç‰ˆæœ¬å·
      *
      */
     public void getSDKVersion() {
@@ -171,55 +171,55 @@ public class PayApiHelper {
     }
 
     /**
-     * create the order info. ´´½¨¶©µ¥ĞÅÏ¢
+     * create the order info. åˆ›å»ºè®¢å•ä¿¡æ¯
      *
      */
     public String getOrderInfo(String tradeNo,String subject, String body, String price) {
-        // Ç©Ô¼ºÏ×÷ÕßÉí·İID
+        // ç­¾çº¦åˆä½œè€…èº«ä»½ID
         String orderInfo = "partner=" + "\"" + PARTNER + "\"";
 
-        // Ç©Ô¼Âô¼ÒÖ§¸¶±¦ÕËºÅ
+        // ç­¾çº¦å–å®¶æ”¯ä»˜å®è´¦å·
         orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
 
-        // ÉÌ»§ÍøÕ¾Î¨Ò»¶©µ¥ºÅ
+        // å•†æˆ·ç½‘ç«™å”¯ä¸€è®¢å•å·
         orderInfo += "&out_trade_no=" + "\"" + tradeNo + "\"";
 
-        // ÉÌÆ·Ãû³Æ
+        // å•†å“åç§°
         orderInfo += "&subject=" + "\"" + subject + "\"";
 
-        // ÉÌÆ·ÏêÇé
+        // å•†å“è¯¦æƒ…
         orderInfo += "&body=" + "\"" + body + "\"";
 
-        // ÉÌÆ·½ğ¶î
+        // å•†å“é‡‘é¢
         orderInfo += "&total_fee=" + "\"" + price + "\"";
 
-        // ·şÎñÆ÷Òì²½Í¨ÖªÒ³ÃæÂ·¾¶
+        // æœåŠ¡å™¨å¼‚æ­¥é€šçŸ¥é¡µé¢è·¯å¾„
         orderInfo += "&notify_url=" + "\"" + "http://220.194.201.2:8081/notify_url.aspx"
                 + "\"";
 
-        // ·şÎñ½Ó¿ÚÃû³Æ£¬ ¹Ì¶¨Öµ
+        // æœåŠ¡æ¥å£åç§°ï¼Œ å›ºå®šå€¼
         orderInfo += "&service=\"mobile.securitypay.pay\"";
 
-        // Ö§¸¶ÀàĞÍ£¬ ¹Ì¶¨Öµ
+        // æ”¯ä»˜ç±»å‹ï¼Œ å›ºå®šå€¼
         orderInfo += "&payment_type=\"1\"";
 
-        // ²ÎÊı±àÂë£¬ ¹Ì¶¨Öµ
+        // å‚æ•°ç¼–ç ï¼Œ å›ºå®šå€¼
         orderInfo += "&_input_charset=\"utf-8\"";
 
-        // ÉèÖÃÎ´¸¶¿î½»Ò×µÄ³¬Ê±Ê±¼ä
-        // Ä¬ÈÏ30·ÖÖÓ£¬Ò»µ©³¬Ê±£¬¸Ã±Ê½»Ò×¾Í»á×Ô¶¯±»¹Ø±Õ¡£
-        // È¡Öµ·¶Î§£º1m¡«15d¡£
-        // m-·ÖÖÓ£¬h-Ğ¡Ê±£¬d-Ìì£¬1c-µ±Ìì£¨ÎŞÂÛ½»Ò×ºÎÊ±´´½¨£¬¶¼ÔÚ0µã¹Ø±Õ£©¡£
-        // ¸Ã²ÎÊıÊıÖµ²»½ÓÊÜĞ¡Êıµã£¬Èç1.5h£¬¿É×ª»»Îª90m¡£
+        // è®¾ç½®æœªä»˜æ¬¾äº¤æ˜“çš„è¶…æ—¶æ—¶é—´
+        // é»˜è®¤30åˆ†é’Ÿï¼Œä¸€æ—¦è¶…æ—¶ï¼Œè¯¥ç¬”äº¤æ˜“å°±ä¼šè‡ªåŠ¨è¢«å…³é—­ã€‚
+        // å–å€¼èŒƒå›´ï¼š1mï½15dã€‚
+        // m-åˆ†é’Ÿï¼Œh-å°æ—¶ï¼Œd-å¤©ï¼Œ1c-å½“å¤©ï¼ˆæ— è®ºäº¤æ˜“ä½•æ—¶åˆ›å»ºï¼Œéƒ½åœ¨0ç‚¹å…³é—­ï¼‰ã€‚
+        // è¯¥å‚æ•°æ•°å€¼ä¸æ¥å—å°æ•°ç‚¹ï¼Œå¦‚1.5hï¼Œå¯è½¬æ¢ä¸º90mã€‚
         orderInfo += "&it_b_pay=\"30m\"";
 
-        // extern_tokenÎª¾­¹ı¿ìµÇÊÚÈ¨»ñÈ¡µ½µÄalipay_open_id,´øÉÏ´Ë²ÎÊıÓÃ»§½«Ê¹ÓÃÊÚÈ¨µÄÕË»§½øĞĞÖ§¸¶
+        // extern_tokenä¸ºç»è¿‡å¿«ç™»æˆæƒè·å–åˆ°çš„alipay_open_id,å¸¦ä¸Šæ­¤å‚æ•°ç”¨æˆ·å°†ä½¿ç”¨æˆæƒçš„è´¦æˆ·è¿›è¡Œæ”¯ä»˜
         // orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
 
-        // Ö§¸¶±¦´¦ÀíÍêÇëÇóºó£¬µ±Ç°Ò³ÃæÌø×ªµ½ÉÌ»§Ö¸¶¨Ò³ÃæµÄÂ·¾¶£¬¿É¿Õ
+        // æ”¯ä»˜å®å¤„ç†å®Œè¯·æ±‚åï¼Œå½“å‰é¡µé¢è·³è½¬åˆ°å•†æˆ·æŒ‡å®šé¡µé¢çš„è·¯å¾„ï¼Œå¯ç©º
         orderInfo += "&return_url=\"m.alipay.com\"";
 
-        // µ÷ÓÃÒøĞĞ¿¨Ö§¸¶£¬ĞèÅäÖÃ´Ë²ÎÊı£¬²ÎÓëÇ©Ãû£¬ ¹Ì¶¨Öµ £¨ĞèÒªÇ©Ô¼¡¶ÎŞÏßÒøĞĞ¿¨¿ì½İÖ§¸¶¡·²ÅÄÜÊ¹ÓÃ£©
+        // è°ƒç”¨é“¶è¡Œå¡æ”¯ä»˜ï¼Œéœ€é…ç½®æ­¤å‚æ•°ï¼Œå‚ä¸ç­¾åï¼Œ å›ºå®šå€¼ ï¼ˆéœ€è¦ç­¾çº¦ã€Šæ— çº¿é“¶è¡Œå¡å¿«æ·æ”¯ä»˜ã€‹æ‰èƒ½ä½¿ç”¨ï¼‰
         // orderInfo += "&paymethod=\"expressGateway\"";
 
         return orderInfo;
@@ -227,17 +227,17 @@ public class PayApiHelper {
 
 
     /**
-     * sign the order info. ¶Ô¶©µ¥ĞÅÏ¢½øĞĞÇ©Ãû
+     * sign the order info. å¯¹è®¢å•ä¿¡æ¯è¿›è¡Œç­¾å
      *
      * @param content
-     *            ´ıÇ©Ãû¶©µ¥ĞÅÏ¢
+     *            å¾…ç­¾åè®¢å•ä¿¡æ¯
      */
     public String sign(String content) {
         return SignUtils.sign(content, RSA_PRIVATE);
     }
 
     /**
-     * get the sign type we use. »ñÈ¡Ç©Ãû·½Ê½
+     * get the sign type we use. è·å–ç­¾åæ–¹å¼
      *
      */
     public String getSignType() {
