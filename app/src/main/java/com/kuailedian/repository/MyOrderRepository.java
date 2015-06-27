@@ -29,7 +29,7 @@ public class MyOrderRepository extends  BaseAsyncRepository {
 
             MyOrderItemEntity detailEntity = new MyOrderItemEntity();
 
-            detailEntity.setId(object.getString("id"));
+            detailEntity.setId(object.getString("orderid"));
             detailEntity.setDate(object.getString("date"));
             detailEntity.setPrice(object.getString("price"));
             detailEntity.setState(object.getString("state"));

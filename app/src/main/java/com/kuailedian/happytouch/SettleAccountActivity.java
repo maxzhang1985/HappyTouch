@@ -130,7 +130,7 @@ public class SettleAccountActivity extends ActionBarActivity {
 
                                 final JSONObject stateObject = JSON.parseObject(responseString);
                                 String code = stateObject.getString("statecode");
-                                //Toast.makeText(SettleAccountActivity.this, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(SettleAccountActivity.this, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
                                 pd.dismiss();
 
                                 //订单生成成功，开始支付
