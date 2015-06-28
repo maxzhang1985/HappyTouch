@@ -15,14 +15,13 @@ public class MyOrderEntity {
     private String state;
     private String addresscode;
     private String paycode;
-    private String type;
+
     private List<CartItem> cart;
 
 
     public MyOrderEntity()
     {
         orderid = "";
-        type = "D";
         paycode = "001";
         state ="0";
     }
@@ -30,7 +29,7 @@ public class MyOrderEntity {
     public MyOrderEntity(String uid, String aid)
     {
         orderid = "";
-        type = "D";
+
         paycode = "001";
         state ="0";
         this.userid = uid;
@@ -83,15 +82,7 @@ public class MyOrderEntity {
         this.paycode = paycode;
     }
 
-    @JSONField(name="type")
-    public String getType() {
-        return type;
-    }
 
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     @JSONField(name="cart")
     public List<CartItem> getCart() {
