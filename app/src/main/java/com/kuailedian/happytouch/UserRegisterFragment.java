@@ -208,7 +208,7 @@ public class UserRegisterFragment extends Fragment {
     private void registerUser(final String phone, final String password,String messagecode)
     {
 
-        String hosturi = HostsPath.HostUri + "OrderAppInterFace.ashx?method=PostMessageCode";
+        String hosturi = HostsPath.HostUri + "OrderAppInterFace.ashx?method=Register";
         RequestParams params = new RequestParams();
         params.add("phone", phone );
         params.add("password", password );
