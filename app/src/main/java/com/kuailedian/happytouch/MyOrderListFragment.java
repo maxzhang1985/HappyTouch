@@ -70,22 +70,23 @@ public class MyOrderListFragment extends Fragment {
 
         orderRepository = new MyOrderRepository();
         RequestParams params = new RequestParams();
-        params.add("userid",getAccount().getMobilePhone());
-        pd = ProgressDialog.show(context, "提示", "加载中，请稍后……");
-        orderRepository.Get(params,new AsyncCallBack(){
-            @Override
-            public void onDataReceive(Object data, Object statusCode) {
-                if(data!=null) {
-                    adapter.clear();
-                    adapter.addAll((ArrayList<MyOrderItemEntity>) data);
-                    adapter.notifyDataSetChanged();
+        Account account = getAccount();
+        if(account!=null) {
+            params.add("userid", getAccount().getMobilePhone());
+            pd = ProgressDialog.show(context, "提示", "加载中，请稍后……");
+            orderRepository.Get(params, new AsyncCallBack() {
+                @Override
+                public void onDataReceive(Object data, Object statusCode) {
+                    if (data != null) {
+                        adapter.clear();
+                        adapter.addAll((ArrayList<MyOrderItemEntity>) data);
+                        adapter.notifyDataSetChanged();
+                    }
+                    pd.dismiss();
                 }
-                pd.dismiss();
-            }
-        });
+            });
 
-
-
+        }
     }
 
     private Account getAccount()
