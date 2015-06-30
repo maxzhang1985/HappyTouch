@@ -4,13 +4,13 @@ package com.kuailedian.alipay;
  * Created by Maxzhang on 2015/6/25.
  */
 public class OrderInfo {
-    //订单ID
+    //璁㈠崟ID
     public String ID;
-    //订单标题
+    //璁㈠崟鏍囬
     public String Subject;
-    //订单内容
+    //璁㈠崟鍐呭
     public String Body;
-    //订单总价
+    //璁㈠崟鎬讳环
     public String Price;
 
 }
