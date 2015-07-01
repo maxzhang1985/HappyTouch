@@ -68,6 +68,7 @@ public class MyOrderListFragment extends Fragment {
 
         myOrderListview.setAdapter(adapter);
 
+
         orderRepository = new MyOrderRepository();
         RequestParams params = new RequestParams();
         Account account = getAccount();

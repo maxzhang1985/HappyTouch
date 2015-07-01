@@ -1,5 +1,7 @@
 package com.kuailedian.entity;
 
+import java.util.ArrayList;
+
 /**
  * Created by Maxzhang on 2015/6/26.
  */
@@ -10,6 +12,7 @@ public class MyOrderItemEntity {
     private String price;
     private String state;
     private String statemessage;
+    private ArrayList<String> imglist;
 
     public String getStatemessage() {
         return statemessage;
@@ -49,5 +52,13 @@ public class MyOrderItemEntity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public ArrayList<String> getImglist() {
+        return imglist;
+    }
+
+    public void setImglist(ArrayList<String> imglist) {
+        this.imglist = imglist;
     }
 }

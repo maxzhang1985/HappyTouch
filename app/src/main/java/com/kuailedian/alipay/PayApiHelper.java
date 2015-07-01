@@ -194,7 +194,7 @@ public class PayApiHelper {
         orderInfo += "&total_fee=" + "\"" + price + "\"";
 
         // 服务器异步通知页面路径
-        orderInfo += "&notify_url=" + "\"" + "http://220.194.201.2:8081/notify_url.aspx"
+        orderInfo += "&notify_url=" + "\"" + "http://220.194.201.2:8011/notify_url.aspx"
                 + "\"";
 
         // 服务接口名称， 固定值

@@ -1,10 +1,13 @@
 package com.kuailedian.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Gallery;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -86,7 +89,13 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
 
         holder.price.setText(item.getPrice());
 
-        holder.state.setText(item.getState());
+        holder.state.setText(item.getStatemessage());
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(view.getContext());
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        holder.recyclerView.setLayoutManager(layoutManager);
+
+        holder.recyclerView.setAdapter(new ImageListAdapter(item.getImglist()));
 
         if(item.getState().equals("0"))
         {
@@ -118,6 +127,9 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
 
         @InjectView(R.id.myorder_item_pedone)
         LinearLayout pedonelayout;
+
+        @InjectView(R.id.recyclerview_horizontal)
+        RecyclerView recyclerView;
 
         public MyOrderViewHolder(View view) {
             ButterKnife.inject(this, view);
