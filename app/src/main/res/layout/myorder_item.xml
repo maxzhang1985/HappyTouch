@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="168dp"
     android:padding="15dp"
     android:layout_margin="28dp"
     android:background="@drawable/kuang"
@@ -51,6 +51,7 @@
 
 
         <android.support.v7.widget.RecyclerView
+            android:focusable="false"
             android:id="@+id/recyclerview_horizontal"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"
@@ -102,6 +103,7 @@
                 android:gravity="right|center"
                 >
             <Button
+                android:focusable="false"
                 android:visibility="gone"
                 android:id="@+id/myorder_item_cancel"
                 android:layout_width="75dp"
@@ -109,6 +111,7 @@
                 android:background="@mipmap/cancel_order_0" />
 
             <Button
+                android:focusable="false"
                 android:id="@+id/myorder_item_pay"
                 android:layout_marginLeft="10dp"
                 android:layout_width="75dp"

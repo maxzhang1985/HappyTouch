@@ -2,7 +2,6 @@ package com.kuailedian.happytouch;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,7 +20,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.kuailedian.adapter.SettleOrderAdapter;
 import com.kuailedian.alipay.OrderInfo;
 import com.kuailedian.alipay.PayApiHelper;
-import com.kuailedian.alipay.PayDemoActivity;
 import com.kuailedian.domain.Account;
 import com.kuailedian.domain.OrderCart;
 import com.kuailedian.entity.AddressEntity;
@@ -144,7 +142,7 @@ public class SettleAccountActivity extends ActionBarActivity {
                                     payApiHelper.payAsync(info , new AsyncCallBack() {
                                         @Override
                                         public void onDataReceive(Object data, Object statusCode) {
-                                            if(stateObject.toString().equals("9000")) {
+                                            if(statusCode.toString().equals("9000")) {
 
                                                final AlertDialog dialog =  new AlertDialog.Builder(SettleAccountActivity.this)
                                                         .setIcon(R.mipmap.icn_2)

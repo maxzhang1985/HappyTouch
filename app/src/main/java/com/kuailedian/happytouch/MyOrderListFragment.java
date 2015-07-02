@@ -4,14 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.kuailedian.adapter.MyOrderAdapter;
+import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.domain.Account;
 import com.kuailedian.entity.MyOrderItemEntity;
 import com.kuailedian.repository.AsyncCallBack;
@@ -69,6 +69,16 @@ public class MyOrderListFragment extends Fragment {
         myOrderListview.setAdapter(adapter);
 
 
+        final INavigationService navigation = getApplication().GetSystemDomain(INavigationService.class);
+
+        myOrderListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                navigation.Push(OrderDetailsFragment.newInstance(adapter.getItem(position).getId()));
+            }
+        });
+
+
         orderRepository = new MyOrderRepository();
         RequestParams params = new RequestParams();
         Account account = getAccount();
@@ -90,9 +100,16 @@ public class MyOrderListFragment extends Fragment {
         }
     }
 
-    private Account getAccount()
+    private  HTApplication getApplication()
     {
         HTApplication app = (HTApplication)getActivity().getApplication();
+        return  app;
+    }
+
+
+    private Account getAccount()
+    {
+        HTApplication app = getApplication();
         Account account = app.GetSystemDomain(Account.class);
         return account;
     }
