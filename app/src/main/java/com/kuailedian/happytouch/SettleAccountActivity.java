@@ -107,7 +107,7 @@ public class SettleAccountActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                if(selectedAddress!=null) {
+                if(selectedAddress!=null && orderCart.getTotalAmount() > 0) {
 
                     MyOrderEntity orderEntity = new MyOrderEntity(account.getMobilePhone(), selectedAddress.getId());
                     orderEntity.setCart( orderCart.toArray() );

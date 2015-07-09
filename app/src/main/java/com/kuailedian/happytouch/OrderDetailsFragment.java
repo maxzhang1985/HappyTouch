@@ -94,7 +94,7 @@ public class OrderDetailsFragment extends Fragment {
         params.setContentEncoding("GB2312");
         params.add("orderid", orderid );
 
-        pd = ProgressDialog.show(context, "ÌáÊ¾", "ÕıÔÚ²éÑ¯£¬ÇëÉÔºó¡­¡­");
+        pd = ProgressDialog.show(context, "æç¤º", "æ­£åœ¨æŸ¥è¯¢ï¼Œè¯·ç¨åâ€¦â€¦");
         HttpUtilsAsync.post(url, params, new TextHttpResponseHandler("GB2312") {
             @Override
             public void onSuccess(int i, Header[] headers, String responseString) {
@@ -131,7 +131,7 @@ public class OrderDetailsFragment extends Fragment {
 
             @Override
             public void onFailure(int i, Header[] headers, String responseString, Throwable throwable) {
-                Toast.makeText(context, "ÍøÂç´íÎó£¡",
+                Toast.makeText(context, "ç½‘ç»œé”™è¯¯ï¼",
                         Toast.LENGTH_LONG).show();
                 pd.dismiss();
             }

@@ -108,8 +108,12 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
                     int groupCount = expandlistView.getCount();
                     for (int i = 0; i < groupCount; i++) {
                         expandlistView.expandGroup(i);
-                        if (entityList.get(i).istoday())
+                        if (entityList.get(i).istoday()) {
                             expandlistView.setSelection(i);
+
+                            Log.v("selection",String.valueOf( i ) );
+
+                        }
                     }
                 }
                 else
