@@ -2,6 +2,7 @@ package com.kuailedian.happytouch;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.Gravity;
@@ -94,7 +95,7 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
         statusAdapter = new StatusExpandAdapter(context, this, list);
         expandlistView.setAdapter(statusAdapter);
         expandlistView.setGroupIndicator(null); // 去掉默认带的箭头
-
+        final Handler handler = new Handler();
 
         pd = ProgressDialog.show(context, "提示", "加载中，请稍后……");
         repository.Get(new RequestParams(), new AsyncCallBack() {
@@ -106,12 +107,20 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
                     statusAdapter.notifyDataSetChanged();
                     // 遍历所有group,将所有项设置成默认展开
                     int groupCount = expandlistView.getCount();
+                    Log.v("display item count",String.valueOf(groupCount)) ;
                     for (int i = 0; i < groupCount; i++) {
                         expandlistView.expandGroup(i);
-                        if (entityList.get(i).istoday()) {
-                            expandlistView.setSelection(i);
 
-                            Log.v("selection",String.valueOf( i ) );
+                        final int pos = i;
+
+                        if (entityList.get(i).istoday()) {
+
+                            handler.postDelayed(new Runnable(){
+                                public void run() {
+                                    Log.v("aa selection item of",String.valueOf(pos ) );
+                                    expandlistView.setSelectedGroup(pos);
+                                }
+                            }, 800);
 
                         }
                     }
@@ -120,7 +129,7 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
                 {
                     Toast.makeText(context, "网格错误！", Toast.LENGTH_LONG).show();
                 }
-                //expandlistView.setSelection(7);// 设置默认选中项
+                expandlistView.setSelection(2);// 设置默认选中项
                 pd.dismiss();
             }
         });

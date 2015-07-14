@@ -11,7 +11,35 @@ import java.util.List;
  */
 public class OrderCart  {
 
+    public int getMinMoney() {
+        return minMoney;
+    }
 
+    public void setMinMoney(int minMoney) {
+        this.minMoney = minMoney;
+    }
+
+    private int minMoney;
+
+    private int startTime;
+
+    private int endTime;
+
+    public int getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(int startTime) {
+        this.startTime = startTime;
+    }
+
+    public int getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
+    }
 
     private HashMap<String,CartItem> items;
 

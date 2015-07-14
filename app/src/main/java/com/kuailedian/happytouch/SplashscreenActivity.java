@@ -1,13 +1,19 @@
 package com.kuailedian.happytouch;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.Window;
-import android.view.animation.AnimationUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.kuailedian.domain.OrderCart;
+import com.kuailedian.repository.HostsPath;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.marshalchen.common.commonUtils.urlUtils.HttpUtilsAsync;
+
+import org.apache.http.Header;
 
 public class SplashscreenActivity extends ActionBarActivity {
 
@@ -17,6 +23,30 @@ public class SplashscreenActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
+        String HostUri = HostsPath.HostUri  + "OrderAppInterFace.ashx?method=EnterInfo" ;
+        HttpUtilsAsync.get(HostUri, new RequestParams() , new TextHttpResponseHandler("GB2312") {
+
+            @Override
+            public void onSuccess(int i, Header[] headers, String responseString) {
+
+                JSONObject object = JSON.parseObject(responseString);
+                OrderCart cart = OrderCart.getOrderCart();
+                cart.setMinMoney(object.getInteger("Enter_min"));
+                String strStartTime =(object.getString("enter_sdate"));
+                String strEndTime =(object.getString("enter_edate"));
+               cart.setStartTime(Integer.valueOf(strStartTime.split(":")[0]));
+                cart.setEndTime(Integer.valueOf(strEndTime.split(":")[0]));
+
+            }
+
+            @Override
+            public void onFailure(int i, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+
+        });
+
 
         new Handler().postDelayed(new Runnable(){
 

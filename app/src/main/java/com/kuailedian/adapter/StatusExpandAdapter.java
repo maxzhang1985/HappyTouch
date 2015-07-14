@@ -123,8 +123,11 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 
 		holder.Week.setImageDrawable(db);
 
-		if(groupList.get(groupPosition).istoday())
+		if(groupList.get(groupPosition).istoday()) {
+
+			Log.v("selection item of",String.valueOf( groupPosition ) );
 			convertView.setSelected(true);
+		}
 
 		return convertView;
 	}
@@ -159,13 +162,13 @@ public class StatusExpandAdapter extends BaseExpandableListAdapter {
 
 
 		viewHolder.productName.setText(entity.getProductName());
-		viewHolder.productMoney.setText( entity.getUnitprice());
+		viewHolder.productMoney.setText(entity.getUnitprice());
 		String imgurl = entity.getImg();
 		viewHolder.productPicture.setImageResource(R.mipmap.no_photo);
 		viewHolder.productPicture.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		if(!imgurl.equals(""))
 		{
-			ImageLoader.getInstance().displayImage(imgurl , viewHolder.productPicture );
+			ImageLoader.getInstance().displayImage(imgurl, viewHolder.productPicture);
 		}
 		//viewHolder.productPicture = entity.getImg()
 		viewHolder.btnAddProduct.setFocusable(false);
