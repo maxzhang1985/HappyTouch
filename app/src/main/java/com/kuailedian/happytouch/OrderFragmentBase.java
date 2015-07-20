@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kuailedian.components.BottomPopupWindow;
 import com.kuailedian.domain.CartItem;
@@ -73,7 +74,13 @@ public class OrderFragmentBase extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(context,SettleAccountActivity.class));
+                OrderCart cart = OrderCart.getOrderCart();
+
+                //if(cart.getIsBuyEnable())
+                    startActivity(new Intent(context, SettleAccountActivity.class));
+                //else
+                //    Toast.makeText(context, "包含点餐订单可免运费!商超不小于" + cart.getMinMoney()   , Toast.LENGTH_LONG).show();
+
             }
         });
 

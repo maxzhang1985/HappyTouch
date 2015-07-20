@@ -152,6 +152,24 @@ public class OrderCart  {
         return  count;
     }
 
+    public boolean getIsBuyEnable()
+    {
+        boolean hasDiancan = false;
+        float money = 0.0f;
+        for(Object key : items.keySet()) {
+            CartItem item = items.get(key);
+            if(item.IsSelected())
+                money += item.getAmount() * item.getMoney() ;
+                if(  item.getType().equals("D") )
+                    hasDiancan = true;
+
+            }
+
+        return  hasDiancan || money > minMoney ;
+    }
+
+
+
     public void clear()
     {
         items.clear();
