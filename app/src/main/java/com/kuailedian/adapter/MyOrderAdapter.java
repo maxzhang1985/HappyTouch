@@ -105,8 +105,8 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
             public void onClick(View v) {
                 OrderInfo info = new OrderInfo();
                 info.ID = item.getId();
-                info.Subject = "¿ìÀÖ¹ºÎïÌåÑé eµãÍâÂôÉÌ³¬ ËÍ»õµ½¼Ò";
-                info.Body =  "¿ìÀÖ¹ºÎïÌåÑé eµãÍâÂôÉÌ³¬ ËÍ»õµ½¼Ò";
+                info.Subject = "å¿«ä¹è´­ç‰©ä½“éªŒ eç‚¹å¤–å–å•†è¶… é€è´§åˆ°å®¶";
+                info.Body =  "å¿«ä¹è´­ç‰©ä½“éªŒ eç‚¹å¤–å–å•†è¶… é€è´§åˆ°å®¶";
                 info.Price = item.getPrice();
                 PayApiHelper payApiHelper = new PayApiHelper(context);
                 payApiHelper.payAsync(info , new AsyncCallBack() {
@@ -116,8 +116,8 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
 
                             final AlertDialog dialog =  new AlertDialog.Builder(context)
                                     .setIcon(R.mipmap.icn_2)
-                                    .setTitle("ÌáÊ¾")
-                                    .setMessage("Ö§¸¶³É¹¦")
+                                    .setTitle("æç¤º")
+                                    .setMessage("æ”¯ä»˜æˆåŠŸ")
                                     .show();
                             Handler mHandler = new Handler();
                             mHandler.postDelayed(new Runnable() {
