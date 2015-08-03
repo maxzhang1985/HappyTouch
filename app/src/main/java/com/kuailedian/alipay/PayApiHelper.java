@@ -8,15 +8,11 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
-import com.kuailedian.domain.OrderCart;
 import com.kuailedian.repository.AsyncCallBack;
+import com.kuailedian.repository.HostsPath;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Random;
 
 /**
  * Created by Maxzhang on 2015/6/25.
@@ -194,7 +190,7 @@ public class PayApiHelper {
         orderInfo += "&total_fee=" + "\"" + price + "\"";
 
         // 服务器异步通知页面路径
-        orderInfo += "&notify_url=" + "\"" + "http://220.194.201.2:8011/notify_url.aspx"
+        orderInfo += "&notify_url=" + "\"" + HostsPath.PayUri
                 + "\"";
 
         // 服务接口名称， 固定值
