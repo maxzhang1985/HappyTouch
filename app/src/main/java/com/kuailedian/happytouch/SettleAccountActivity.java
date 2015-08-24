@@ -82,7 +82,7 @@ public class SettleAccountActivity extends ActionBarActivity {
                 onBackPressed();
             }
         });
-        mToolBarTextView.setText("结算");
+        mToolBarTextView.setText("订单确认");
 
        final OrderCart orderCart = OrderCart.getOrderCart();
 
@@ -107,7 +107,7 @@ public class SettleAccountActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                if(selectedAddress!=null && orderCart.getTotalAmount() > 0) {
+                if(selectedAddress!=null && orderCart.getIsBuyEnable()  && orderCart.getTotalAmount() > 0) {
 
                     MyOrderEntity orderEntity = new MyOrderEntity(account.getMobilePhone(), selectedAddress.getId());
                     orderEntity.setCart( orderCart.toArray() );
@@ -128,7 +128,7 @@ public class SettleAccountActivity extends ActionBarActivity {
 
                                 final JSONObject stateObject = JSON.parseObject(responseString);
                                 String code = stateObject.getString("statecode");
-                                Toast.makeText(SettleAccountActivity.this, stateObject.getString("msg"), Toast.LENGTH_LONG).show();
+                                Toast.makeText(SettleAccountActivity.this,"订单:" + stateObject.getString("msg"), Toast.LENGTH_LONG).show();
                                 pd.dismiss();
 
                                 //订单生成成功，开始支付

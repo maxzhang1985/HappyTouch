@@ -34,8 +34,8 @@ public class SplashscreenActivity extends ActionBarActivity {
                 cart.setMinMoney(object.getInteger("Enter_min"));
                 String strStartTime =(object.getString("enter_sdate"));
                 String strEndTime =(object.getString("enter_edate"));
-               cart.setStartTime(Integer.valueOf(strStartTime.split(":")[0]));
-                cart.setEndTime(Integer.valueOf(strEndTime.split(":")[0]));
+//               cart.setStartTime(Integer.valueOf(strStartTime.split(":")[0]));
+//                cart.setEndTime(Integer.valueOf(strEndTime.split(":")[0]));
 
             }
 

@@ -1,7 +1,6 @@
 package com.kuailedian.happytouch;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -10,16 +9,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.applictionservice.MenuProvider;
+import com.kuailedian.components.LoginPopupWindow;
 import com.kuailedian.domain.Account;
-import com.kuailedian.entity.AddressEntity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.yalantis.contextmenu.lib.ContextMenuDialogFragment;
@@ -38,7 +40,8 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
     @InjectView(R.id.toolbar)
      Toolbar mToolbar;
 
-
+    @InjectView(R.id.container)
+    FrameLayout  frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,17 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
         }
     }
 
+
+    public Fragment getActiveFragment() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            return null;
+        }
+        String tag = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName();
+        return  getSupportFragmentManager().findFragmentByTag(tag);
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -131,17 +145,55 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
 
     @Override
     public void onMenuItemClick(View clickedView, int position) {
+
+        final HTApplication app = getHtAppliction();
+        final INavigationService navigation = app.GetSystemDomain(INavigationService.class);
+        Account account = app.GetSystemDomain(Account.class);
+
         switch (position)
         {
             case 0:
                 mMenuDialogFragment.dismiss();
                 break;
             case 1:
-                this.Push(ProductsFragment.newInstance());
+
+                if(account !=null) {
+                    navigation.Push(ProductsFragment.newInstance());
+                }
+                else
+                {
+                    LoginPopupWindow popup = new LoginPopupWindow(MyBaseActivity.this);
+                    popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            Account account = app.GetSystemDomain(Account.class);
+                            if(account !=null) {
+                                navigation.Push(ProductsFragment.newInstance());
+                            }
+                        }
+                    });
+                    popup.showAtLocation( frameLayout , Gravity.CENTER , 0 , 0);
+                }
                 break;
             case 2:
-                this.Push(ReservationFragment.newInstance()) ;
 
+                if(account !=null) {
+                    navigation.Push(ProductsFragment.newInstance());
+                }
+                else
+                {
+                    LoginPopupWindow popup = new LoginPopupWindow(MyBaseActivity.this);
+                    popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            Account account = app.GetSystemDomain(Account.class);
+                            if(account !=null) {
+                                navigation.Push(ReservationFragment.newInstance()) ;
+                            }
+                        }
+                    });
+                    popup.showAtLocation( frameLayout , Gravity.CENTER , 0 , 0);
+                }
                 break;
             case 3:
                 this.Push(PersonalCenterFragment.newInstance());

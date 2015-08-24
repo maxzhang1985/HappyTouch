@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
@@ -41,9 +42,9 @@ public class PayApiHelper {
 
                     // 支付宝返回此次支付结果及加签，建议对支付宝签名信息拿签约时支付宝提供的公钥做验签
                     String resultInfo = payResult.getResult();
-
+                    Log.v("payinfo",resultInfo);
                     String resultStatus = payResult.getResultStatus();
-
+                    Log.v("payinfo",resultStatus);
                     // 判断resultStatus 为“9000”则代表支付成功，具体状态码代表含义可参考接口文档
                     if (TextUtils.equals(resultStatus, "9000")) {
                         Toast.makeText(context, "支付成功",

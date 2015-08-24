@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.ViewSwitcher;
 
 import com.kuailedian.applictionservice.INavigationService;
@@ -134,15 +135,25 @@ public class HomeFragment extends Fragment {
     @OnClick(R.id.reservation)
     public void onGo_Reservation()
     {
-        HTApplication app = (HTApplication)getActivity().getApplication();
+        final HTApplication app = (HTApplication)getActivity().getApplication();
+        final INavigationService navigation = app.GetSystemDomain(INavigationService.class);
         Account account = app.GetSystemDomain(Account.class);
         if(account !=null) {
-            INavigationService navigation = app.GetSystemDomain(INavigationService.class);
             navigation.Push(ReservationFragment.newInstance());
         }
         else
         {
             LoginPopupWindow popup = new LoginPopupWindow(context);
+            popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    Account account = app.GetSystemDomain(Account.class);
+                    if(account !=null) {
+                        navigation.Push(ReservationFragment.newInstance());
+                    }
+
+                }
+            });
             popup.showAtLocation(rootView , Gravity.CENTER , 0 , 0);
         }
     }
@@ -151,16 +162,26 @@ public class HomeFragment extends Fragment {
     @OnClick(R.id.shopping)
     public void onGo_Shopping()
     {
-        HTApplication app = (HTApplication)getActivity().getApplication();
+        final HTApplication app = (HTApplication)getActivity().getApplication();
+        final INavigationService navigation = app.GetSystemDomain(INavigationService.class);
         Account account = app.GetSystemDomain(Account.class);
         if(account !=null) {
-            INavigationService navigation = app.GetSystemDomain(INavigationService.class);
+
             navigation.Push(ProductsFragment.newInstance());
         }
         else
         {
             LoginPopupWindow popup = new LoginPopupWindow(context);
-            popup.showAtLocation(rootView , Gravity.CENTER , 0 , 0);
+            popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                @Override
+                public void onDismiss() {
+                    Account account = app.GetSystemDomain(Account.class);
+                    if(account !=null) {
+                        navigation.Push(ProductsFragment.newInstance());
+                    }
+                }
+            });
+            popup.showAtLocation(rootView, Gravity.CENTER, 0, 0);
         }
     }
 
