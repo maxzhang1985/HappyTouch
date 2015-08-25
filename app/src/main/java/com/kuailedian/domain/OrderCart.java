@@ -21,24 +21,42 @@ public class OrderCart  {
 
     private int minMoney;
 
-    private int startTime;
+    private String dcstime;
+    private String dcetime;
 
-    private int endTime;
+    private String scstime;
+    private String scetime;
 
-    public int getStartTime() {
-        return startTime;
+    public String getDcstime() {
+        return dcstime;
     }
 
-    public void setStartTime(int startTime) {
-        this.startTime = startTime;
+    public void setDcstime(String dcstime) {
+        this.dcstime = dcstime;
     }
 
-    public int getEndTime() {
-        return endTime;
+    public String getDcetime() {
+        return dcetime;
     }
 
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
+    public void setDcetime(String dcetime) {
+        this.dcetime = dcetime;
+    }
+
+    public String getScstime() {
+        return scstime;
+    }
+
+    public void setScstime(String scstime) {
+        this.scstime = scstime;
+    }
+
+    public String getScetime() {
+        return scetime;
+    }
+
+    public void setScetime(String scetime) {
+        this.scetime = scetime;
     }
 
     private HashMap<String,CartItem> items;

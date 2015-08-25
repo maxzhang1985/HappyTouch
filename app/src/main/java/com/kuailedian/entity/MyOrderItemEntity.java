@@ -12,6 +12,16 @@ public class MyOrderItemEntity {
     private String price;
     private String state;
     private String statemessage;
+
+    public String getPaycode() {
+        return paycode;
+    }
+
+    public void setPaycode(String paycode) {
+        this.paycode = paycode;
+    }
+
+    private String paycode;
     private ArrayList<String> imglist;
 
     public String getStatemessage() {

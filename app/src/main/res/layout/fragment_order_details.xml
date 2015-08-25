@@ -208,7 +208,8 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:text="支付宝"
+                android:id="@+id/payinfo"
+                android:text="无"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:layout_marginLeft="10dp"

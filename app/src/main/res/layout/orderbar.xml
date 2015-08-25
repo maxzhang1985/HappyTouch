@@ -35,7 +35,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
-            android:background="@drawable/ordersubmit_selector"
+            android:background="@drawable/ordersok_selector"
             android:id="@+id/btn_ordersubmit" />
     </LinearLayout>
 </RelativeLayout>

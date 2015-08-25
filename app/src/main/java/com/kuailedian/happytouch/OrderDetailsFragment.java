@@ -55,6 +55,10 @@ public class OrderDetailsFragment extends Fragment {
     @InjectView(R.id.order_details_complatetime)
     TextView details_complatetime;
 
+    @InjectView(R.id.payinfo)
+    TextView details_payinfo;
+
+
     @InjectView(R.id.order_details_listview)
     ListView details_listview;
 
@@ -100,12 +104,19 @@ public class OrderDetailsFragment extends Fragment {
             public void onSuccess(int i, Header[] headers, String responseString) {
                 pd.dismiss();
                 JSONObject jsonObject = JSON.parseObject(responseString);
-                details_address.setText(jsonObject.getString("addresscode"));
+                details_address.setText(jsonObject.getString("address"));
                 details_orderid.setText(jsonObject.getString("orderid"));
                 details_complatetime.setText(jsonObject.getString("complatetime"));
                 details_deliverytime.setText(jsonObject.getString("deliverytime"));
                 details_paytime.setText(jsonObject.getString("paytime"));
                 details_createtime.setText(jsonObject.getString("createtime"));
+                String paycode = jsonObject.getString("paycode").trim();
+
+                if(paycode=="001")
+                    details_payinfo.setText("支付宝");
+                else
+                    details_payinfo.setText("货到付款");
+
 
                 JSONArray jsonArray =  jsonObject.getJSONArray("cart");
                 List<CartItem> cartItemList = new ArrayList<CartItem>();

@@ -34,6 +34,8 @@ public class MyOrderRepository extends  BaseAsyncRepository {
             detailEntity.setPrice(object.getString("price"));
             detailEntity.setState(object.getString("state"));
             detailEntity.setStatemessage(object.getString("statemsg"));
+            detailEntity.setPaycode(object.getString("paycode"));
+
             ArrayList<String> imglist = new ArrayList<>();
             JSONArray array = object.getJSONArray("imglist");
             for(int j =0;j<=array.size()-1;j++) {

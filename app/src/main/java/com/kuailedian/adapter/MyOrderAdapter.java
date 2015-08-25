@@ -97,6 +97,8 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
 
         holder.state.setText(item.getStatemessage());
 
+        if(item.getState().equals("0") && item.getPaycode().trim().equals("002"))
+            holder.state.setText( "货到付款" );
 
         holder.btnPay.setFocusable(false);
 
@@ -113,7 +115,6 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
                     @Override
                     public void onDataReceive(Object data, Object statusCode) {
                         if(statusCode.toString().equals("9000")) {
-
                             final AlertDialog dialog =  new AlertDialog.Builder(context)
                                     .setIcon(R.mipmap.icn_2)
                                     .setTitle("提示")
@@ -125,7 +126,7 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
                                 public void run() {
                                     dialog.dismiss();
                                 }
-                            }, 800L);
+                            }, 2800L);
                         }
                     }
                 });
@@ -140,7 +141,7 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
 
         holder.recyclerView.setAdapter(new ImageListAdapter(item.getImglist()));
 
-        if(item.getState().equals("0"))
+        if(item.getState().equals("0") && item.getPaycode().trim().equals("001"))
         {
             holder.donelayout.setVisibility(View.GONE);
             holder.pedonelayout.setVisibility(View.VISIBLE);
@@ -150,6 +151,8 @@ public class MyOrderAdapter extends ArrayAdapter<MyOrderItemEntity> {
             holder.donelayout.setVisibility(View.VISIBLE);
             holder.pedonelayout.setVisibility(View.GONE);
         }
+
+
 
 
 

@@ -20,11 +20,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.kuailedian.components.BottomPopupWindow;
 import com.kuailedian.domain.CartItem;
 import com.kuailedian.domain.OrderCart;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by maxzhang on 5/8/2015.
@@ -87,6 +89,11 @@ public class OrderFragmentBase extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setOrderBar();
+    }
 
     protected void ShowOrder()
     {
@@ -225,6 +232,13 @@ public class OrderFragmentBase extends Fragment {
     public void AddProducts(View itemview, CartItem item) {
 
         OrderCart cart = OrderCart.getOrderCart();
+        Date now = new Date();
+        String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(now);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+
+
         cart.addCart(item);
         float money =  cart.getToalMoney();
         int amount =  cart.getTotalAmount();

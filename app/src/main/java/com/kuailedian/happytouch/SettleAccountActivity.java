@@ -2,6 +2,7 @@ package com.kuailedian.happytouch;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -61,6 +62,11 @@ public class SettleAccountActivity extends ActionBarActivity {
     @InjectView(R.id.btn_ordersubmit)
     ImageButton orderSubmit;
 
+    @InjectView(R.id.op_payaway)
+    TextView op_payaway;
+
+    String paycode = "001";
+
     private AddressEntity selectedAddress;
 
     ProgressDialog pd;
@@ -100,6 +106,39 @@ public class SettleAccountActivity extends ActionBarActivity {
             }
         });
 
+
+        //select pay away
+        op_payaway.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String[] str={"支付宝","货到付款"};
+                AlertDialog ad = new AlertDialog.Builder(SettleAccountActivity.this)
+                        .setTitle("选择支付方式")
+                        .setSingleChoiceItems(str, 0, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if(which == 0)
+                                {
+                                    paycode = "001";
+                                    op_payaway.setText("支付宝");
+                                }
+                                else if(which == 1)
+                                {
+                                    paycode = "002";
+                                    op_payaway.setText("支付宝");
+                                }
+                                Log.v("paycode",paycode + ":" + String.valueOf( which));
+                                dialog.dismiss();
+                            }
+                        }).create();
+                ad.show();
+
+            }
+        });
+
+
+
+        //submit orders
         HTApplication app = getAppliction();
         final Account account = app.GetSystemDomain(Account.class);
 
@@ -108,10 +147,9 @@ public class SettleAccountActivity extends ActionBarActivity {
             public void onClick(View v) {
 
                 if(selectedAddress!=null && orderCart.getIsBuyEnable()  && orderCart.getTotalAmount() > 0) {
-
                     MyOrderEntity orderEntity = new MyOrderEntity(account.getMobilePhone(), selectedAddress.getId());
+                    orderEntity.setPaycode(paycode);
                     orderEntity.setCart( orderCart.toArray() );
-
                     String orderjson  = JSON.toJSONString(orderEntity);
 
                     if(account!=null) {
@@ -133,33 +171,53 @@ public class SettleAccountActivity extends ActionBarActivity {
 
                                 //订单生成成功，开始支付
                                 if(code.equals("0000")) {
-                                    OrderInfo info = new OrderInfo();
-                                    info.ID = stateObject.getString("msg");
-                                    info.Subject = "快乐购物体验 e点外卖商超 送货到家";
-                                    info.Body =  "快乐购物体验 e点外卖商超 送货到家";
-                                    info.Price = String.valueOf( orderCart.getToalMoney() );
-                                    PayApiHelper payApiHelper = new PayApiHelper(SettleAccountActivity.this);
-                                    payApiHelper.payAsync(info , new AsyncCallBack() {
-                                        @Override
-                                        public void onDataReceive(Object data, Object statusCode) {
-                                            if(statusCode.toString().equals("9000")) {
 
-                                               final AlertDialog dialog =  new AlertDialog.Builder(SettleAccountActivity.this)
-                                                        .setIcon(R.mipmap.icn_2)
-                                                        .setTitle("提示")
-                                                        .setMessage("支付成功")
-                                                        .show();
-                                                Handler mHandler = new Handler();
-                                                mHandler.postDelayed(new Runnable() {
-                                                    @Override
-                                                    public void run() {
-                                                        dialog.dismiss();
-                                                        SettleAccountActivity.this.finish();
-                                                    }
-                                                }, 800L);
+                                    if(paycode == "002"){
+                                        final AlertDialog dialog1 = new AlertDialog.Builder(SettleAccountActivity.this)
+                                                .setIcon(R.mipmap.icn_2)
+                                                .setTitle("提示")
+                                                .setMessage("订单成功,正在为你配送,请耐心等待.")
+                                                .show();
+                                        orderCart.clear();
+                                        Handler mHandler = new Handler();
+                                        mHandler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                dialog1.dismiss();
+                                                SettleAccountActivity.this.finish();
                                             }
-                                        }
-                                    });
+                                        }, 2800L);
+                                    }else {
+                                        OrderInfo info = new OrderInfo();
+                                        info.ID = stateObject.getString("msg");
+                                        info.Subject = "快乐购物体验 e点外卖商超 送货到家";
+                                        info.Body = "快乐购物体验 e点外卖商超 送货到家";
+                                        info.Price = String.valueOf(orderCart.getToalMoney());
+                                        PayApiHelper payApiHelper = new PayApiHelper(SettleAccountActivity.this);
+                                        payApiHelper.payAsync(info, new AsyncCallBack() {
+                                            @Override
+                                            public void onDataReceive(Object data, Object statusCode) {
+                                                if (statusCode.toString().equals("9000")) {
+
+                                                    final AlertDialog dialog = new AlertDialog.Builder(SettleAccountActivity.this)
+                                                            .setIcon(R.mipmap.icn_2)
+                                                            .setTitle("提示")
+                                                            .setMessage("支付成功,正在为你配送,请耐心等待.")
+                                                            .show();
+                                                    orderCart.clear();
+                                                    Handler mHandler = new Handler();
+                                                    mHandler.postDelayed(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                            dialog.dismiss();
+                                                            SettleAccountActivity.this.finish();
+                                                        }
+                                                    }, 2800L);
+                                                }
+                                            }
+                                        });
+                                    }
+
                                 }
 
                                 //startActivity(new Intent(SettleAccountActivity.this, PayDemoActivity.class));
