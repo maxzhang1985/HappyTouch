@@ -143,6 +143,7 @@ public class HomeFragment extends Fragment {
         }
         else
         {
+            UserRegisterFragment.goShopAndReservation = "R";
             LoginPopupWindow popup = new LoginPopupWindow(context);
             popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
@@ -171,12 +172,13 @@ public class HomeFragment extends Fragment {
         }
         else
         {
+            UserRegisterFragment.goShopAndReservation = "S";
             LoginPopupWindow popup = new LoginPopupWindow(context);
             popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
                 @Override
                 public void onDismiss() {
                     Account account = app.GetSystemDomain(Account.class);
-                    if(account !=null) {
+                    if (account != null) {
                         navigation.Push(ProductsFragment.newInstance());
                     }
                 }

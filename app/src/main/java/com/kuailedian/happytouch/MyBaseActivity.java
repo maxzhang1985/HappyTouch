@@ -162,6 +162,7 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
                 }
                 else
                 {
+                    UserRegisterFragment.goShopAndReservation = "S";
                     LoginPopupWindow popup = new LoginPopupWindow(MyBaseActivity.this);
                     popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
                         @Override
@@ -178,10 +179,11 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
             case 2:
 
                 if(account !=null) {
-                    navigation.Push(ProductsFragment.newInstance());
+                    navigation.Push(ReservationFragment.newInstance());
                 }
                 else
                 {
+                    UserRegisterFragment.goShopAndReservation = "R";
                     LoginPopupWindow popup = new LoginPopupWindow(MyBaseActivity.this);
                     popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
                         @Override

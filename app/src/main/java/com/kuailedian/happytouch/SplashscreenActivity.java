@@ -32,10 +32,14 @@ public class SplashscreenActivity extends ActionBarActivity {
                 JSONObject object = JSON.parseObject(responseString);
                 OrderCart cart = OrderCart.getOrderCart();
                 cart.setMinMoney(object.getInteger("Enter_min"));
+
                 String strStartTime =(object.getString("enter_sdate"));
                 String strEndTime =(object.getString("enter_edate"));
                 String strSCStartTime =(object.getString("enter_sc_sdate"));
                 String strSCEndTime =(object.getString("enter_sc_edate"));
+                String enter_tel = (object.getString("enter_tel"));
+
+                cart.setMobilePhone(enter_tel);
                 cart.setDcstime(strStartTime);
                 cart.setDcetime(strEndTime);
                 cart.setScstime(strSCStartTime);

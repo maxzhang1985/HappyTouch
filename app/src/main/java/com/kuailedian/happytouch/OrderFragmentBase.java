@@ -236,7 +236,7 @@ public class OrderFragmentBase extends Fragment {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(now);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
+        //dateFormat.parse()
 
 
         cart.addCart(item);

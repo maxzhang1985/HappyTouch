@@ -27,6 +27,16 @@ public class OrderCart  {
     private String scstime;
     private String scetime;
 
+    public String getMobilePhone() {
+        return mobilePhone;
+    }
+
+    public void setMobilePhone(String mobilePhone) {
+        this.mobilePhone = mobilePhone;
+    }
+
+    private String mobilePhone;
+
     public String getDcstime() {
         return dcstime;
     }

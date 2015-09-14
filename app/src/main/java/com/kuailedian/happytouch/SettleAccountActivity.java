@@ -65,7 +65,7 @@ public class SettleAccountActivity extends ActionBarActivity {
     @InjectView(R.id.op_payaway)
     TextView op_payaway;
 
-    String paycode = "001";
+    String paycode = "";
 
     private AddressEntity selectedAddress;
 
@@ -111,23 +111,19 @@ public class SettleAccountActivity extends ActionBarActivity {
         op_payaway.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String[] str={"支付宝","货到付款"};
+                final String[] str={"支付宝","货到付款"};
                 AlertDialog ad = new AlertDialog.Builder(SettleAccountActivity.this)
                         .setTitle("选择支付方式")
                         .setSingleChoiceItems(str, 0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if(which == 0)
-                                {
                                     paycode = "001";
-                                    op_payaway.setText("支付宝");
-                                }
                                 else if(which == 1)
-                                {
                                     paycode = "002";
-                                    op_payaway.setText("支付宝");
-                                }
+
                                 Log.v("paycode",paycode + ":" + String.valueOf( which));
+                                op_payaway.setText(str[which]);
                                 dialog.dismiss();
                             }
                         }).create();
@@ -146,7 +142,7 @@ public class SettleAccountActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                if(selectedAddress!=null && orderCart.getIsBuyEnable()  && orderCart.getTotalAmount() > 0) {
+                if(!paycode.equals("") && selectedAddress!=null && orderCart.getIsBuyEnable()  && orderCart.getTotalAmount() > 0) {
                     MyOrderEntity orderEntity = new MyOrderEntity(account.getMobilePhone(), selectedAddress.getId());
                     orderEntity.setPaycode(paycode);
                     orderEntity.setCart( orderCart.toArray() );
@@ -245,6 +241,11 @@ public class SettleAccountActivity extends ActionBarActivity {
 
 
 
+                }
+                else
+                {
+                    Toast.makeText(SettleAccountActivity.this, "请选择正确//的信息！",
+                            Toast.LENGTH_LONG).show();
                 }
 
             }

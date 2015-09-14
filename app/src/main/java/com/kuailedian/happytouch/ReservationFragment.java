@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kuailedian.adapter.StatusExpandAdapter;
 import com.kuailedian.applictionservice.IOrderCartOperator;
 import com.kuailedian.components.DetailsPopupWindow;
+import com.kuailedian.domain.OrderCart;
 import com.kuailedian.entity.ChildStatusEntity;
 import com.kuailedian.entity.GroupStatusEntity;
 import com.kuailedian.repository.AsyncCallBack;
@@ -35,6 +37,9 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
 
     @InjectView(R.id.expandlist)
     ExpandableListView expandlistView;
+
+    @InjectView(R.id.courses_title)
+    TextView tv_phone;
 
     private ProgressDialog pd;
 
@@ -77,7 +82,8 @@ public class ReservationFragment extends OrderFragmentBase implements IOrderCart
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        OrderCart cart = OrderCart.getOrderCart();
+        tv_phone.setText(cart.getMobilePhone());
         initExpandListView();
 
 

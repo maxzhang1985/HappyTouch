@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.InputType;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -21,6 +20,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.components.MyEditText;
 import com.kuailedian.domain.Account;
 import com.kuailedian.repository.HostsPath;
@@ -37,6 +37,8 @@ import butterknife.InjectView;
  * Created by 磊 on 2015/5/25.
  */
 public class UserRegisterFragment extends Fragment {
+
+    public static String goShopAndReservation;
 
     // TODO: Rename and change types and number of parameters
     public static UserRegisterFragment newInstance() {
@@ -142,13 +144,10 @@ public class UserRegisterFragment extends Fragment {
                 String passwrod = editPasswrod.getText().toString();
                 String messagecode = editMsgCode.getText().toString();
 
-                if(!phone.equals("") && !passwrod.equals("") && !messagecode.equals(""))
-                {
-                    registerUser(phone,passwrod,messagecode);
-                }
-                else
-                {
-                    Toast.makeText(context, "必填字段不能为空！",  Toast.LENGTH_LONG).show();
+                if (!phone.equals("") && !passwrod.equals("") && !messagecode.equals("")) {
+                    registerUser(phone, passwrod, messagecode);
+                } else {
+                    Toast.makeText(context, "必填字段不能为空！", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -237,6 +236,15 @@ public class UserRegisterFragment extends Fragment {
                         Toast.LENGTH_LONG).show();
 
                 pd.dismiss();
+                INavigationService service =  getAppliction().GetSystemDomain(INavigationService.class);
+                if(UserRegisterFragment.goShopAndReservation.equals("R"))
+                {
+                    service.Navigate(ReservationFragment.newInstance());
+                }
+                else
+                {
+                    service.Navigate(ProductsFragment.newInstance());
+                }
             }
 
             @Override

@@ -71,14 +71,10 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@drawable/kuang">
-        <ImageView
 
-            android:background="@mipmap/msp_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp" />
         <TextView android:id="@+id/op_payaway"
             android:layout_weight="1"
-            android:text="支付宝"
+            android:text="请选择"
             android:textColor="@color/black"
             android:textSize="24dp"
             android:gravity="center|left"
