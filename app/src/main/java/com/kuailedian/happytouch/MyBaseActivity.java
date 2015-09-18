@@ -1,6 +1,8 @@
 package com.kuailedian.happytouch;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -9,18 +11,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.applictionservice.MenuProvider;
-import com.kuailedian.components.LoginPopupWindow;
 import com.kuailedian.domain.Account;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -137,7 +136,26 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
     public void onBackPressed() {
 
         if (fragmentManager.getBackStackEntryCount() == 1) {
-            finish();
+
+            AlertDialog dialog1 = new AlertDialog.Builder(this)
+                    .setIcon(R.mipmap.icn_1)
+                    .setTitle("提示")
+                    .setMessage("确定要退出应用吗?")
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    })
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .show();
+
+
+
+
         } else {
             super.onBackPressed();
         }
@@ -156,46 +174,46 @@ public class MyBaseActivity extends ActionBarActivity implements OnMenuItemClick
                 mMenuDialogFragment.dismiss();
                 break;
             case 1:
-
-                if(account !=null) {
-                    navigation.Push(ProductsFragment.newInstance());
-                }
-                else
-                {
-                    UserRegisterFragment.goShopAndReservation = "S";
-                    LoginPopupWindow popup = new LoginPopupWindow(MyBaseActivity.this);
-                    popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                        @Override
-                        public void onDismiss() {
-                            Account account = app.GetSystemDomain(Account.class);
-                            if(account !=null) {
-                                navigation.Push(ProductsFragment.newInstance());
-                            }
-                        }
-                    });
-                    popup.showAtLocation( frameLayout , Gravity.CENTER , 0 , 0);
-                }
+                navigation.Push(ProductsFragment.newInstance());
+//                if(account !=null) {
+//                    navigation.Push(ProductsFragment.newInstance());
+//                }
+//                else
+//                {
+//                    UserRegisterFragment.goShopAndReservation = "S";
+//                    LoginPopupWindow popup = new LoginPopupWindow(MyBaseActivity.this);
+//                    popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//                        @Override
+//                        public void onDismiss() {
+//                            Account account = app.GetSystemDomain(Account.class);
+//                            if(account !=null) {
+//                                navigation.Push(ProductsFragment.newInstance());
+//                            }
+//                        }
+//                    });
+//                    popup.showAtLocation( frameLayout , Gravity.CENTER , 0 , 0);
+//                }
                 break;
             case 2:
-
-                if(account !=null) {
-                    navigation.Push(ReservationFragment.newInstance());
-                }
-                else
-                {
-                    UserRegisterFragment.goShopAndReservation = "R";
-                    LoginPopupWindow popup = new LoginPopupWindow(MyBaseActivity.this);
-                    popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                        @Override
-                        public void onDismiss() {
-                            Account account = app.GetSystemDomain(Account.class);
-                            if(account !=null) {
-                                navigation.Push(ReservationFragment.newInstance()) ;
-                            }
-                        }
-                    });
-                    popup.showAtLocation( frameLayout , Gravity.CENTER , 0 , 0);
-                }
+                navigation.Push(ReservationFragment.newInstance());
+//                if(account !=null) {
+//                    navigation.Push(ReservationFragment.newInstance());
+//                }
+//                else
+//                {
+//                    UserRegisterFragment.goShopAndReservation = "R";
+//                    LoginPopupWindow popup = new LoginPopupWindow(MyBaseActivity.this);
+//                    popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//                        @Override
+//                        public void onDismiss() {
+//                            Account account = app.GetSystemDomain(Account.class);
+//                            if(account !=null) {
+//                                navigation.Push(ReservationFragment.newInstance()) ;
+//                            }
+//                        }
+//                    });
+//                    popup.showAtLocation( frameLayout , Gravity.CENTER , 0 , 0);
+//                }
                 break;
             case 3:
                 this.Push(PersonalCenterFragment.newInstance());

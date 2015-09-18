@@ -16,6 +16,8 @@
             android:layout_marginLeft="12dp" android:layout_marginRight="12dp"
             android:hint="请输入手机号码"  android:textColor="@color/black" android:background="@null"
             testattr:LineColor="#757575" android:textSize="18dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:textColorHint="#ff939393"
             android:inputType="phone"
             android:id="@+id/edit_login_username"

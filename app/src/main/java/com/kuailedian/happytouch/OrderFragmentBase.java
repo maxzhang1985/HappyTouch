@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
@@ -21,7 +22,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.components.BottomPopupWindow;
+import com.kuailedian.components.LoginPopupWindow;
+import com.kuailedian.domain.Account;
 import com.kuailedian.domain.CartItem;
 import com.kuailedian.domain.OrderCart;
 
@@ -76,10 +80,33 @@ public class OrderFragmentBase extends Fragment {
             @Override
             public void onClick(View v) {
 
-                OrderCart cart = OrderCart.getOrderCart();
+                //OrderCart cart = OrderCart.getOrderCart();
+                final HTApplication app = (HTApplication)getActivity().getApplication();
+                final INavigationService navigation = app.GetSystemDomain(INavigationService.class);
+                Account account = app.GetSystemDomain(Account.class);
+                if(account !=null) {
+                    startActivity(new Intent(context, SettleAccountActivity.class));
+                }
+                else
+                {
+                    //UserRegisterFragment.goShopAndReservation = "R";
+                    LoginPopupWindow popup = new LoginPopupWindow(context);
+                    popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                        @Override
+                        public void onDismiss() {
+                            Account account = app.GetSystemDomain(Account.class);
+                            if(account !=null) {
+                                startActivity(new Intent(context, SettleAccountActivity.class));
+                            }
+
+                        }
+                    });
+                    popup.showAtLocation(rootView , Gravity.CENTER , 0 , 0);
+                }
 
                 //if(cart.getIsBuyEnable())
-                    startActivity(new Intent(context, SettleAccountActivity.class));
+//                if(account!=null)
+//                    startActivity(new Intent(context, SettleAccountActivity.class));
                 //else
                 //    Toast.makeText(context, "包含点餐订单可免运费!商超不小于" + cart.getMinMoney()   , Toast.LENGTH_LONG).show();
 

@@ -7,15 +7,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
 import android.widget.ViewSwitcher;
 
 import com.kuailedian.applictionservice.INavigationService;
-import com.kuailedian.components.LoginPopupWindow;
 import com.kuailedian.domain.Account;
 import com.marshalchen.common.uimodule.kenburnsview.KenBurnsView;
 import com.marshalchen.common.uimodule.kenburnsview.Transition;
@@ -137,26 +134,29 @@ public class HomeFragment extends Fragment {
     {
         final HTApplication app = (HTApplication)getActivity().getApplication();
         final INavigationService navigation = app.GetSystemDomain(INavigationService.class);
-        Account account = app.GetSystemDomain(Account.class);
-        if(account !=null) {
-            navigation.Push(ReservationFragment.newInstance());
-        }
-        else
-        {
-            UserRegisterFragment.goShopAndReservation = "R";
-            LoginPopupWindow popup = new LoginPopupWindow(context);
-            popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    Account account = app.GetSystemDomain(Account.class);
-                    if(account !=null) {
-                        navigation.Push(ReservationFragment.newInstance());
-                    }
 
-                }
-            });
-            popup.showAtLocation(rootView , Gravity.CENTER , 0 , 0);
-        }
+        navigation.Push(ReservationFragment.newInstance());
+
+//        Account account = app.GetSystemDomain(Account.class);
+//        if(account !=null) {
+//            navigation.Push(ReservationFragment.newInstance());
+//        }
+//        else
+//        {
+//            UserRegisterFragment.goShopAndReservation = "R";
+//            LoginPopupWindow popup = new LoginPopupWindow(context);
+//            popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//                @Override
+//                public void onDismiss() {
+//                    Account account = app.GetSystemDomain(Account.class);
+//                    if(account !=null) {
+//                        navigation.Push(ReservationFragment.newInstance());
+//                    }
+//
+//                }
+//            });
+//            popup.showAtLocation(rootView , Gravity.CENTER , 0 , 0);
+//        }
     }
 
 
@@ -165,26 +165,29 @@ public class HomeFragment extends Fragment {
     {
         final HTApplication app = (HTApplication)getActivity().getApplication();
         final INavigationService navigation = app.GetSystemDomain(INavigationService.class);
-        Account account = app.GetSystemDomain(Account.class);
-        if(account !=null) {
 
-            navigation.Push(ProductsFragment.newInstance());
-        }
-        else
-        {
-            UserRegisterFragment.goShopAndReservation = "S";
-            LoginPopupWindow popup = new LoginPopupWindow(context);
-            popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                @Override
-                public void onDismiss() {
-                    Account account = app.GetSystemDomain(Account.class);
-                    if (account != null) {
-                        navigation.Push(ProductsFragment.newInstance());
-                    }
-                }
-            });
-            popup.showAtLocation(rootView, Gravity.CENTER, 0, 0);
-        }
+        navigation.Push(ProductsFragment.newInstance());
+
+//        Account account = app.GetSystemDomain(Account.class);
+//        if(account !=null) {
+//
+//            navigation.Push(ProductsFragment.newInstance());
+//        }
+//        else
+//        {
+//            UserRegisterFragment.goShopAndReservation = "S";
+//            LoginPopupWindow popup = new LoginPopupWindow(context);
+//            popup.setOnDismissListener(new PopupWindow.OnDismissListener() {
+//                @Override
+//                public void onDismiss() {
+//                    Account account = app.GetSystemDomain(Account.class);
+//                    if (account != null) {
+//                        navigation.Push(ProductsFragment.newInstance());
+//                    }
+//                }
+//            });
+//            popup.showAtLocation(rootView, Gravity.CENTER, 0, 0);
+//        }
     }
 
 

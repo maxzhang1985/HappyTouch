@@ -56,14 +56,6 @@
     </LinearLayout>
 
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal" android:id="@+id/person_center_mypasswrod"
-                  android:gravity="center">
-        <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_key"
-                   android:layout_marginLeft="20dp"/>
-        <TextView android:text="我的密码" android:textColor="@color/black" android:textSize="20dp" android:layout_width="match_parent" android:layout_height="match_parent"
-                  android:gravity="center_vertical" android:layout_marginLeft="20dp"/>
-    </LinearLayout>
-
     <LinearLayout android:layout_width="match_parent" android:layout_height="70dp" android:orientation="horizontal" android:id="@+id/person_center_aboat"
                   android:gravity="center">
         <ImageView android:layout_width="35dp" android:layout_height="35dp"  android:src="@mipmap/ic_about"

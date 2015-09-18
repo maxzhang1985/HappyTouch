@@ -193,7 +193,7 @@ public class OrderCart  {
 
             }
 
-        return  hasDiancan || money > minMoney ;
+        return  hasDiancan ;
     }
 
 

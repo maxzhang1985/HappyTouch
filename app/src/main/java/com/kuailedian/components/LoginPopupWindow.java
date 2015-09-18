@@ -73,7 +73,8 @@ public class LoginPopupWindow extends PopupWindow {
         edit_username =  (MyEditText)view.findViewById(R.id.edit_login_username);
 
         edit_password =  (MyEditText)view.findViewById(R.id.edit_login_password);
-        
+
+        edit_username.setFocusable(true);
         //go to register button
         TextView go_reg =  (TextView)view.findViewById(R.id.goto_register);
         go_reg.setOnClickListener(Goto_registerView);
@@ -100,7 +101,7 @@ public class LoginPopupWindow extends PopupWindow {
         public void onClick(View v) {
             LoginPopupWindow.this.dismiss();
             INavigationService service =  getAppliction().GetSystemDomain(INavigationService.class);
-            service.Navigate(UserRegisterFragment.newInstance());
+            service.Push(UserRegisterFragment.newInstance());
         }
     };
 
