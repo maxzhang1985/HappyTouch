@@ -102,6 +102,8 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
                 CatalogEntity catalog = catalogAdapter.getItem(i);
 
                 getProductByCatelogid(catalog.categoryid);
+                catalogListView.setItemChecked(i - 1, true);
+                catalogListView.setSelection(i - 1);
 
             }
         });
@@ -139,6 +141,8 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
                         catalogAdapter.addAll((ArrayList<CatalogEntity>) data);
                         catalogAdapter.notifyDataSetChanged();
                         productsAdapter.clear();
+
+
                         CatalogEntity catalog = catalogAdapter.getItem(0);
                         getProductByCatelogid(catalog.categoryid);
 
@@ -171,8 +175,10 @@ public class ProductsFragment extends OrderFragmentBase  implements XListView.IX
                     return;
                 }
                 productsAdapter.clear();
-                productsAdapter.addAll((ArrayList<ProductEntity>)data);
+                productsAdapter.addAll((ArrayList<ProductEntity>) data);
                 productsAdapter.notifyDataSetChanged();
+                catalogListView.setFocusable(true);
+                catalogListView.requestFocus();
 
             }
         });

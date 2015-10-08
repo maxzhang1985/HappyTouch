@@ -350,6 +350,7 @@ public class SettleAccountActivity extends ActionBarActivity {
 
 
     private HTApplication getAppliction()
+
     {
         HTApplication app =(HTApplication)this.getApplication();
         return app;
