@@ -66,6 +66,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginLeft="12dp" />
+
+            <TextView android:id="@+id/goto_rallback" android:text="找回密码" android:textColor="@color/OrangeRed" android:textSize="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp" />
             
         </LinearLayout>
     </LinearLayout>

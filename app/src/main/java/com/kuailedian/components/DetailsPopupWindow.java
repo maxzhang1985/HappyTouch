@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Gallery;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -40,6 +41,15 @@ public class DetailsPopupWindow extends PopupWindow {
 
 
         this.setContentView(view);
+
+        Button btn_close = (Button)view.findViewById(R.id.btn_detail_close);
+
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DetailsPopupWindow.this.dismiss();
+            }
+        });
 
         final RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_horizontal);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);

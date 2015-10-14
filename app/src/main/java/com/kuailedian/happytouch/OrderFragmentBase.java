@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.components.BottomPopupWindow;
@@ -29,6 +30,7 @@ import com.kuailedian.domain.Account;
 import com.kuailedian.domain.CartItem;
 import com.kuailedian.domain.OrderCart;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -263,7 +265,35 @@ public class OrderFragmentBase extends Fragment {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(now);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        //dateFormat.parse()
+        try {
+            Date stime;
+            Date etime;
+
+            if(item.getType().equals("C")) {
+                stime = dateFormat.parse(currentDate + " " + cart.getScstime());
+                etime = dateFormat.parse(currentDate + " " + cart.getScetime());
+            }
+            else
+            {
+                stime = dateFormat.parse(currentDate + " " + cart.getDcstime());
+                etime = dateFormat.parse(currentDate + " " + cart.getDcetime());
+            }
+
+
+            if(now.before(stime) || now.after(etime))
+            {
+
+                Toast.makeText(context, "现在不是服务时间！",
+                        Toast.LENGTH_LONG).show();
+                return;
+            }
+
+
+
+        }
+        catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
 
 
         cart.addCart(item);
