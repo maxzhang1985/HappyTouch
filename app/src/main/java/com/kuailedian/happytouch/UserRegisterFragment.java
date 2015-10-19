@@ -1,11 +1,13 @@
 package com.kuailedian.happytouch;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.method.HideReturnsTransformationMethod;
@@ -181,7 +183,7 @@ public class UserRegisterFragment extends Fragment {
         String hosturi = HostsPath.HostUri + "OrderAppInterFace.ashx?method=PostMessageCode";
         RequestParams params = new RequestParams();
         params.add("phone", mobilephone );
-        pd = ProgressDialog.show(context, "提示", "正在注册，请稍后……");
+        pd = ProgressDialog.show(context, "提示", "正在提交，请稍后……");
         HttpUtilsAsync.get(hosturi, params, new TextHttpResponseHandler("GB2312") {
             @Override
             public void onSuccess(int i, Header[] headers, String responseString) {
@@ -257,6 +259,97 @@ public class UserRegisterFragment extends Fragment {
 
 
     }
+
+
+
+    private void sendMessagecode(String mobilephone)
+    {
+        //PostMessageCode
+        String hosturi = HostsPath.HostUri + "OrderAppInterFace.ashx?method=PostMessageCodeEpw";
+        RequestParams params = new RequestParams();
+        params.add("phone", mobilephone );
+        pd = ProgressDialog.show(context, "提示", "正在提交，请稍后……");
+        HttpUtilsAsync.get(hosturi, params, new TextHttpResponseHandler("GB2312") {
+            @Override
+            public void onSuccess(int i, Header[] headers, String responseString) {
+                Log.v("getdatalog", responseString);
+                JSONObject stateObject = JSON.parseObject(responseString);
+                //String code = stateObject.getString("statecode");
+                Toast.makeText(context, stateObject.getString("msg"),
+                        Toast.LENGTH_LONG).show();
+                pd.dismiss();
+            }
+
+            @Override
+            public void onFailure(int i, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(context, "网络错误！",
+                        Toast.LENGTH_LONG).show();
+                pd.dismiss();
+            }
+        });
+
+
+    }
+
+
+    private void changePassword(String phone, String password1,String password2,String messagecode)
+    {
+
+        String hosturi = HostsPath.HostUri + "OrderAppInterFace.ashx?method=PwdEdit";
+        RequestParams params = new RequestParams();
+        params.add("phone", phone );
+        params.add("newpwd", password1 );
+        params.add("newpwdq", password2 );
+        params.add("messagecode", messagecode );
+        pd = ProgressDialog.show(context, "提示", "正在提交，请稍后……");
+        HttpUtilsAsync.get(hosturi, params, new TextHttpResponseHandler("GB2312") {
+            @Override
+            public void onSuccess(int i, Header[] headers, String responseString) {
+                Log.v("getdatalog", responseString);
+                JSONObject stateObject = JSON.parseObject(responseString);
+                String code = stateObject.getString("statecode");
+                Log.v("show state code", code);
+                //register suress
+                if (code.equals("0000")) {
+                    final AlertDialog dialog = new AlertDialog.Builder(context)
+                            .setIcon(R.mipmap.icn_2)
+                            .setTitle("提示")
+                            .setMessage("密码修改成功,请重新登录.")
+                            .show();
+                    Handler mHandler = new Handler();
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            dialog.dismiss();
+                        }
+                    }, 2800L);
+
+                }
+
+                Toast.makeText(context, stateObject.getString("msg"),
+                        Toast.LENGTH_LONG).show();
+
+                pd.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(int i, Header[] headers, String responseString, Throwable throwable) {
+                Toast.makeText(context, "网络错误！",
+                        Toast.LENGTH_LONG).show();
+                pd.dismiss();
+            }
+        });
+
+
+
+    }
+
+
+
+
+
+
 
     private HTApplication getAppliction()
     {
