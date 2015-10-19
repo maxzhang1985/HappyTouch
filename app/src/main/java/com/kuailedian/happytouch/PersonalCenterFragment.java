@@ -93,12 +93,12 @@ public class PersonalCenterFragment extends Fragment{
         }
         LinearLayout l1 = (LinearLayout)view.findViewById(R.id.person_center_myaddress);
         LinearLayout l2 = (LinearLayout)view.findViewById(R.id.person_center_myorder);
-
+        LinearLayout l3 = (LinearLayout)view.findViewById(R.id.person_center_password);
         LinearLayout l4 = (LinearLayout)view.findViewById(R.id.person_center_aboat);
 
         l1.setOnClickListener(onClick);
         l2.setOnClickListener(onClick);
-
+        l3.setOnClickListener(onClick);
         l4.setOnClickListener(onClick);
 
 
@@ -120,6 +120,7 @@ public class PersonalCenterFragment extends Fragment{
                     intent.putExtra("callback",false);
                     startActivity(intent);
                     break;
+                case R.id.person_center_password:
 
                 case R.id.person_center_aboat:
                     break;
