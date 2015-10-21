@@ -19,10 +19,14 @@ public class SplashscreenActivity extends ActionBarActivity {
 
     private final int SPLASH_DISPLAY_LENGHT = 1800;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
+
+
+
         String HostUri = HostsPath.HostUri  + "OrderAppInterFace.ashx?method=EnterInfo" ;
         HttpUtilsAsync.get(HostUri, new RequestParams() , new TextHttpResponseHandler("GB2312") {
 

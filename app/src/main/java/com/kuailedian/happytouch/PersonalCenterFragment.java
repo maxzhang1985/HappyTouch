@@ -96,6 +96,7 @@ public class PersonalCenterFragment extends Fragment{
         LinearLayout l3 = (LinearLayout)view.findViewById(R.id.person_center_password);
         LinearLayout l4 = (LinearLayout)view.findViewById(R.id.person_center_aboat);
 
+
         l1.setOnClickListener(onClick);
         l2.setOnClickListener(onClick);
         l3.setOnClickListener(onClick);
@@ -121,7 +122,8 @@ public class PersonalCenterFragment extends Fragment{
                     startActivity(intent);
                     break;
                 case R.id.person_center_password:
-
+                    navigation.Push(ChangePasswordFragment.newInstance());
+                    break;
                 case R.id.person_center_aboat:
                     break;
             }

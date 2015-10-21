@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.kuailedian.applictionservice.INavigationService;
 import com.kuailedian.domain.Account;
+import com.kuailedian.happytouch.ChangePasswordFragment;
 import com.kuailedian.happytouch.HTApplication;
 import com.kuailedian.happytouch.R;
 import com.kuailedian.happytouch.UserRegisterFragment;
@@ -79,6 +80,11 @@ public class LoginPopupWindow extends PopupWindow {
         TextView go_reg =  (TextView)view.findViewById(R.id.goto_register);
         go_reg.setOnClickListener(Goto_registerView);
 
+
+        //go to changepassword button
+        TextView go_changepassword =  (TextView)view.findViewById(R.id.goto_rallback);
+        go_changepassword.setOnClickListener(Goto_rollbackPasswordView);
+
         //login button
         Button btnLogin =(Button)view.findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(Goto_Login);
@@ -104,6 +110,19 @@ public class LoginPopupWindow extends PopupWindow {
             service.Push(UserRegisterFragment.newInstance());
         }
     };
+
+
+    View.OnClickListener Goto_rollbackPasswordView =  new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            LoginPopupWindow.this.dismiss();
+            INavigationService service =  getAppliction().GetSystemDomain(INavigationService.class);
+            service.Push(ChangePasswordFragment.newInstance());
+        }
+    };
+
+
+
 
     View.OnTouchListener On_showPassword =  new View.OnTouchListener() {
         @Override

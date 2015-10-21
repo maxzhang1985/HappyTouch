@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:testattr="http://schemas.android.com/apk/res/com.kuailedian.happytouch"
+    xmlns:testattr="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:background="#b0000000"
@@ -13,6 +13,7 @@
         android:gravity="center">
 
         <com.kuailedian.components.MyEditText android:layout_width="match_parent" android:layout_height="35dp" android:layout_marginTop="20dp"
+            android:textCursorDrawable="@null"
             android:layout_marginLeft="12dp" android:layout_marginRight="12dp"
             android:hint="请输入手机号码"  android:textColor="@color/black" android:background="@null"
             testattr:LineColor="#757575" android:textSize="18dp"
@@ -29,6 +30,7 @@
             >
 
             <com.kuailedian.components.MyEditText  android:layout_width="match_parent" android:layout_height="35dp"
+                android:textCursorDrawable="@null"
                 android:layout_marginLeft="12dp" android:layout_marginRight="12dp"
                 android:hint="请输出密码"  android:textColor="@color/black" android:background="@null"
                 testattr:LineColor="#757575" android:textSize="18dp"

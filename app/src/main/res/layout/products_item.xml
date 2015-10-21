@@ -30,7 +30,7 @@
 
             <TextView
                 android:id="@+id/tv_productname"
-                android:layout_width="110dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="在睚佃办肖辉煌"
                 android:textColor="#999999"
@@ -73,7 +73,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minWidth="70dp"
+            android:minWidth="50px"
             android:layout_marginLeft="10dp"
             android:gravity="right">
 
