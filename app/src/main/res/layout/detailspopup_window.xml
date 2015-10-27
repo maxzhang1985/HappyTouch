@@ -29,7 +29,7 @@
 
 
         <LinearLayout android:id="@+id/detail_peicai_layout"
-            android:layout_width="match_parent"  android:layout_height="100dp" android:orientation="horizontal" android:layout_marginTop="8dp"
+            android:layout_width="match_parent"  android:layout_height="90dp" android:orientation="horizontal" android:layout_marginTop="8dp"
             android:gravity="center_vertical" >
 
         <TextView
@@ -55,7 +55,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="140dp">
+            android:layout_height="120dp">
 
             <TextView
                 android:layout_width="match_parent"
@@ -85,7 +85,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="65dp"
             android:divider="@color/black"
             >
                 <TextView
