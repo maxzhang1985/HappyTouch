@@ -91,13 +91,15 @@ public class DetailsPopupWindow extends PopupWindow {
             recyclerView.setVisibility(View.VISIBLE);
 
             ReservationDetailRepository repository = new ReservationDetailRepository();
-            repository.Get(params,new AsyncCallBack(){
+            repository.Get(params, new AsyncCallBack() {
                 @Override
                 public void onDataReceive(Object data, Object statusCode) {
-                    FoodDetailEntity detailEntity =  (FoodDetailEntity)data;
-                    setDetailInfomation(view,detailEntity.getRemark(),detailEntity.getDeliveryare());
-                    gallery.setAdapter(new ProductGalleryAdpater(context,detailEntity.getImglist()));
-                    recyclerView.setAdapter(new SubFoodAdapter(detailEntity.getSubfoodlist()));
+                    if (data != null) {
+                        FoodDetailEntity detailEntity = (FoodDetailEntity) data;
+                        setDetailInfomation(view, detailEntity.getRemark(), detailEntity.getDeliveryare());
+                        gallery.setAdapter(new ProductGalleryAdpater(context, detailEntity.getImglist()));
+                        recyclerView.setAdapter(new SubFoodAdapter(detailEntity.getSubfoodlist()));
+                    }
                 }
             });
 

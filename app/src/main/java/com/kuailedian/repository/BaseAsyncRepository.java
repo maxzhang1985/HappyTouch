@@ -31,7 +31,7 @@ public abstract class BaseAsyncRepository implements  IAsyncRepository {
                     Log.v("getdatalogonSuccess", responseString);
                     // JSONArray object = JSON.parseArray(responseString);
                     //Day array = object.getJSONObject(0).getJSONArray("days").getObject(0, Day.class);
-                    //Log.v("getdatalog", array.getDate());
+                    Log.v("getdatalog", responseString);
                     callback.onDataReceive(getData(responseString), null);
                 }
 
