@@ -1,5 +1,7 @@
 package com.kuailedian.repository;
 
+import android.util.Log;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -23,7 +25,7 @@ public class ReservationDetailRepository extends BaseAsyncRepository {
     public Object getData(String responseObj) {
 
         JSONObject object = JSON.parseObject(responseObj);
-
+        Log.v("detail",responseObj);
         FoodDetailEntity detailEntity = new FoodDetailEntity();
 
         detailEntity.setRemark(object.getString("remark"));
@@ -48,8 +50,9 @@ public class ReservationDetailRepository extends BaseAsyncRepository {
                 subfood.setName(subfoodJson.getString("productname"));
 
                 JSONArray subfoodImgArray = subfoodJson.getJSONArray("img");
-                subfood.setImage(subfoodImgArray.getString(0));
-
+                try {
+                    subfood.setImage(subfoodImgArray.getString(0));
+                }catch (Exception ex){}
                 subFoodEntities.add(subfood);
 
             }
