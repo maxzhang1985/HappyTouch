@@ -135,7 +135,7 @@ public class UpdateChecker extends Fragment {
 			int apkCode = obj.getInt(Constants.APK_VERSION_CODE);
 
 			int versionCode = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionCode;
-
+			Log.v("versioncode",String.valueOf(versionCode));
 			if (apkCode > versionCode) {
 				if (mTypeOfNotice == NOTICE_NOTIFICATION) {
 					showNotification(updateMessage,apkUrl);
