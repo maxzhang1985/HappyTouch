@@ -98,7 +98,47 @@ public class OrderFragmentBase extends Fragment {
                         public void onDismiss() {
                             Account account = app.GetSystemDomain(Account.class);
                             if(account !=null) {
-                                startActivity(new Intent(context, SettleAccountActivity.class));
+
+
+                                OrderCart cart = OrderCart.getOrderCart();
+                                Date now = new Date();
+                                String currentDate = new SimpleDateFormat("yyyy-MM-dd").format(now);
+
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                                try {
+                                    Date stime,sstime;
+                                    Date etime,eetime;
+
+
+                                    stime = dateFormat.parse(currentDate + " " + cart.getScstime());
+                                    etime = dateFormat.parse(currentDate + " " + cart.getScetime());
+
+                                    sstime = dateFormat.parse(currentDate + " " + cart.getDcstime());
+                                    eetime = dateFormat.parse(currentDate + " " + cart.getDcetime());
+
+
+                                    if ((now.before(stime) || now.after(etime)) ) {
+
+                                        cart.clear();
+                                        Toast.makeText(context, "现在不是服务时间！",
+                                                Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+
+                                    if (now.before(sstime) || now.after(eetime))
+                                    {
+                                        cart.clear();
+                                        Toast.makeText(context, "现在不是服务时间！",
+                                                Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
+
+
+                                    startActivity(new Intent(context, SettleAccountActivity.class));
+
+                                }catch(Exception ex){}
+
+
                             }
 
                         }
