@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.kuailedian.adapter.OrderCartAdapter;
 import com.kuailedian.domain.CartItem;
 import com.kuailedian.domain.OrderCart;
+import com.kuailedian.happytouch.OrderFragmentBase;
 import com.kuailedian.happytouch.R;
 import com.kuailedian.happytouch.SettleAccountActivity;
 
@@ -88,7 +89,8 @@ public class BottomPopupWindow extends PopupWindow {
             @Override
             public void onClick(View v) {
 
-                context.startActivity(new Intent(context, SettleAccountActivity.class));
+                if(OrderFragmentBase.isOnBuy(owner))
+                    context.startActivity(new Intent(context, SettleAccountActivity.class));
 
             }
         });

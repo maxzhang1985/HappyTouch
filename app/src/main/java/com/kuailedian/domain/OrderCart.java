@@ -120,7 +120,7 @@ public class OrderCart  {
         {
             CartItem item = items.get(id);
             int amount = item.getAmount() -1 ;
-            item.setAmount( amount  );
+            item.setAmount(amount);
             if(amount<=0)
             {
                 items.remove(id);
@@ -196,6 +196,37 @@ public class OrderCart  {
         return  hasDiancan ;
     }
 
+
+    public void ClearC()
+    {
+        ArrayList<CartItem> removekeylist = new ArrayList<CartItem>();
+        for(Object key : items.keySet()) {
+            CartItem item = items.get(key);
+            if(item.getType().equals("C"))
+                removekeylist.add(item);
+        }
+
+        for(CartItem item : removekeylist)
+            items.remove(item.getId());
+
+        onItemChanged();
+
+    }
+
+    public void ClearD()
+    {
+        ArrayList<CartItem> removekeylist = new ArrayList<CartItem>();
+        for(Object key : items.keySet()) {
+            CartItem item = items.get(key);
+            if(item.getType().equals("D"))
+                removekeylist.add(item);
+        }
+
+        for(CartItem item : removekeylist)
+            items.remove(item.getId());
+
+        onItemChanged();
+    }
 
 
     public void clear()

@@ -76,6 +76,6 @@ public class CartItem {
 
     @Override
     public String toString() {
-        return String.format("id:%s,name:%s,money:%f,selected:%b",id,name,money,isselected);
+        return String.format("id:%s,name:%s,money:%f,selected:%b,type:%s",id,name,money,isselected,type);
     }
 }
