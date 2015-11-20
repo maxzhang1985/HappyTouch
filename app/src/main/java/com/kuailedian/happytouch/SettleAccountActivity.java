@@ -156,6 +156,7 @@ public class SettleAccountActivity extends ActionBarActivity {
                                  .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                      public void onClick(DialogInterface dialog, int which) {
                                          CartItem plusItem = new CartItem();
+                                         plusItem.setId("000000000000000");
                                          plusItem.setName("运费");
                                          plusItem.setType("C");
                                          plusItem.setAmount(1);
