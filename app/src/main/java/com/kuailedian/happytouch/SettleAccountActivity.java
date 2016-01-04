@@ -152,7 +152,7 @@ public class SettleAccountActivity extends ActionBarActivity {
                         AlertDialog dialog1 = new AlertDialog.Builder(SettleAccountActivity.this)
                                 .setIcon(R.mipmap.icn_1)
                                 .setTitle("提示")
-                                .setMessage("订单中不包含订餐商品，不足"+ String.valueOf(orderCart.getMinMoney())  + "元,需要支付5元运费,确定订单吗?"   )
+                                .setMessage("订单中不包含订餐商品且总额不足"+ String.valueOf(orderCart.getMinMoney())  + "元,需要支付5元运费,确定订单吗?"   )
                                  .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                      public void onClick(DialogInterface dialog, int which) {
                                          CartItem plusItem = new CartItem();
@@ -252,7 +252,7 @@ public class SettleAccountActivity extends ActionBarActivity {
 
                     final JSONObject stateObject = JSON.parseObject(responseString);
                     String code = stateObject.getString("statecode");
-                    Toast.makeText(SettleAccountActivity.this, "订单:" + stateObject.getString("msg"), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(SettleAccountActivity.this, "订单:" + stateObject.getString("msg"), Toast.LENGTH_LONG).show();
                     pd.dismiss();
 
                     //订单生成成功，开始支付
@@ -262,7 +262,7 @@ public class SettleAccountActivity extends ActionBarActivity {
                             final AlertDialog dialog1 = new AlertDialog.Builder(SettleAccountActivity.this)
                                     .setIcon(R.mipmap.icn_2)
                                     .setTitle("提示")
-                                    .setMessage("订单成功,正在为你配送,请耐心等待.")
+                                    .setMessage("订单提交成功,我们正在为您处理,稍后将进行商品配送,请耐心等待。")
                                     .show();
                             orderCart.clear();
                             Handler mHandler = new Handler();
@@ -288,7 +288,7 @@ public class SettleAccountActivity extends ActionBarActivity {
                                         final AlertDialog dialog = new AlertDialog.Builder(SettleAccountActivity.this)
                                                 .setIcon(R.mipmap.icn_2)
                                                 .setTitle("提示")
-                                                .setMessage("支付成功,正在为你配送,请耐心等待.")
+                                                .setMessage("支付成功,我们正在为您处理,稍后将进行商品配送,请耐心等待。")
                                                 .show();
                                         orderCart.clear();
                                         Handler mHandler = new Handler();

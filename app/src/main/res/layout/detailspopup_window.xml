@@ -6,88 +6,107 @@
     android:layout_height="match_parent"
     android:background="#b0000000">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
-        android:orientation="vertical"
         android:background="@color/White"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="80dp"
-        android:layout_marginRight="35dp">
-        <Gallery android:id="@+id/detail_gallery"
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:src="@mipmap/no_photo"
-             ></Gallery>
+        android:layout_marginLeft="45px"
+        android:layout_marginTop="60px"
+        android:layout_marginBottom="90px"
+        android:layout_marginRight="45px"
 
-        <View  android:layout_width="wrap_content"
-            android:layout_height="1dp"
-
-            android:background="@android:color/darker_gray" />
-
-
-        <LinearLayout android:id="@+id/detail_peicai_layout"
-            android:layout_width="match_parent"  android:layout_height="90dp" android:orientation="horizontal" android:layout_marginTop="8dp"
-            android:gravity="center_vertical" >
-
-        <TextView
-            android:layout_width="30dp"
-            android:layout_height="50dp" android:text="配菜" android:textSize="18dp" android:textColor="@color/black"
-            android:layout_marginLeft="10dp" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerview_horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                />
-
-
-
-        </LinearLayout>
-
-
-
-        <View  android:layout_width="wrap_content"  android:layout_height="1dp"  android:background="@android:color/darker_gray" />
-
-
+        >
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="120dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24dp" android:textColor="@color/black"
-                android:text="商品描述"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp" />
-            <TextView
-                android:id="@+id/detail_remark"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="16dp"
-                android:text="路北区往东，路南区往北"
-                android:layout_marginLeft="10dp"
-
-                />
-
-
-        </LinearLayout>
-
-        <View  android:layout_width="wrap_content"
-            android:layout_height="1dp"
-
-            android:background="@android:color/darker_gray" />
-        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_marginBottom="41dp"
             android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:divider="@color/black"
-            >
+            android:id="@+id/detailsContent">
+            <Gallery android:id="@+id/detail_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="260dp"
+                android:src="@mipmap/no_photo"
+                ></Gallery>
+
+            <View  android:layout_width="wrap_content"
+                android:layout_height="1dp"
+
+                android:background="@android:color/darker_gray" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarStyle="insideOverlay"
+    android:fadeScrollbars="false"
+    >
+
+<LinearLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+            <LinearLayout android:id="@+id/detail_peicai_layout"
+                android:layout_width="match_parent"  android:layout_height="120dp" android:orientation="vertical" android:layout_marginTop="8dp"
+>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24dp" android:textColor="@color/black"
+                    android:text="配菜"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+            <View  android:layout_width="wrap_content"  android:layout_height="1dp"  android:background="@android:color/darker_gray" />
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="120dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="24dp" android:textColor="@color/black"
+                    android:text="商品描述"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp" />
+                <TextView
+                    android:id="@+id/detail_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:text="路北区往东，路南区往北"
+                    android:layout_marginLeft="10dp"
+
+                    />
+
+
+            </LinearLayout>
+
+            <View  android:layout_width="wrap_content"
+                android:layout_height="1dp"
+
+                android:background="@android:color/darker_gray" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/black"
+                >
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -103,17 +122,22 @@
                     android:text=""
                     android:layout_marginLeft="10dp" />
 
+            </LinearLayout>
+</LinearLayout>
+</ScrollView>
         </LinearLayout>
-
 
         <Button
             android:id="@+id/btn_detail_close"
             android:text="关闭"
-            android:layout_gravity="bottom"
             android:layout_width="match_parent"
-            android:layout_height="42dp" />
+            android:layout_height="45dp"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
 
-    </LinearLayout>
+
+
 
 
 </RelativeLayout>

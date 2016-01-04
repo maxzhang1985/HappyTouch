@@ -41,7 +41,7 @@
                 android:layout_width="70px"
                 android:layout_height="wrap_content"
                 android:text="￥"
-                android:textColor="@color/OrangeRed"
+                android:textColor="@color/black"
                 android:textSize="18dp"
                 android:layout_gravity="center_vertical" />
             <TextView
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="12"
-                android:textColor="@color/OrangeRed"
+                android:textColor="@color/black"
                 android:textSize="18dp"
                 android:layout_gravity="center_vertical" />
         </LinearLayout>
@@ -66,10 +66,10 @@
 
         <Button
             android:id="@+id/btn_addproduct"
-            android:layout_width="68px"
-            android:layout_height="68px"
+            android:layout_width="70px"
+            android:layout_height="70px"
             android:layout_gravity="center"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="5dp"
             android:background="@mipmap/btn_plus" />
     </LinearLayout>
 

@@ -203,6 +203,7 @@ public class ChangePasswordFragment extends Fragment {
                         @Override
                         public void run() {
                             dialog.dismiss();
+                            ChangePasswordFragment.this.getActivity().onBackPressed();
                         }
                     }, 2800L);
 

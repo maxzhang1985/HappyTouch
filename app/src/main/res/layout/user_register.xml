@@ -17,7 +17,9 @@
                           testattr:LineColor="#757575" android:textSize="18dp"
                           android:textColorHint="#ff939393"
                           android:id="@+id/edit_reg_mobilephone"
-                           android:inputType="phone"    />
+                          android:textCursorDrawable="@null"
+                        android:focusable="true"
+                        android:inputType="phone"    />
 
         <RelativeLayout android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -31,6 +33,7 @@
                                                   android:textColorHint="#ff939393"
                                                   android:inputType="textPassword"
                                                   android:id="@+id/edit_reg_password"
+                                                    android:textCursorDrawable="@null"
                                                   android:password="true"/>
             <Button android:id="@+id/btn_showpassword"
                 android:background="@mipmap/icansee" android:layout_width="24dp" android:layout_height="24dp"
@@ -48,6 +51,7 @@
                                                   testattr:LineColor="#757575" android:textSize="18dp"
                                                   android:textColorHint="#ff939393"
                                                 android:id="@+id/edit_reg_msgcode"
+                                                android:textCursorDrawable="@null"
                                                   android:inputType="phone"    />
 
             <Button android:id="@+id/btn_sendcodesms"
