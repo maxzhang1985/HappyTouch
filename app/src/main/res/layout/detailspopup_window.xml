@@ -45,7 +45,7 @@
     android:layout_height="match_parent">
 
             <LinearLayout android:id="@+id/detail_peicai_layout"
-                android:layout_width="match_parent"  android:layout_height="120dp" android:orientation="vertical" android:layout_marginTop="8dp"
+                android:layout_width="match_parent"  android:layout_height="140dp" android:orientation="vertical" android:layout_marginTop="8dp"
 >
 
                 <TextView
